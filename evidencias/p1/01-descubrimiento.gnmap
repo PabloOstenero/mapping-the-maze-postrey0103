@@ -1,0 +1,11 @@
+# Nmap 7.99 scan initiated Sat Nov 21 18:31:52 2026 as: /usr/lib/nmap/nmap -sn -PE -PP -PS21,22,23,25,80,443,445,3389,8080 -PA80 -PU53,161 -iL scope.txt -oA evidencias/p1/01-descubrimiento
+Host: 172.17.0.3 ()	Status: Up
+Host: 172.17.0.4 ()	Status: Up
+Host: 172.17.0.5 ()	Status: Up
+Host: 172.17.0.6 ()	Status: Up
+Host: 172.17.0.7 ()	Status: Up
+Host: 172.17.0.8 ()	Status: Up
+Host: 172.17.0.9 ()	Status: Up
+Host: 172.17.0.10 ()	Status: Up
+Host: 172.17.0.1 ()	Status: Up
+# Nmap done at Sat Nov 21 18:31:56 2026 -- 256 IP addresses (9 hosts up) scanned in 4.03 seconds

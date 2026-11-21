@@ -1,0 +1,11 @@
+# Nmap 7.99 scan initiated Sat Nov 21 18:54:20 2026 as: /usr/lib/nmap/nmap -sn -PR -iL scope.txt -oA evidencias/p1/02-descubrimiento-arp
+Host: 172.17.0.3 ()	Status: Up
+Host: 172.17.0.4 ()	Status: Up
+Host: 172.17.0.5 ()	Status: Up
+Host: 172.17.0.6 ()	Status: Up
+Host: 172.17.0.7 ()	Status: Up
+Host: 172.17.0.8 ()	Status: Up
+Host: 172.17.0.9 ()	Status: Up
+Host: 172.17.0.10 ()	Status: Up
+Host: 172.17.0.1 ()	Status: Up
+# Nmap done at Sat Nov 21 18:54:24 2026 -- 256 IP addresses (9 hosts up) scanned in 4.01 seconds
