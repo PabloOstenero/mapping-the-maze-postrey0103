@@ -1,0 +1,11 @@
+Looking up status of 172.17.0.8
+	SAMBASERVER     <00> -         B <ACTIVE> 
+	SAMBASERVER     <03> -         B <ACTIVE> 
+	SAMBASERVER     <20> -         B <ACTIVE> 
+	..__MSBROWSE__. <01> - <GROUP> B <ACTIVE> 
+	ESEEMEB.DL      <00> - <GROUP> B <ACTIVE> 
+	ESEEMEB.DL      <1d> -         B <ACTIVE> 
+	ESEEMEB.DL      <1e> - <GROUP> B <ACTIVE> 
+
+	MAC Address = 00-00-00-00-00-00
+

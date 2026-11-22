@@ -318,3 +318,90 @@ Nota de trazabilidad: el historial de bash existía antes de activar las marcas 
 - **Captura:** sin captura
 - **Siguiente paso:** enumerar los servicios web con cabeceras, `robots.txt`, pistas de la portada y whatweb.
 
+### 2026-11-22 17:05 - Enumeración web: cabeceras, robots.txt y whatweb
+- **Cuándo:** 2026-11-22 17:05
+- **Objetivo y alcance:** ver qué expone cada servicio web sin autenticar, con tres peticiones normales por servicio (cabeceras, `robots.txt`) más `whatweb -a 1`. Objetivos: 172.17.0.3:80, 172.17.0.4:8080, 172.17.0.5:80, 443 y 8161, 172.17.0.6:8080, 172.17.0.8:80, 172.17.0.9:80 y 172.17.0.10:80, dentro de 172.17.0.0/24. Sin rastreo de rutas ni pruebas de login.
+- **Qué hice:** `for t in 172.17.0.3:80:http 172.17.0.4:8080:http 172.17.0.5:80:http 172.17.0.5:443:https 172.17.0.5:8161:http 172.17.0.6:8080:http 172.17.0.8:80:http 172.17.0.9:80:http 172.17.0.10:80:http; do IP=${t%%:*}; r=${t#*:}; P=${r%%:*}; S=${r#*:}; URL=$S://$IP:$P; echo "=== $URL ==="; curl -sk -m 10 -I $URL | tee evidencias/p2/21-http-cabeceras-$IP-$P.txt; curl -sk -m 10 $URL/robots.txt | head -c 1000 | tee evidencias/p2/21-http-robots-$IP-$P.txt; whatweb -a 1 $URL | tee evidencias/p2/21-whatweb-$IP-$P.txt; done`. Por un descuido, el bucle no incluía la petición de las pistas de la portada; se hizo después (entrada de las 17:25).
+- **Qué salió:** las cabeceras confirman las versiones de la Parte 1: Apache 2.4.58 (.3 y .8), 2.4.59 (.5), 2.4.68 (.9), Jetty 9.4.39 (.5:8161), Jetty 10.0.18 (.6) y SimpleHTTP/0.6 con Python 3.11.2 (.10). La .6 es Jenkins 2.441: cabecera `X-Jenkins: 2.441`, `whatweb` con `Jenkins[2.441]` y redirección a `/login` con formulario de contraseña (no se entró). La .5:8161 responde 401 con `WWW-Authenticate: ActiveMQRealm basic` (no se probó ninguna credencial). Ningún `robots.txt` publica rutas salvo el de la .6, que contiene `Disallow: /`. Evidencia: `evidencias/p2/21-http-cabeceras-*.txt`, `21-http-robots-*.txt` y `21-whatweb-*.txt`.
+- **Captura:** sin captura (ver entrada de las capturas)
+- **Siguiente paso:** obtener el certificado de la 172.17.0.5:443.
+
+### 2026-11-22 17:11 - Certificado TLS de 172.17.0.5:443
+- **Cuándo:** 2026-11-22 17:11
+- **Objetivo y alcance:** leer el certificado del único servicio HTTPS (organización, emisor, fechas). Solo la negociación TLS, contra 172.17.0.5, dentro de 172.17.0.0/24.
+- **Qué hice:** `echo | openssl s_client -connect 172.17.0.5:443 2>/dev/null | openssl x509 -noout -subject -issuer -dates | tee evidencias/p2/21-tls-cert-172.17.0.5-443.txt`
+- **Qué salió:** certificado autofirmado (emisor igual al sujeto): `C=US, ST=California, L=San Francisco, O=Your Organization, OU=Your Unit, CN=example.com`. Válido del 17 de abril de 2024 al 17 de abril de 2025 (caducado). Parece un certificado de plantilla. Evidencia: `evidencias/p2/21-tls-cert-172.17.0.5-443.txt`.
+- **Captura:** ![Certificado TLS de 172.17.0.5](../imagenes/p2-04-tls-172.17.0.5.png)
+- **Siguiente paso:** capturar la salida de cada servicio web.
+
+### 2026-11-22 17:13 - Capturas de la enumeración web por servicio
+- **Cuándo:** 2026-11-22 17:13 (.3:80), 17:14 (.4:8080), 17:15 (.5:80), 17:16 (.5:443), 17:17 (.5:8161), 17:18 (.6:8080), 17:19 (.8:80 y .9:80) y 17:20 (.10:80)
+- **Objetivo y alcance:** dejar captura de lo recogido por cada servicio web. Solo ficheros locales.
+- **Qué hice:** `cat evidencias/p2/21-*-172.17.0.<n>-<puerto>.txt` (uno por servicio, con `clear; date "+%F %H:%M"` delante)
+- **Qué salió:** los resultados de la entrada de las 17:05. Evidencia: `evidencias/p2/21-*-172.17.0.<n>-<puerto>.txt`.
+- **Captura:** ![Web 172.17.0.3:80](../imagenes/p2-03-http-172.17.0.3-80.png) ![Web 172.17.0.4:8080](../imagenes/p2-03-http-172.17.0.4-8080.png) ![Web 172.17.0.5:80](../imagenes/p2-03-http-172.17.0.5-80.png) ![Web 172.17.0.5:443](../imagenes/p2-03-http-172.17.0.5-443.png) ![Web 172.17.0.5:8161](../imagenes/p2-03-http-172.17.0.5-8161.png) ![Web 172.17.0.6:8080](../imagenes/p2-03-http-172.17.0.6-8080.png) ![Web 172.17.0.8:80](../imagenes/p2-03-http-172.17.0.8-80.png) ![Web 172.17.0.9:80](../imagenes/p2-03-http-172.17.0.9-80.png) ![Web 172.17.0.10:80](../imagenes/p2-03-http-172.17.0.10-80.png)
+- **Siguiente paso:** revisar cabeceras y robots.txt de una vez y comprobar las pistas de la portada.
+
+### 2026-11-22 17:21 - Intento fallido de las pistas de la portada
+- **Cuándo:** 2026-11-22 17:21 (lectura) y 17:23 (segundo intento)
+- **Objetivo y alcance:** revisar cabeceras y `robots.txt` y recoger las pistas de la portada (comentarios, correos, autores). Solo ficheros locales, y una petición a `/` por servicio en el segundo intento, dentro de 172.17.0.0/24.
+- **Qué hice:** `grep -iH -E "^(server|x-powered-by)" evidencias/p2/21-http-cabeceras-*.txt` y `cat evidencias/p2/21-http-robots-*.txt evidencias/p2/21-http-pistas-*.txt` (17:21); después el bucle de las pistas con el patrón del `grep` entre comillas dobles (17:23)
+- **Qué salió:** a las 17:21, el `cat` de las pistas dio `No such file or directory`, porque esa petición no se había lanzado. A las 17:23 el bucle falló con `bash: !-: event not found`: la secuencia `<!--` dentro de comillas dobles se interpreta como expansión del historial. Solo se ejecutaron los `echo`. Evidencia: salida en la terminal, sin fichero.
+- **Captura:** sin captura
+- **Siguiente paso:** repetir el bucle con el patrón del `grep` entre comillas simples.
+
+### 2026-11-22 17:25 - Pistas de la portada de los servicios web
+- **Cuándo:** 2026-11-22 17:25
+- **Objetivo y alcance:** recoger comentarios HTML, correos, autores y versiones de la portada de cada servicio web, con una sola petición a `/` por servicio. Dentro de 172.17.0.0/24.
+- **Qué hice:** `for t in 172.17.0.3:80:http 172.17.0.4:8080:http 172.17.0.5:80:http 172.17.0.5:443:https 172.17.0.5:8161:http 172.17.0.6:8080:http 172.17.0.8:80:http 172.17.0.9:80:http 172.17.0.10:80:http; do IP=${t%%:*}; r=${t#*:}; P=${r%%:*}; S=${r#*:}; URL=$S://$IP:$P; echo "=== $URL ==="; curl -sk -m 10 $URL/ | grep -iE 'generator|version|author|<title|mailto|@|<!--' | cut -c1-200 | tee evidencias/p2/21-http-pistas-$IP-$P.txt; done` y `grep -H . evidencias/p2/21-http-pistas-*.txt`
+- **Qué salió:** la web de 172.17.0.5:443 es una plantilla de ejemplo ("DockerLabs | Plantilla gratuita Bootstrap 4.3.x", autor de la plantilla `Devcrud`, comentarios de relleno) y su pie muestra el correo `info@dockerlabs.lab`, que se anota como cuenta. La 172.17.0.8 muestra un formulario de login con el texto de ejemplo `ejemplo@correo.com`, que no se considera cuenta. Las demás portadas solo devuelven su título o su página por defecto. Evidencia: `evidencias/p2/21-http-pistas-*.txt`.
+- **Captura:** sin captura
+- **Siguiente paso:** enumerar SSH y leer los banners de FTP y de los puertos sin identificar.
+
+### 2026-11-22 17:29 - SSH: banner, algoritmos y claves de host
+- **Cuándo:** 2026-11-22 17:29 (inicio); fin: no registrada (el siguiente comando es de las 17:30). Capturas entre las 17:32 y las 17:41.
+- **Objetivo y alcance:** conocer la versión de SSH y su configuración sin autenticar. Objetivos: 172.17.0.4, .6, .7, .8 y .9, puerto 22, dentro de 172.17.0.0/24. No se usó `ssh-auth-methods` ni se intentó conectar con ningún usuario.
+- **Qué hice:** `for ip in 172.17.0.4 172.17.0.6 172.17.0.7 172.17.0.8 172.17.0.9; do echo "=== $ip ==="; nc -nv -w 3 $ip 22 </dev/null | tee evidencias/p2/22-ssh-banner-$ip.txt; sudo nmap -Pn -p 22 --script ssh2-enum-algos,ssh-hostkey $ip -oA evidencias/p2/22-ssh-$ip; done`
+- **Qué salió:** algoritmos de intercambio de claves, cifrado y claves de host de cada servidor. Los banners guardados por `nc` se veían recortados o ausentes al listarlos con `grep` (ver entrada de las 17:55). Las capturas de cada equipo se hicieron en dos partes porque no cabían. Evidencia: `evidencias/p2/22-ssh-172.17.0.<n>.nmap` y `evidencias/p2/22-ssh-banner-172.17.0.<n>.txt`.
+- **Captura:** ![SSH 172.17.0.4 (1 de 2)](../imagenes/p2-05-ssh-172.17.0.4-1.png) ![SSH 172.17.0.4 (2 de 2)](../imagenes/p2-05-ssh-172.17.0.4-2.png) ![SSH 172.17.0.6 (1 de 2)](../imagenes/p2-05-ssh-172.17.0.6-1.png) ![SSH 172.17.0.6 (2 de 2)](../imagenes/p2-05-ssh-172.17.0.6-2.png) ![SSH 172.17.0.7 (1 de 2)](../imagenes/p2-05-ssh-172.17.0.7-1.png) ![SSH 172.17.0.7 (2 de 2)](../imagenes/p2-05-ssh-172.17.0.7-2.png) ![SSH 172.17.0.8 (1 de 2)](../imagenes/p2-05-ssh-172.17.0.8-1.png) ![SSH 172.17.0.8 (2 de 2)](../imagenes/p2-05-ssh-172.17.0.8-2.png) ![SSH 172.17.0.9 (1 de 2)](../imagenes/p2-05-ssh-172.17.0.9-1.png) ![SSH 172.17.0.9 (2 de 2)](../imagenes/p2-05-ssh-172.17.0.9-2.png)
+- **Siguiente paso:** leer el banner del FTP y de los puertos sin identificar.
+
+### 2026-11-22 17:30 - Banners de FTP y de los puertos sin identificar de 172.17.0.5
+- **Cuándo:** 2026-11-22 17:30 (FTP con `nc`), 17:31 (5672 y 32987 con `nc`), capturas a las 17:46, 17:48 y 17:50, y 20:09 (repetición con `/dev/tcp`, hora tomada del `date` de la captura)
+- **Objetivo y alcance:** leer el saludo del FTP de 172.17.0.3 (21/tcp) y de los puertos 5672 y 32987 de 172.17.0.5, que `nmap -sV` no identificó. Dentro de 172.17.0.0/24. Solo se lee el saludo; no se envía ningún comando ni se inicia sesión. El `ping` a 172.17.0.3 respondió sin pérdida de paquetes durante la lectura del FTP.
+- **Qué hice:** `nc -nv -w 3 172.17.0.3 21 </dev/null | tee evidencias/p2/23-ftp-banner-172.17.0.3.txt`, `nc -nv -w 3 172.17.0.5 5672 </dev/null | tee evidencias/p2/23-banner-172.17.0.5-5672.txt` y el equivalente para el puerto 32987. Después, en la repetición del FTP (entrada de las 17:55), `/dev/tcp`; y a las 20:09 `for p in 5672 32987; do echo "=== 172.17.0.5:$p ==="; timeout 5 bash -c "exec 3<>/dev/tcp/172.17.0.5/$p; head -c 100 <&3" | tee evidencias/p2/23-banner-172.17.0.5-$p-bash.txt; done` y `wc -c evidencias/p2/23-banner-172.17.0.5-*-bash.txt`
+- **Qué salió:** con `nc`, los ficheros de 5672 y 32987 quedaron vacíos (0 bytes). El del FTP se repitió porque no se pudo verificar con `nc` y, con `/dev/tcp`, devolvió `220 (vsFTPd 2.3.4)` (ver entrada de las 17:55). Con `/dev/tcp`, el puerto 5672 mantuvo la conexión abierta sin enviar nada durante 5 s (`timeout` la cortó) y el puerto 32987 terminó sin devolver datos; ambos ficheros tienen 0 bytes. Ninguno de los dos servicios envía saludo sin que el cliente hable primero, por lo que no se obtuvo versión ni más información. Evidencia: `evidencias/p2/23-banner-172.17.0.5-5672-bash.txt` y `23-banner-172.17.0.5-32987-bash.txt`.
+- **Captura:** ![Banners de 172.17.0.5 en los puertos 5672 y 32987](../imagenes/p2-06-banner-5672-32987-172.17.0.5.png)
+- **Siguiente paso:** enumerar SMB y NetBIOS de 172.17.0.8 y la versión de IPMI de 172.17.0.10.
+
+### 2026-11-22 20:14 - SMB y NetBIOS de 172.17.0.8
+- **Cuándo:** 2026-11-22 20:14 (comandos) y 20:15 (captura)
+- **Objetivo y alcance:** conocer nombre del equipo, grupo, dialectos y firma de SMB sin autenticar. Objetivo 172.17.0.8 (139 y 445/tcp, 137/udp), dentro de 172.17.0.0/24. Sin sesión nula, sin enumeración de usuarios ni de recursos compartidos.
+- **Qué hice:** `sudo nmap -Pn -p 139,445 --script smb-os-discovery,smb2-security-mode,smb-security-mode,smb-protocols 172.17.0.8 -oA evidencias/p2/24-smb-172.17.0.8`, `sudo nmap -Pn -sU -p 137 --script nbstat 172.17.0.8 -oA evidencias/p2/24-nbstat-172.17.0.8` y `nmblookup -A 172.17.0.8 | tee evidencias/p2/24-nmblookup-172.17.0.8.txt`; después `cat` de los tres resultados
+- **Qué salió:** SMB 3.1.1 con firma habilitada pero no obligatoria; dialectos 2.0.2, 2.1, 3.0, 3.0.2 y 3.1.1. NetBIOS: nombre `SAMBASERVER`, usuario `<unknown>`; nombres `SAMBASERVER<00>`, `<03>` y `<20>`, `__MSBROWSE__<01>` y `ESEEMEB.DL<00>`, `<1d>` y `<1e>`; `nmblookup` coincide, con MAC `00-00-00-00-00-00`. Los scripts `smb-os-discovery` y `smb-security-mode` no muestran líneas en la salida. En la Parte 1, `-sV` mostró `workgroup: DL`; `nbstat` muestra el grupo como `ESEEMEB.DL`. Ninguna cuenta de usuario revelada. Evidencia: `evidencias/p2/24-smb-172.17.0.8.nmap`, `24-nbstat-172.17.0.8.nmap` y `24-nmblookup-172.17.0.8.txt`.
+- **Captura:** ![SMB y NetBIOS de 172.17.0.8 (1 de 2)](../imagenes/p2-07-smb-172.17.0.8-1.png) ![SMB y NetBIOS de 172.17.0.8 (2 de 2)](../imagenes/p2-07-smb-172.17.0.8-2.png)
+- **Siguiente paso:** comprobar la versión de IPMI de 172.17.0.10.
+
+### 2026-11-22 20:17 - Versión de IPMI de 172.17.0.10
+- **Cuándo:** 2026-11-22 20:17
+- **Objetivo y alcance:** conocer la versión de IPMI que anuncia el puerto 623/udp de 172.17.0.10, dentro de 172.17.0.0/24. Solo el script `ipmi-version`; no se probó ninguna credencial ni se enviaron más peticiones.
+- **Qué hice:** `sudo nmap -Pn -sU -p 623 --script ipmi-version 172.17.0.10 -oA evidencias/p2/25-ipmi-172.17.0.10`; después `cat evidencias/p2/25-ipmi-172.17.0.10.nmap`
+- **Qué salió:** IPMI 2.0. `UserAuth: password, md5, md2, null`; `PassAuth: auth_msg, auth_user, non_null_user`; niveles 1.5 y 2.0. Es lo que el servicio anuncia: la opción `null` queda pendiente de comprobar en una fase posterior, con permiso. Evidencia: `evidencias/p2/25-ipmi-172.17.0.10.nmap`.
+- **Captura:** ![IPMI de 172.17.0.10](../imagenes/p2-08-udp-ipmi-172.17.0.10.png)
+- **Siguiente paso:** buscar cuentas de usuario en todo lo recogido.
+
+### 2026-11-22 20:24 - Búsqueda de cuentas de usuario en las evidencias
+- **Cuándo:** 2026-11-22 20:24 (comando) y 20:26 (lectura)
+- **Objetivo y alcance:** buscar cuentas de usuario reveladas por los servicios, en mis propias evidencias de la Parte 2. Solo ficheros locales, sin tráfico de red.
+- **Qué hice:** `grep -rhoiE "(user(name)?|login|owner|author|contact|admin)[^<]{0,60}|[a-z0-9._-]+@[a-z0-9.-]+" --include='*.nmap' --include='*.txt' evidencias/p2/ | sort -u | tee evidencias/p2/29-cuentas-candidatas.txt` y `cat evidencias/p2/29-cuentas-candidatas.txt`
+- **Qué salió:** 33 candidatos, de los que solo uno es una cuenta real: `info@dockerlabs.lab`, en el pie de la web de 172.17.0.5:443. Se descartan `ejemplo@correo.com` (texto de ejemplo del formulario de login de 172.17.0.8), `Devcrud` (autor de la plantilla web), los nombres de algoritmos SSH con forma de correo (`...@openssh.com`, `...@libssh.org`), `tailwindcss@2.2.19` y las opciones de autenticación de IPMI. Algunos candidatos llevan el prefijo `22m`, un resto de color de la salida de `whatweb`. Evidencia: `evidencias/p2/29-cuentas-candidatas.txt`.
+- **Captura:** ![Búsqueda de cuentas en las evidencias](../imagenes/p2-10-cuentas.png)
+- **Siguiente paso:** redactar la Parte 2 de `inventario.md`.
+
+### 2026-11-22 - Redacción de la Parte 2 de inventario.md
+- **Cuándo:** 2026-11-22, después de las 20:26 (hora exacta no registrada en el historial: el fichero se redactó y se subió fuera de la terminal de este historial)
+- **Objetivo y alcance:** dejar escrito lo que expone cada servicio sin autenticar, las cuentas descubiertas y las limitaciones. Solo trabajo con ficheros locales, sin tráfico de red.
+- **Qué hice:** añadí el apartado de la Parte 2 a `inventario.md` con ayuda de IA, a partir de mis ficheros de `evidencias/p2/`, y lo comprobé contra mis salidas y capturas. Con lo observado revisé las funciones probables: 172.17.0.6 pasa a servidor donde se montaban cosas (Jenkins), 172.17.0.8 a portal de clientes (indicio débil) y 172.17.0.9 a sin función asignada.
+- **Qué salió:** `inventario.md` con la enumeración de los 8 equipos, 2 servicios UDP, 1 cuenta de usuario y las limitaciones. Evidencia: `inventario.md`.
+- **Captura:** sin captura
+- **Siguiente paso:** comprobar los enlaces a imágenes, hacer commit y empezar la Parte 3.

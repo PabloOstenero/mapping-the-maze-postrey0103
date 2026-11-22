@@ -1,0 +1,23 @@
+    <meta name="author" content="Devcrud">
+    <title>DockerLabs | Plantilla gratuita Bootstrap 4.3.x</title>
+    <!-- font icons -->
+    <!-- Bootstrap + FoodHut main styles -->
+    <!-- Navbar -->
+    <!-- header -->
+    <!--  About Section  -->
+    <!--  Gallary Section  -->
+        <!-- Aquí van las imágenes de la galería -->
+    <!-- Book a table Section  -->
+                <!-- Aquí van los campos para la reserva de mesa -->
+    <!-- Blog Section  -->
+        <!-- Aquí va el contenido del blog -->
+    <!-- Reviews Section  -->
+        <!-- Aquí van las opiniones -->
+    <!-- Contact Section  -->
+            <!-- Aquí va el mapa y la información de contacto -->
+    <!-- Page footer -->
+                <P class="text-muted">info@dockerlabs.lab</P>
+    <!-- Core scripts -->
+    <!-- Bootstrap affix -->
+    <!-- wow.js -->
+    <!-- FoodHut js -->

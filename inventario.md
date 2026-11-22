@@ -38,15 +38,15 @@
 | 172.17.0.5 | idem | 61613 | tcp | stomp | Apache ActiveMQ (sin versión) | idem |
 | 172.17.0.5 | idem | 61614 | tcp | http | Jetty 9.4.39.v20210325 | idem |
 | 172.17.0.5 | idem | 61616 | tcp | apachemq | ActiveMQ OpenWire transport 5.15.15 | idem |
-| 172.17.0.6 | Sin función asignada (servidor de aplicaciones Java) | 22 | tcp | ssh | OpenSSH 9.2p1 Debian 2+deb12u2 (protocol 2.0) | `evidencias/p1/11-tcp-ver-172.17.0.6.nmap` |
+| 172.17.0.6 | Servidor donde se montaban cosas (probable: Jenkins) | 22 | tcp | ssh | OpenSSH 9.2p1 Debian 2+deb12u2 (protocol 2.0) | `evidencias/p1/11-tcp-ver-172.17.0.6.nmap` |
 | 172.17.0.6 | idem | 8080 | tcp | http | Jetty 10.0.18 | idem |
 | 172.17.0.7 | Sin función asignada (solo SSH) | 22 | tcp | ssh | OpenSSH 7.7 (protocol 2.0) | `evidencias/p1/11-tcp-ver-172.17.0.7.nmap` |
-| 172.17.0.8 | Servidor de pruebas (probable) | 22 | tcp | ssh | OpenSSH 9.6p1 Ubuntu 3ubuntu13.5 (Ubuntu Linux; protocol 2.0) | `evidencias/p1/11-tcp-ver-172.17.0.8.nmap` |
+| 172.17.0.8 | Portal de clientes (probable, indicio débil) | 22 | tcp | ssh | OpenSSH 9.6p1 Ubuntu 3ubuntu13.5 (Ubuntu Linux; protocol 2.0) | `evidencias/p1/11-tcp-ver-172.17.0.8.nmap` |
 | 172.17.0.8 | idem | 80 | tcp | http | Apache httpd 2.4.58 ((Ubuntu)) | idem |
 | 172.17.0.8 | idem | 139 | tcp | netbios-ssn | Samba smbd 4 | idem |
 | 172.17.0.8 | idem | 445 | tcp | netbios-ssn | Samba smbd 4 | idem |
 | 172.17.0.8 | idem | 137 | udp | netbios-ns | Samba nmbd netbios-ns (workgroup: DL) | `evidencias/p1/12-udp-172.17.0.8.nmap` |
-| 172.17.0.9 | Portal de clientes (probable, provisional) | 22 | tcp | ssh | OpenSSH 9.2p1 Debian 2+deb12u10 (protocol 2.0) | `evidencias/p1/11-tcp-ver-172.17.0.9.nmap` |
+| 172.17.0.9 | Sin función asignada (web "test page") | 22 | tcp | ssh | OpenSSH 9.2p1 Debian 2+deb12u10 (protocol 2.0) | `evidencias/p1/11-tcp-ver-172.17.0.9.nmap` |
 | 172.17.0.9 | idem | 80 | tcp | http | Apache httpd 2.4.68 ((Debian)) | idem |
 | 172.17.0.10 | Consola de gestión de servidores (probable) | 80 | tcp | http | SimpleHTTPServer 0.6 (Python 3.11.2) | `evidencias/p1/11-tcp-ver-172.17.0.10.nmap` |
 | 172.17.0.10 | idem | 623 | udp | asf-rmcp | no identificada | `evidencias/p1/12-udp-172.17.0.10.nmap` |
@@ -155,3 +155,126 @@ Hoja del cliente comparada con lo observado el 2026-11-22. La hoja no se usó co
 | (no aparece) | 172.17.0.8 vivo con SSH, Apache y Samba (139, 445, 137/udp) | Añadirlo y asignarle responsable | Falta |
 
 **Conclusión:** la hoja del cliente tiene 7 entradas que sobran, le faltan 6 equipos y contiene 2 entradas con datos erróneos. Una entrada más (172.17.1.6) queda fuera del alcance y no se pudo verificar. El inventario válido es el de este documento.
+
+## Parte 2 - Enumeración sin autenticar
+
+**Autor:** Pablo Ostenero Reyes
+**Fecha de las comprobaciones:** 2026-11-22 (hora de la máquina virtual Kali)
+**Criterio de evaluación:** RA3.b, inventario de cuentas de usuario y servicios mediante técnicas activas, sin autenticación.
+
+### Criterio seguido
+
+- Scripts NSE solo de las categorías default y safe a la vez (filtro `SAFE`), excluyendo intrusive, exploit, dos, brute, malware, auth, broadcast y external.
+- Scripts sueltos de la categoría safe (`ssh2-enum-algos`, `ssh-hostkey`, `smb-os-discovery`, `smb2-security-mode`, `smb-security-mode`, `smb-protocols`, `nbstat`, `ipmi-version`), cuyas categorías se comprobaron antes de usarlos:
+![Categorías de los scripts NSE usados](imagenes/p2-02-categorias-scripts.png)
+- Lectura de banners (con `nc` y con `/dev/tcp`) y peticiones HTTP normales con `curl`; una petición a cada recurso y sin rastreo de rutas.
+- Sin credenciales, sin sesiones anónimas y sin fuerza bruta de rutas, usuarios o contraseñas.
+- A 172.17.0.3 se le pasaron los scripts solo en el puerto 80, con `-T2`. No se lanzó ningún script contra su FTP (vsftpd 2.3.4), hallazgo grave que no se toca. El `ping` a ese equipo respondió sin pérdida de paquetes durante las comprobaciones.
+- Los servicios de mensajería (1883, 5672, 61613, 61616, 32987) y el AJP de 172.17.0.4 (8009) no se probaron con scripts, siguiendo la regla de no acceder a colas de mensajes.
+
+### 172.17.0.3 - Equipo antiguo y delicado
+
+| Puerto/servicio | Qué expone sin autenticar | Cómo se obtuvo | Evidencia |
+|---|---|---|---|
+| 21/ftp | Banner `220 (vsFTPd 2.3.4)`, leído sin enviar nada | `/dev/tcp` (lectura del saludo) | `evidencias/p2/23-ftp-banner-172.17.0.3-bash.txt`, [captura](imagenes/p2-06-banner-ftp-172.17.0.3.png) |
+| 80/http | Apache/2.4.58 (Ubuntu); título "Apache2 Ubuntu Default Page: It works"; `robots.txt` devuelve 404 | `curl -I`, `curl /robots.txt`, `whatweb -a 1`, NSE seguros | `evidencias/p2/21-http-cabeceras-172.17.0.3-80.txt`, `21-http-robots-172.17.0.3-80.txt`, `21-whatweb-172.17.0.3-80.txt`, [captura](imagenes/p2-03-http-172.17.0.3-80.png) |
+
+![Scripts NSE seguros sobre 172.17.0.3](imagenes/p2-01-nse-172.17.0.3.png)
+
+### 172.17.0.4
+
+| Puerto/servicio | Qué expone sin autenticar | Cómo se obtuvo | Evidencia |
+|---|---|---|---|
+| 22/ssh | Banner `SSH-2.0-OpenSSH_7.9p1 Debian-10+deb10u4`, algoritmos y claves de host | `/dev/tcp`, `ssh2-enum-algos`, `ssh-hostkey` | `evidencias/p2/22-ssh-banner-172.17.0.4-bash.txt`, `22-ssh-172.17.0.4.nmap`, [captura 1](imagenes/p2-05-ssh-172.17.0.4-1.png), [captura 2](imagenes/p2-05-ssh-172.17.0.4-2.png) |
+| 8080/http | Apache Tomcat 9.0.30 (título, favicon y pie de la página de error); `robots.txt` devuelve 404 | `curl`, `whatweb -a 1`, NSE seguros | `evidencias/p2/21-http-cabeceras-172.17.0.4-8080.txt`, `21-http-robots-172.17.0.4-8080.txt`, [captura](imagenes/p2-03-http-172.17.0.4-8080.png) |
+| 8009/ajp13 | Solo la versión de `-sV` (Apache Jserv, AJP 1.3); sin script ni más pruebas | `nmap -sV` (Parte 1) | `evidencias/p1/11-tcp-ver-172.17.0.4.nmap` |
+
+![Scripts NSE seguros sobre 172.17.0.4](imagenes/p2-01-nse-172.17.0.4.png)
+
+### 172.17.0.5 - Mensajería con operadores (probable)
+
+| Puerto/servicio | Qué expone sin autenticar | Cómo se obtuvo | Evidencia |
+|---|---|---|---|
+| 80/http | Apache/2.4.59 (Debian); página por defecto de Apache | `curl`, `whatweb -a 1`, NSE seguros | `evidencias/p2/21-http-cabeceras-172.17.0.5-80.txt`, [captura](imagenes/p2-03-http-172.17.0.5-80.png) |
+| 443/https | Web de plantilla "DockerLabs \| Plantilla gratuita Bootstrap 4.3.x" (autor de la plantilla: Devcrud) con el correo `info@dockerlabs.lab` en el pie | `curl`, `whatweb -a 1` | `evidencias/p2/21-http-pistas-172.17.0.5-443.txt`, `21-whatweb-172.17.0.5-443.txt`, [captura](imagenes/p2-03-http-172.17.0.5-443.png) |
+| 443/https | Certificado autofirmado (emisor igual al sujeto): `C=US, ST=California, L=San Francisco, O=Your Organization, OU=Your Unit, CN=example.com`; válido del 2024-04-17 al 2025-04-17 (caducado) | `openssl s_client` | `evidencias/p2/21-tls-cert-172.17.0.5-443.txt`, [captura](imagenes/p2-04-tls-172.17.0.5.png) |
+| 8161/http | Jetty 9.4.39.v20210325 que responde 401 con `WWW-Authenticate: basic realm ActiveMQRealm`; pide autenticación | `curl -I`, `whatweb -a 1` | `evidencias/p2/21-http-cabeceras-172.17.0.5-8161.txt`, `21-whatweb-172.17.0.5-8161.txt`, [captura](imagenes/p2-03-http-172.17.0.5-8161.png) |
+| 61614/http | Jetty 9.4.39.v20210325. `http-methods` avisa de `TRACE` como método potencialmente arriesgado en un puerto Jetty de esta máquina | NSE seguros | `evidencias/p2/20-nse-172.17.0.5.nmap` |
+| 1883, 5672 y 32987 | Sin banner: el saludo no devolvió datos (5672 mantuvo la conexión 5 s sin enviar nada; 32987 terminó sin datos) | `nc` y `/dev/tcp` | `evidencias/p2/23-banner-172.17.0.5-5672-bash.txt`, `23-banner-172.17.0.5-32987-bash.txt`, [captura](imagenes/p2-06-banner-5672-32987-172.17.0.5.png) |
+| 61613 y 61616 | Solo la versión de `-sV` (STOMP de Apache ActiveMQ; ActiveMQ OpenWire 5.15.15); sin scripts | `nmap -sV` (Parte 1) | `evidencias/p1/11-tcp-ver-172.17.0.5.nmap` |
+
+![Scripts NSE seguros sobre 172.17.0.5](imagenes/p2-01-nse-172.17.0.5.png)
+
+### 172.17.0.6 - Servidor donde se montaban cosas (probable)
+
+| Puerto/servicio | Qué expone sin autenticar | Cómo se obtuvo | Evidencia |
+|---|---|---|---|
+| 22/ssh | Banner `SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u2`, algoritmos y claves de host | `/dev/tcp`, `ssh2-enum-algos`, `ssh-hostkey` | `evidencias/p2/22-ssh-banner-172.17.0.6-bash.txt`, `22-ssh-172.17.0.6.nmap`, [captura 1](imagenes/p2-05-ssh-172.17.0.6-1.png), [captura 2](imagenes/p2-05-ssh-172.17.0.6-2.png) |
+| 8080/http | Jenkins 2.441 sobre Jetty 10.0.18 (cabeceras `X-Jenkins: 2.441` y `X-Hudson: 1.395`); la portada redirige a `/login` con formulario de contraseña; cookie `JSESSIONID` con `HttpOnly`; `robots.txt` con `Disallow: /` | `curl -I`, `curl /robots.txt`, `whatweb -a 1` | `evidencias/p2/21-http-cabeceras-172.17.0.6-8080.txt`, `21-http-robots-172.17.0.6-8080.txt`, `21-whatweb-172.17.0.6-8080.txt`, [captura](imagenes/p2-03-http-172.17.0.6-8080.png) |
+
+![Scripts NSE seguros sobre 172.17.0.6](imagenes/p2-01-nse-172.17.0.6.png)
+
+### 172.17.0.7
+
+| Puerto/servicio | Qué expone sin autenticar | Cómo se obtuvo | Evidencia |
+|---|---|---|---|
+| 22/ssh | Banner `SSH-2.0-OpenSSH_7.7` (sin distribución), algoritmos y claves de host | `/dev/tcp`, `ssh2-enum-algos`, `ssh-hostkey` | `evidencias/p2/22-ssh-banner-172.17.0.7-bash.txt`, `22-ssh-172.17.0.7.nmap`, [captura 1](imagenes/p2-05-ssh-172.17.0.7-1.png), [captura 2](imagenes/p2-05-ssh-172.17.0.7-2.png) |
+
+![Scripts NSE seguros sobre 172.17.0.7](imagenes/p2-01-nse-172.17.0.7.png)
+
+### 172.17.0.8 - Portal de clientes (probable, indicio débil)
+
+| Puerto/servicio | Qué expone sin autenticar | Cómo se obtuvo | Evidencia |
+|---|---|---|---|
+| 22/ssh | Banner `SSH-2.0-OpenSSH_9.6p1 Ubuntu-3ubuntu13.5`, algoritmos y claves de host | `/dev/tcp`, `ssh2-enum-algos`, `ssh-hostkey` | `evidencias/p2/22-ssh-banner-172.17.0.8-bash.txt`, `22-ssh-172.17.0.8.nmap`, [captura 1](imagenes/p2-05-ssh-172.17.0.8-1.png), [captura 2](imagenes/p2-05-ssh-172.17.0.8-2.png) |
+| 80/http | Apache/2.4.58 (Ubuntu); página titulada "Login" con campo de contraseña (no se entró) | `curl`, `whatweb -a 1`, NSE seguros | `evidencias/p2/21-http-pistas-172.17.0.8-80.txt`, `21-whatweb-172.17.0.8-80.txt`, [captura](imagenes/p2-03-http-172.17.0.8-80.png) |
+| 139 y 445/tcp (SMB) | SMB 3.1.1 con firma habilitada pero no obligatoria; dialectos 2.0.2, 2.1, 3.0, 3.0.2 y 3.1.1. `smb-os-discovery` y `smb-security-mode` no devolvieron líneas | `smb2-security-mode`, `smb-protocols` | `evidencias/p2/24-smb-172.17.0.8.nmap`, [captura 1](imagenes/p2-07-smb-172.17.0.8-1.png), [captura 2](imagenes/p2-07-smb-172.17.0.8-2.png) |
+| 137/udp (NetBIOS) | Nombre `SAMBASERVER`; nombres `SAMBASERVER<00>`, `<03>` y `<20>`, `__MSBROWSE__<01>` y `ESEEMEB.DL<00>`, `<1d>` y `<1e>`; usuario NetBIOS `<unknown>`. En la Parte 1, `-sV` mostró `workgroup: DL` | `nbstat`, `nmblookup -A` | `evidencias/p2/24-nbstat-172.17.0.8.nmap`, `24-nmblookup-172.17.0.8.txt` |
+
+![Scripts NSE seguros sobre 172.17.0.8](imagenes/p2-01-nse-172.17.0.8.png)
+
+### 172.17.0.9
+
+| Puerto/servicio | Qué expone sin autenticar | Cómo se obtuvo | Evidencia |
+|---|---|---|---|
+| 22/ssh | Banner `SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u10`, algoritmos y claves de host | `/dev/tcp`, `ssh2-enum-algos`, `ssh-hostkey` | `evidencias/p2/22-ssh-banner-172.17.0.9-bash.txt`, `22-ssh-172.17.0.9.nmap`, [captura 1](imagenes/p2-05-ssh-172.17.0.9-1.png), [captura 2](imagenes/p2-05-ssh-172.17.0.9-2.png) |
+| 80/http | Apache/2.4.68 (Debian); página titulada "test page" | `curl`, `whatweb -a 1`, NSE seguros | `evidencias/p2/21-http-cabeceras-172.17.0.9-80.txt`, [captura](imagenes/p2-03-http-172.17.0.9-80.png) |
+
+![Scripts NSE seguros sobre 172.17.0.9](imagenes/p2-01-nse-172.17.0.9.png)
+
+### 172.17.0.10 - Consola de gestión de servidores (probable)
+
+| Puerto/servicio | Qué expone sin autenticar | Cómo se obtuvo | Evidencia |
+|---|---|---|---|
+| 80/http | SimpleHTTP/0.6 con Python 3.11.2; página titulada "CTG · IPMI bajo exposición" | `curl`, `whatweb -a 1`, NSE seguros | `evidencias/p2/21-http-cabeceras-172.17.0.10-80.txt`, `21-whatweb-172.17.0.10-80.txt`, [captura](imagenes/p2-03-http-172.17.0.10-80.png) |
+
+![Scripts NSE seguros sobre 172.17.0.10](imagenes/p2-01-nse-172.17.0.10.png)
+
+### Servicios UDP
+
+| IP:puerto | Servicio | Qué expone | Evidencia |
+|---|---|---|---|
+| 172.17.0.10:623/udp | IPMI | Versión IPMI 2.0; `UserAuth: password, md5, md2, null`; `PassAuth: auth_msg, auth_user, non_null_user`; niveles 1.5 y 2.0. Es lo que el servicio anuncia; no se probó ninguna credencial | `evidencias/p2/25-ipmi-172.17.0.10.nmap`, [captura](imagenes/p2-08-udp-ipmi-172.17.0.10.png) |
+| 172.17.0.8:137/udp | NetBIOS | Ver el apartado de 172.17.0.8 | `evidencias/p2/24-nbstat-172.17.0.8.nmap` |
+
+### Cuentas de usuario descubiertas
+
+| Cuenta | Equipo y servicio | Cómo se obtuvo | Evidencia |
+|---|---|---|---|
+| info@dockerlabs.lab | 172.17.0.5, web (443/tcp) | Correo de contacto en el pie de la página | `evidencias/p2/21-http-pistas-172.17.0.5-443.txt`, `21-whatweb-172.17.0.5-443.txt`, [captura](imagenes/p2-03-http-172.17.0.5-443.png) |
+
+![Búsqueda de cuentas en las evidencias](imagenes/p2-10-cuentas.png)
+
+Ninguna cuenta se ha usado ni probado; solo se documenta que el servicio la revela. Se descartaron como candidatos `ejemplo@correo.com` (texto de ejemplo del formulario de login de 172.17.0.8), el autor de la plantilla `Devcrud` y los nombres de algoritmos SSH con forma de correo. NetBIOS devolvió el usuario `<unknown>`.
+
+### Limitaciones
+
+- No se probaron la sesión nula de SMB ni los scripts de enumeración de usuarios y recursos, ni el FTP anónimo ni communities SNMP: serían accesos con credenciales anónimas o por defecto, que las reglas de compromiso no permiten.
+- No se lanzó ningún script contra el FTP de 172.17.0.3 (vsftpd 2.3.4), el AJP de 172.17.0.4 (8009) ni los servicios de mensajería de 172.17.0.5 (1883, 5672, 61613, 61616, 32987), por tratarse de hallazgos graves o de servicios que pueden devolver datos del cliente.
+- 172.17.0.5:5672 y 32987 no devolvieron banner sin enviar datos; la versión de AMQP sigue sin identificar.
+- 172.17.0.5:8161 pide autenticación (401): no se probaron credenciales.
+- 172.17.0.6:8080 (Jenkins) y 172.17.0.8:80 tienen formulario de login: no se entró.
+- Los scripts `smb-os-discovery` y `smb-security-mode` no devolvieron líneas para 172.17.0.8; no se investigó el motivo.
+- Los puertos UDP marcados `open|filtered` en la Parte 1 no respondieron y no se pudieron confirmar. No se enumeraron SNMP, NTP ni DNS porque ningún equipo los tiene abiertos.
+- No se descubrieron rutas web por fuerza bruta; solo se revisó lo que el servidor publica.
+- Los banners leídos con `nc` aparecían recortados al listarlos con `grep`; se repitieron con `/dev/tcp` y la verificación de tamaño y de caracteres ocultos (`wc -c`, `cat -A`) mostró que los ficheros estaban completos.

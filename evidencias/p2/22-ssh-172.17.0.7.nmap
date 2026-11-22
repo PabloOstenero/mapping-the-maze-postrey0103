@@ -1,0 +1,52 @@
+# Nmap 7.99 scan initiated Sun Nov 22 17:30:21 2026 as: /usr/lib/nmap/nmap -Pn -p 22 --script ssh2-enum-algos,ssh-hostkey -oA evidencias/p2/22-ssh-172.17.0.7 172.17.0.7
+Nmap scan report for 172.17.0.7
+Host is up (0.000036s latency).
+
+PORT   STATE SERVICE
+22/tcp open  ssh
+| ssh2-enum-algos: 
+|   kex_algorithms: (10)
+|       curve25519-sha256
+|       curve25519-sha256@libssh.org
+|       ecdh-sha2-nistp256
+|       ecdh-sha2-nistp384
+|       ecdh-sha2-nistp521
+|       diffie-hellman-group-exchange-sha256
+|       diffie-hellman-group16-sha512
+|       diffie-hellman-group18-sha512
+|       diffie-hellman-group14-sha256
+|       diffie-hellman-group14-sha1
+|   server_host_key_algorithms: (5)
+|       ssh-rsa
+|       rsa-sha2-512
+|       rsa-sha2-256
+|       ecdsa-sha2-nistp256
+|       ssh-ed25519
+|   encryption_algorithms: (6)
+|       chacha20-poly1305@openssh.com
+|       aes128-ctr
+|       aes192-ctr
+|       aes256-ctr
+|       aes128-gcm@openssh.com
+|       aes256-gcm@openssh.com
+|   mac_algorithms: (10)
+|       umac-64-etm@openssh.com
+|       umac-128-etm@openssh.com
+|       hmac-sha2-256-etm@openssh.com
+|       hmac-sha2-512-etm@openssh.com
+|       hmac-sha1-etm@openssh.com
+|       umac-64@openssh.com
+|       umac-128@openssh.com
+|       hmac-sha2-256
+|       hmac-sha2-512
+|       hmac-sha1
+|   compression_algorithms: (2)
+|       none
+|_      zlib@openssh.com
+| ssh-hostkey: 
+|   2048 1a:cb:5e:a3:3d:d1:da:c0:ed:2a:61:7f:73:79:46:ce (RSA)
+|   256 54:9e:53:23:57:fc:60:1e:c0:41:cb:f3:85:32:01:fc (ECDSA)
+|_  256 4b:15:7e:7b:b3:07:54:3d:74:ad:e0:94:78:0c:94:93 (ED25519)
+MAC Address: 5E:C8:7C:82:D9:49 (Unknown)
+
+# Nmap done at Sun Nov 22 17:30:22 2026 -- 1 IP address (1 host up) scanned in 0.82 seconds

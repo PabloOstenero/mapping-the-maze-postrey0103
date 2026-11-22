@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.99 scan initiated Sun Nov 22 20:17:40 2026 as: /usr/lib/nmap/nmap -Pn -sU -p 623 -&#45;script ipmi-version -oA evidencias/p2/25-ipmi-172.17.0.10 172.17.0.10 -->
+<nmaprun scanner="nmap" args="/usr/lib/nmap/nmap -Pn -sU -p 623 -&#45;script ipmi-version -oA evidencias/p2/25-ipmi-172.17.0.10 172.17.0.10" start="1795378660" startstr="Sun Nov 22 20:17:40 2026" version="7.99" xmloutputversion="1.05">
+<scaninfo type="udp" protocol="udp" numservices="1" services="623"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="172.17.0.10" addrtype="ipv4"/>
+<address addr="1A:A5:09:CE:CF:88" addrtype="mac"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<host starttime="1795378661" endtime="1795378661"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="172.17.0.10" addrtype="ipv4"/>
+<address addr="1A:A5:09:CE:CF:88" addrtype="mac"/>
+<hostnames>
+</hostnames>
+<ports><port protocol="udp" portid="623"><state state="open" reason="udp-response" reason_ttl="64"/><service name="asf-rmcp" method="table" conf="3"/><script id="ipmi-version" output="&#xa;  Version: &#xa;    IPMI-2.0&#xa;  UserAuth: password, md5, md2, null&#xa;  PassAuth: auth_msg, auth_user, non_null_user&#xa;  Level: 1.5, 2.0"><table key="Version">
+<elem>IPMI-2.0</elem>
+</table>
+<table key="UserAuth">
+<elem>password</elem>
+<elem>md5</elem>
+<elem>md2</elem>
+<elem>null</elem>
+</table>
+<table key="PassAuth">
+<elem>auth_msg</elem>
+<elem>auth_user</elem>
+<elem>non_null_user</elem>
+</table>
+<table key="Level">
+<elem>1.5</elem>
+<elem>2.0</elem>
+</table>
+</script></port>
+</ports>
+<times srtt="69" rttvar="3774" to="100000"/>
+</host>
+<runstats><finished time="1795378661" timestr="Sun Nov 22 20:17:41 2026" summary="Nmap done at Sun Nov 22 20:17:41 2026; 1 IP address (1 host up) scanned in 0.76 seconds" elapsed="0.76" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

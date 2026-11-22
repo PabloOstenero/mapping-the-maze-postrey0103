@@ -1,0 +1,4 @@
+subject=C=US, ST=California, L=San Francisco, O=Your Organization, OU=Your Unit, CN=example.com
+issuer=C=US, ST=California, L=San Francisco, O=Your Organization, OU=Your Unit, CN=example.com
+notBefore=Apr 17 08:32:44 2024 GMT
+notAfter=Apr 17 08:32:44 2025 GMT
