@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.99 scan initiated Sat Nov 21 22:57:11 2026 as: /usr/lib/nmap/nmap -Pn -sV -p 80,443,1883,5672,8161,32987,61613,61614,61616 -oA evidencias/p1/11-tcp-ver-172.17.0.5 172.17.0.5 -->
+<nmaprun scanner="nmap" args="/usr/lib/nmap/nmap -Pn -sV -p 80,443,1883,5672,8161,32987,61613,61614,61616 -oA evidencias/p1/11-tcp-ver-172.17.0.5 172.17.0.5" start="1795301831" startstr="Sat Nov 21 22:57:11 2026" version="7.99" xmloutputversion="1.05">
+<scaninfo type="syn" protocol="tcp" numservices="9" services="80,443,1883,5672,8161,32987,61613-61614,61616"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="172.17.0.5" addrtype="ipv4"/>
+<address addr="5A:93:29:F9:09:C3" addrtype="mac"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<host starttime="1795301832" endtime="1795301863"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="172.17.0.5" addrtype="ipv4"/>
+<address addr="5A:93:29:F9:09:C3" addrtype="mac"/>
+<hostnames>
+</hostnames>
+<ports><port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="http" product="Apache httpd" version="2.4.59" extrainfo="(Debian)" method="probed" conf="10"><cpe>cpe:/a:apache:http_server:2.4.59</cpe></service></port>
+<port protocol="tcp" portid="443"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="http" product="Apache httpd" version="2.4.59" extrainfo="(Debian)" tunnel="ssl" method="probed" conf="10"><cpe>cpe:/a:apache:http_server:2.4.59</cpe></service></port>
+<port protocol="tcp" portid="1883"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="mqtt" method="probed" conf="10"/></port>
+<port protocol="tcp" portid="5672"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="amqp" servicefp="SF-Port5672-TCP:V=7.99%I=7%D=11/21%Time=6B0221D3%P=x86_64-pc-linux-gnu%r(GetRequest,89,&quot;AMQP\x03\x01\0\0AMQP\0\x01\0\0\0\0\0\x19\x02\0\0\0\0S\x10\xc0\x0c\x04\xa1\0@p\0\x02\0\0`\x7f\xff\0\0\0`\x02\0\0\0\0S\x18\xc0S\x01\0S\x1d\xc0M\x02\xa3\x11amqp:decode-error\xa17Connection\x20from\x20client\x20using\x20unsupported\x20AMQP\x20attempted&quot;)%r(HTTPOptions,89,&quot;AMQP\x03\x01\0\0AMQP\0\x01\0\0\0\0\0\x19\x02\0\0\0\0S\x10\xc0\x0c\x04\xa1\0@p\0\x02\0\0`\x7f\xff\0\0\0`\x02\0\0\0\0S\x18\xc0S\x01\0S\x1d\xc0M\x02\xa3\x11amqp:decode-error\xa17Connection\x20from\x20client\x20using\x20unsupported\x20AMQP\x20attempted&quot;)%r(RTSPRequest,89,&quot;AMQP\x03\x01\0\0AMQP\0\x01\0\0\0\0\0\x19\x02\0\0\0\0S\x10\xc0\x0c\x04\xa1\0@p\0\x02\0\0`\x7f\xff\0\0\0`\x02\0\0\0\0S\x18\xc0S\x01\0S\x1d\xc0M\x02\xa3\x11amqp:decode-error\xa17Connection\x20from\x20client\x20using\x20unsupported\x20AMQP\x20attempted&quot;)%r(RPCCheck,89,&quot;AMQP\x03\x01\0\0AMQP\0\x01\0\0\0\0\0\x19\x02\0\0\0\0S\x10\xc0\x0c\x04\xa1\0@p\0\x02\0\0`\x7f\xff\0\0\0`\x02\0\0\0\0S\x18\xc0S\x01\0S\x1d\xc0M\x02\xa3\x11amqp:decode-error\xa17Connection\x20from\x20client\x20using\x20unsupported\x20AMQP\x20attempted&quot;)%r(DNSVersionBindReqTCP,89,&quot;AMQP\x03\x01\0\0AMQP\0\x01\0\0\0\0\0\x19\x02\0\0\0\0S\x10\xc0\x0c\x04\xa1\0@p\0\x02\0\0`\x7f\xff\0\0\0`\x02\0\0\0\0S\x18\xc0S\x01\0S\x1d\xc0M\x02\xa3\x11amqp:decode-error\xa17Connection\x20from\x20client\x20using\x20unsupported\x20AMQP\x20attempted&quot;)%r(DNSStatusRequestTCP,89,&quot;AMQP\x03\x01\0\0AMQP\0\x01\0\0\0\0\0\x19\x02\0\0\0\0S\x10\xc0\x0c\x04\xa1\0@p\0\x02\0\0`\x7f\xff\0\0\0`\x02\0\0\0\0S\x18\xc0S\x01\0S\x1d\xc0M\x02\xa3\x11amqp:decode-error\xa17Connection\x20from\x20client\x20using\x20unsupported\x20AMQP\x20attempted&quot;)%r(SSLSessionReq,89,&quot;AMQP\x03\x01\0\0AMQP\0\x01\0\0\0\0\0\x19\x02\0\0\0\0S\x10\xc0\x0c\x04\xa1\0@p\0\x02\0\0`\x7f\xff\0\0\0`\x02\0\0\0\0S\x18\xc0S\x01\0S\x1d\xc0M\x02\xa3\x11amqp:decode-error\xa17Connection\x20from\x20client\x20using\x20unsupported\x20AMQP\x20attempted&quot;)%r(TerminalServerCookie,89,&quot;AMQP\x03\x01\0\0AMQP\0\x01\0\0\0\0\0\x19\x02\0\0\0\0S\x10\xc0\x0c\x04\xa1\0@p\0\x02\0\0`\x7f\xff\0\0\0`\x02\0\0\0\0S\x18\xc0S\x01\0S\x1d\xc0M\x02\xa3\x11amqp:decode-error\xa17Connection\x20from\x20client\x20using\x20unsupported\x20AMQP\x20attempted&quot;);" method="table" conf="3"/></port>
+<port protocol="tcp" portid="8161"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="http" product="Jetty" version="9.4.39.v20210325" method="probed" conf="10"><cpe>cpe:/a:mortbay:jetty:9.4.39.v20210325</cpe></service></port>
+<port protocol="tcp" portid="32987"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="tcpwrapped" method="probed" conf="8"/></port>
+<port protocol="tcp" portid="61613"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="stomp" product="Apache ActiveMQ" servicefp="SF-Port61613-TCP:V=7.99%I=7%D=11/21%Time=6B0221CE%P=x86_64-pc-linux-gnu%r(HELP4STOMP,289,&quot;ERROR\ncontent-type:text/plain\nmessage:Unknown\x20STOMP\x20action:\x20HELP\n\norg\.apache\.activemq\.transport\.stomp\.ProtocolException:\x20Unknown\x20STOMP\x20action:\x20HELP\n\tat\x20org\.apache\.activemq\.transport\.stomp\.ProtocolConverter\.onStompCommand\(ProtocolConverter\.java:258\)\n\tat\x20org\.apache\.activemq\.transport\.stomp\.StompTransportFilter\.onCommand\(StompTransportFilter\.java:85\)\n\tat\x20org\.apache\.activemq\.transport\.TransportSupport\.doConsume\(TransportSupport\.java:83\)\n\tat\x20org\.apache\.activemq\.transport\.tcp\.TcpTransport\.doRun\(TcpTransport\.java:233\)\n\tat\x20org\.apache\.activemq\.transport\.tcp\.TcpTransport\.run\(TcpTransport\.java:215\)\n\tat\x20java\.base/java\.lang\.Thread\.run\(Thread\.java:840\)\n\0\n&quot;);" method="probed" conf="10"><cpe>cpe:/a:apache:activemq</cpe></service></port>
+<port protocol="tcp" portid="61614"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="http" product="Jetty" version="9.4.39.v20210325" method="probed" conf="10"><cpe>cpe:/a:mortbay:jetty:9.4.39.v20210325</cpe></service></port>
+<port protocol="tcp" portid="61616"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="apachemq" product="ActiveMQ OpenWire transport" version="5.15.15" method="probed" conf="10"><cpe>cpe:/a:apache:activemq:5.15.15</cpe></service></port>
+</ports>
+<times srtt="36" rttvar="410" to="100000"/>
+</host>
+<runstats><finished time="1795301863" timestr="Sat Nov 21 22:57:43 2026" summary="Nmap done at Sat Nov 21 22:57:43 2026; 1 IP address (1 host up) scanned in 31.89 seconds" elapsed="31.89" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

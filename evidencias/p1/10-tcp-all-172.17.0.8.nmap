@@ -1,0 +1,12 @@
+# Nmap 7.99 scan initiated Sat Nov 21 20:19:59 2026 as: /usr/lib/nmap/nmap -Pn -sS -p- -T3 --max-rate 200 -oA evidencias/p1/10-tcp-all-172.17.0.8 172.17.0.8
+Nmap scan report for 172.17.0.8
+Host is up (0.0000090s latency).
+Not shown: 65531 closed tcp ports (reset)
+PORT    STATE SERVICE
+22/tcp  open  ssh
+80/tcp  open  http
+139/tcp open  netbios-ssn
+445/tcp open  microsoft-ds
+MAC Address: AE:02:99:C9:8F:EB (Unknown)
+
+# Nmap done at Sat Nov 21 20:25:28 2026 -- 1 IP address (1 host up) scanned in 328.32 seconds

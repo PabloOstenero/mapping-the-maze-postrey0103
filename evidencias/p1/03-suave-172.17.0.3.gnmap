@@ -1,0 +1,4 @@
+# Nmap 7.99 scan initiated Sat Nov 21 19:20:51 2026 as: /usr/lib/nmap/nmap -Pn -sS --top-ports 100 -sV --version-light -T2 --max-retries 1 -oA evidencias/p1/03-suave-172.17.0.3 172.17.0.3
+Host: 172.17.0.3 ()	Status: Up
+Host: 172.17.0.3 ()	Ports: 21/open/tcp//ftp//vsftpd 2.3.4/, 80/open/tcp//http//Apache httpd 2.4.58 ((Ubuntu))/	Ignored State: closed (98)
+# Nmap done at Sat Nov 21 19:21:39 2026 -- 1 IP address (1 host up) scanned in 47.36 seconds

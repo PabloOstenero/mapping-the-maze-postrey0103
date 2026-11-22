@@ -1,0 +1,10 @@
+# Nmap 7.99 scan initiated Sat Nov 21 21:46:33 2026 as: /usr/lib/nmap/nmap -Pn -sS -p- -T3 --max-rate 30 --max-retries 1 -oA evidencias/p1/10-tcp-all-172.17.0.3 172.17.0.3
+Nmap scan report for 172.17.0.3
+Host is up (0.000038s latency).
+Not shown: 65533 closed tcp ports (reset)
+PORT   STATE SERVICE
+21/tcp open  ftp
+80/tcp open  http
+MAC Address: 76:A5:38:5B:60:CF (Unknown)
+
+# Nmap done at Sat Nov 21 22:22:58 2026 -- 1 IP address (1 host up) scanned in 2185.10 seconds

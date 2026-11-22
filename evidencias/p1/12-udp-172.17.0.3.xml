@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.99 scan initiated Sat Nov 21 23:22:59 2026 as: /usr/lib/nmap/nmap -Pn -sU -p 53,67,69,123,137,161,500,623,1900,5353 -&#45;max-retries 1 -T2 -oA evidencias/p1/12-udp-172.17.0.3 172.17.0.3 -->
+<nmaprun scanner="nmap" args="/usr/lib/nmap/nmap -Pn -sU -p 53,67,69,123,137,161,500,623,1900,5353 -&#45;max-retries 1 -T2 -oA evidencias/p1/12-udp-172.17.0.3 172.17.0.3" start="1795303379" startstr="Sat Nov 21 23:22:59 2026" version="7.99" xmloutputversion="1.05">
+<scaninfo type="udp" protocol="udp" numservices="10" services="53,67,69,123,137,161,500,623,1900,5353"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="172.17.0.3" addrtype="ipv4"/>
+<address addr="76:A5:38:5B:60:CF" addrtype="mac"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<host starttime="1795303381" endtime="1795303387"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="172.17.0.3" addrtype="ipv4"/>
+<address addr="76:A5:38:5B:60:CF" addrtype="mac"/>
+<hostnames>
+</hostnames>
+<ports><port protocol="udp" portid="53"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="domain" method="table" conf="3"/></port>
+<port protocol="udp" portid="67"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="dhcps" method="table" conf="3"/></port>
+<port protocol="udp" portid="69"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="tftp" method="table" conf="3"/></port>
+<port protocol="udp" portid="123"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="ntp" method="table" conf="3"/></port>
+<port protocol="udp" portid="137"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="netbios-ns" method="table" conf="3"/></port>
+<port protocol="udp" portid="161"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="snmp" method="table" conf="3"/></port>
+<port protocol="udp" portid="500"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="isakmp" method="table" conf="3"/></port>
+<port protocol="udp" portid="623"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="asf-rmcp" method="table" conf="3"/></port>
+<port protocol="udp" portid="1900"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="upnp" method="table" conf="3"/></port>
+<port protocol="udp" portid="5353"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="zeroconf" method="table" conf="3"/></port>
+</ports>
+<times srtt="67" rttvar="510" to="400000"/>
+</host>
+<runstats><finished time="1795303387" timestr="Sat Nov 21 23:23:07 2026" summary="Nmap done at Sat Nov 21 23:23:07 2026; 1 IP address (1 host up) scanned in 7.63 seconds" elapsed="7.63" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

@@ -1,0 +1,4 @@
+# Nmap 7.99 scan initiated Sat Nov 21 22:58:04 2026 as: /usr/lib/nmap/nmap -Pn -sV -p 22,80 -oA evidencias/p1/11-tcp-ver-172.17.0.9 172.17.0.9
+Host: 172.17.0.9 ()	Status: Up
+Host: 172.17.0.9 ()	Ports: 22/open/tcp//ssh//OpenSSH 9.2p1 Debian 2+deb12u10 (protocol 2.0)/, 80/open/tcp//http//Apache httpd 2.4.68 ((Debian))/
+# Nmap done at Sat Nov 21 22:58:11 2026 -- 1 IP address (1 host up) scanned in 6.83 seconds

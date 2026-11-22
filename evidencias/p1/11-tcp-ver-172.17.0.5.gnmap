@@ -1,0 +1,4 @@
+# Nmap 7.99 scan initiated Sat Nov 21 22:57:11 2026 as: /usr/lib/nmap/nmap -Pn -sV -p 80,443,1883,5672,8161,32987,61613,61614,61616 -oA evidencias/p1/11-tcp-ver-172.17.0.5 172.17.0.5
+Host: 172.17.0.5 ()	Status: Up
+Host: 172.17.0.5 ()	Ports: 80/open/tcp//http//Apache httpd 2.4.59 ((Debian))/, 443/open/tcp//ssl|http//Apache httpd 2.4.59 ((Debian))/, 1883/open/tcp//mqtt///, 5672/open/tcp//amqp?///, 8161/open/tcp//http//Jetty 9.4.39.v20210325/, 32987/open/tcp//tcpwrapped///, 61613/open/tcp//stomp//Apache ActiveMQ/, 61614/open/tcp//http//Jetty 9.4.39.v20210325/, 61616/open/tcp//apachemq//ActiveMQ OpenWire transport 5.15.15/
+# Nmap done at Sat Nov 21 22:57:43 2026 -- 1 IP address (1 host up) scanned in 31.89 seconds

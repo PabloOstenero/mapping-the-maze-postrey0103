@@ -1,0 +1,10 @@
+# Nmap 7.99 scan initiated Sat Nov 21 19:26:55 2026 as: /usr/lib/nmap/nmap -Pn -sS --top-ports 100 -sV --version-light -T2 --max-retries 1 -oA evidencias/p1/03-suave-172.17.0.10 172.17.0.10
+Nmap scan report for 172.17.0.10
+Host is up (0.000066s latency).
+Not shown: 99 closed tcp ports (reset)
+PORT   STATE SERVICE VERSION
+80/tcp open  http    SimpleHTTPServer 0.6 (Python 3.11.2)
+MAC Address: 1A:A5:09:CE:CF:88 (Unknown)
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sat Nov 21 19:27:42 2026 -- 1 IP address (1 host up) scanned in 47.21 seconds

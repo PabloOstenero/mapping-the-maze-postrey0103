@@ -1,0 +1,4 @@
+# Nmap 7.99 scan initiated Sat Nov 21 22:57:52 2026 as: /usr/lib/nmap/nmap -Pn -sV -p 22,80,139,445 -oA evidencias/p1/11-tcp-ver-172.17.0.8 172.17.0.8
+Host: 172.17.0.8 ()	Status: Up
+Host: 172.17.0.8 ()	Ports: 22/open/tcp//ssh//OpenSSH 9.6p1 Ubuntu 3ubuntu13.5 (Ubuntu Linux; protocol 2.0)/, 80/open/tcp//http//Apache httpd 2.4.58 ((Ubuntu))/, 139/open/tcp//netbios-ssn//Samba smbd 4/, 445/open/tcp//netbios-ssn//Samba smbd 4/
+# Nmap done at Sat Nov 21 22:58:04 2026 -- 1 IP address (1 host up) scanned in 11.87 seconds

@@ -1,0 +1,19 @@
+# Nmap 7.99 scan initiated Sat Nov 21 23:22:59 2026 as: /usr/lib/nmap/nmap -Pn -sU -p 53,67,69,123,137,161,500,623,1900,5353 --max-retries 1 -T2 -oA evidencias/p1/12-udp-172.17.0.3 172.17.0.3
+Warning: 172.17.0.3 giving up on port because retransmission cap hit (1).
+Nmap scan report for 172.17.0.3
+Host is up (0.000067s latency).
+
+PORT     STATE         SERVICE
+53/udp   closed        domain
+67/udp   closed        dhcps
+69/udp   closed        tftp
+123/udp  closed        ntp
+137/udp  open|filtered netbios-ns
+161/udp  closed        snmp
+500/udp  closed        isakmp
+623/udp  closed        asf-rmcp
+1900/udp closed        upnp
+5353/udp open|filtered zeroconf
+MAC Address: 76:A5:38:5B:60:CF (Unknown)
+
+# Nmap done at Sat Nov 21 23:23:07 2026 -- 1 IP address (1 host up) scanned in 7.63 seconds

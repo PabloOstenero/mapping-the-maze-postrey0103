@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.99 scan initiated Sat Nov 21 22:57:04 2026 as: /usr/lib/nmap/nmap -Pn -sV -p 22,8009,8080 -oA evidencias/p1/11-tcp-ver-172.17.0.4 172.17.0.4 -->
+<nmaprun scanner="nmap" args="/usr/lib/nmap/nmap -Pn -sV -p 22,8009,8080 -oA evidencias/p1/11-tcp-ver-172.17.0.4 172.17.0.4" start="1795301824" startstr="Sat Nov 21 22:57:04 2026" version="7.99" xmloutputversion="1.05">
+<scaninfo type="syn" protocol="tcp" numservices="3" services="22,8009,8080"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="172.17.0.4" addrtype="ipv4"/>
+<address addr="1A:03:16:B7:A6:F1" addrtype="mac"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<host starttime="1795301825" endtime="1795301831"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="172.17.0.4" addrtype="ipv4"/>
+<address addr="1A:03:16:B7:A6:F1" addrtype="mac"/>
+<hostnames>
+</hostnames>
+<ports><port protocol="tcp" portid="22"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="ssh" product="OpenSSH" version="7.9p1 Debian 10+deb10u4" extrainfo="protocol 2.0" ostype="Linux" method="probed" conf="10"><cpe>cpe:/a:openbsd:openssh:7.9p1</cpe><cpe>cpe:/o:linux:linux_kernel</cpe></service></port>
+<port protocol="tcp" portid="8009"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="ajp13" product="Apache Jserv" extrainfo="Protocol v1.3" method="probed" conf="10"/></port>
+<port protocol="tcp" portid="8080"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="http" product="Apache Tomcat" version="9.0.30" method="probed" conf="10"><cpe>cpe:/a:apache:tomcat:9.0.30</cpe></service></port>
+</ports>
+<times srtt="63" rttvar="2143" to="100000"/>
+</host>
+<runstats><finished time="1795301831" timestr="Sat Nov 21 22:57:11 2026" summary="Nmap done at Sat Nov 21 22:57:11 2026; 1 IP address (1 host up) scanned in 6.90 seconds" elapsed="6.90" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

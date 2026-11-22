@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.99 scan initiated Sat Nov 21 19:20:51 2026 as: /usr/lib/nmap/nmap -Pn -sS -&#45;top-ports 100 -sV -&#45;version-light -T2 -&#45;max-retries 1 -oA evidencias/p1/03-suave-172.17.0.3 172.17.0.3 -->
+<nmaprun scanner="nmap" args="/usr/lib/nmap/nmap -Pn -sS -&#45;top-ports 100 -sV -&#45;version-light -T2 -&#45;max-retries 1 -oA evidencias/p1/03-suave-172.17.0.3 172.17.0.3" start="1795288851" startstr="Sat Nov 21 19:20:51 2026" version="7.99" xmloutputversion="1.05">
+<scaninfo type="syn" protocol="tcp" numservices="100" services="7,9,13,21-23,25-26,37,53,79-81,88,106,110-111,113,119,135,139,143-144,179,199,389,427,443-445,465,513-515,543-544,548,554,587,631,646,873,990,993,995,1025-1029,1110,1433,1720,1723,1755,1900,2000-2001,2049,2121,2717,3000,3128,3306,3389,3986,4899,5000,5009,5051,5060,5101,5190,5357,5432,5631,5666,5800,5900,6000-6001,6646,7070,8000,8008-8009,8080-8081,8443,8888,9100,9999-10000,32768,49152-49157"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="172.17.0.3" addrtype="ipv4"/>
+<address addr="76:A5:38:5B:60:CF" addrtype="mac"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<taskprogress task="SYN Stealth Scan" time="1795288853" percent="1.00" remaining="0" etc="1795288853"/>
+<taskprogress task="SYN Stealth Scan" time="1795288854" percent="2.00" remaining="50" etc="1795288903"/>
+<host starttime="1795288853" endtime="1795288899"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="172.17.0.3" addrtype="ipv4"/>
+<address addr="76:A5:38:5B:60:CF" addrtype="mac"/>
+<hostnames>
+</hostnames>
+<ports><extraports state="closed" count="98">
+<extrareasons reason="reset" count="98" proto="tcp" ports="7,9,13,22-23,25-26,37,53,79,81,88,106,110-111,113,119,135,139,143-144,179,199,389,427,443-445,465,513-515,543-544,548,554,587,631,646,873,990,993,995,1025-1029,1110,1433,1720,1723,1755,1900,2000-2001,2049,2121,2717,3000,3128,3306,3389,3986,4899,5000,5009,5051,5060,5101,5190,5357,5432,5631,5666,5800,5900,6000-6001,6646,7070,8000,8008-8009,8080-8081,8443,8888,9100,9999-10000,32768,49152-49157"/>
+</extraports>
+<port protocol="tcp" portid="21"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="ftp" product="vsftpd" version="2.3.4" ostype="Unix" method="probed" conf="10"><cpe>cpe:/a:vsftpd:vsftpd:2.3.4</cpe></service></port>
+<port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="http" product="Apache httpd" version="2.4.58" extrainfo="(Ubuntu)" method="probed" conf="10"><cpe>cpe:/a:apache:http_server:2.4.58</cpe></service></port>
+</ports>
+<times srtt="53" rttvar="9" to="400000"/>
+</host>
+<runstats><finished time="1795288899" timestr="Sat Nov 21 19:21:39 2026" summary="Nmap done at Sat Nov 21 19:21:39 2026; 1 IP address (1 host up) scanned in 47.36 seconds" elapsed="47.36" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

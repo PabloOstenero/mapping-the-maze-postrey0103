@@ -1,0 +1,65 @@
+# Nmap 7.99 scan initiated Sat Nov 21 22:57:11 2026 as: /usr/lib/nmap/nmap -Pn -sV -p 80,443,1883,5672,8161,32987,61613,61614,61616 -oA evidencias/p1/11-tcp-ver-172.17.0.5 172.17.0.5
+Nmap scan report for 172.17.0.5
+Host is up (0.000036s latency).
+
+PORT      STATE SERVICE    VERSION
+80/tcp    open  http       Apache httpd 2.4.59 ((Debian))
+443/tcp   open  ssl/http   Apache httpd 2.4.59 ((Debian))
+1883/tcp  open  mqtt
+5672/tcp  open  amqp?
+8161/tcp  open  http       Jetty 9.4.39.v20210325
+32987/tcp open  tcpwrapped
+61613/tcp open  stomp      Apache ActiveMQ
+61614/tcp open  http       Jetty 9.4.39.v20210325
+61616/tcp open  apachemq   ActiveMQ OpenWire transport 5.15.15
+2 services unrecognized despite returning data. If you know the service/version, please submit the following fingerprints at https://nmap.org/cgi-bin/submit.cgi?new-service :
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port5672-TCP:V=7.99%I=7%D=11/21%Time=6B0221D3%P=x86_64-pc-linux-gnu%r(G
+SF:etRequest,89,"AMQP\x03\x01\0\0AMQP\0\x01\0\0\0\0\0\x19\x02\0\0\0\0S\x10
+SF:\xc0\x0c\x04\xa1\0@p\0\x02\0\0`\x7f\xff\0\0\0`\x02\0\0\0\0S\x18\xc0S\x0
+SF:1\0S\x1d\xc0M\x02\xa3\x11amqp:decode-error\xa17Connection\x20from\x20cl
+SF:ient\x20using\x20unsupported\x20AMQP\x20attempted")%r(HTTPOptions,89,"A
+SF:MQP\x03\x01\0\0AMQP\0\x01\0\0\0\0\0\x19\x02\0\0\0\0S\x10\xc0\x0c\x04\xa
+SF:1\0@p\0\x02\0\0`\x7f\xff\0\0\0`\x02\0\0\0\0S\x18\xc0S\x01\0S\x1d\xc0M\x
+SF:02\xa3\x11amqp:decode-error\xa17Connection\x20from\x20client\x20using\x
+SF:20unsupported\x20AMQP\x20attempted")%r(RTSPRequest,89,"AMQP\x03\x01\0\0
+SF:AMQP\0\x01\0\0\0\0\0\x19\x02\0\0\0\0S\x10\xc0\x0c\x04\xa1\0@p\0\x02\0\0
+SF:`\x7f\xff\0\0\0`\x02\0\0\0\0S\x18\xc0S\x01\0S\x1d\xc0M\x02\xa3\x11amqp:
+SF:decode-error\xa17Connection\x20from\x20client\x20using\x20unsupported\x
+SF:20AMQP\x20attempted")%r(RPCCheck,89,"AMQP\x03\x01\0\0AMQP\0\x01\0\0\0\0
+SF:\0\x19\x02\0\0\0\0S\x10\xc0\x0c\x04\xa1\0@p\0\x02\0\0`\x7f\xff\0\0\0`\x
+SF:02\0\0\0\0S\x18\xc0S\x01\0S\x1d\xc0M\x02\xa3\x11amqp:decode-error\xa17C
+SF:onnection\x20from\x20client\x20using\x20unsupported\x20AMQP\x20attempte
+SF:d")%r(DNSVersionBindReqTCP,89,"AMQP\x03\x01\0\0AMQP\0\x01\0\0\0\0\0\x19
+SF:\x02\0\0\0\0S\x10\xc0\x0c\x04\xa1\0@p\0\x02\0\0`\x7f\xff\0\0\0`\x02\0\0
+SF:\0\0S\x18\xc0S\x01\0S\x1d\xc0M\x02\xa3\x11amqp:decode-error\xa17Connect
+SF:ion\x20from\x20client\x20using\x20unsupported\x20AMQP\x20attempted")%r(
+SF:DNSStatusRequestTCP,89,"AMQP\x03\x01\0\0AMQP\0\x01\0\0\0\0\0\x19\x02\0\
+SF:0\0\0S\x10\xc0\x0c\x04\xa1\0@p\0\x02\0\0`\x7f\xff\0\0\0`\x02\0\0\0\0S\x
+SF:18\xc0S\x01\0S\x1d\xc0M\x02\xa3\x11amqp:decode-error\xa17Connection\x20
+SF:from\x20client\x20using\x20unsupported\x20AMQP\x20attempted")%r(SSLSess
+SF:ionReq,89,"AMQP\x03\x01\0\0AMQP\0\x01\0\0\0\0\0\x19\x02\0\0\0\0S\x10\xc
+SF:0\x0c\x04\xa1\0@p\0\x02\0\0`\x7f\xff\0\0\0`\x02\0\0\0\0S\x18\xc0S\x01\0
+SF:S\x1d\xc0M\x02\xa3\x11amqp:decode-error\xa17Connection\x20from\x20clien
+SF:t\x20using\x20unsupported\x20AMQP\x20attempted")%r(TerminalServerCookie
+SF:,89,"AMQP\x03\x01\0\0AMQP\0\x01\0\0\0\0\0\x19\x02\0\0\0\0S\x10\xc0\x0c\
+SF:x04\xa1\0@p\0\x02\0\0`\x7f\xff\0\0\0`\x02\0\0\0\0S\x18\xc0S\x01\0S\x1d\
+SF:xc0M\x02\xa3\x11amqp:decode-error\xa17Connection\x20from\x20client\x20u
+SF:sing\x20unsupported\x20AMQP\x20attempted");
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port61613-TCP:V=7.99%I=7%D=11/21%Time=6B0221CE%P=x86_64-pc-linux-gnu%r(
+SF:HELP4STOMP,289,"ERROR\ncontent-type:text/plain\nmessage:Unknown\x20STOM
+SF:P\x20action:\x20HELP\n\norg\.apache\.activemq\.transport\.stomp\.Protoc
+SF:olException:\x20Unknown\x20STOMP\x20action:\x20HELP\n\tat\x20org\.apach
+SF:e\.activemq\.transport\.stomp\.ProtocolConverter\.onStompCommand\(Proto
+SF:colConverter\.java:258\)\n\tat\x20org\.apache\.activemq\.transport\.sto
+SF:mp\.StompTransportFilter\.onCommand\(StompTransportFilter\.java:85\)\n\
+SF:tat\x20org\.apache\.activemq\.transport\.TransportSupport\.doConsume\(T
+SF:ransportSupport\.java:83\)\n\tat\x20org\.apache\.activemq\.transport\.t
+SF:cp\.TcpTransport\.doRun\(TcpTransport\.java:233\)\n\tat\x20org\.apache\
+SF:.activemq\.transport\.tcp\.TcpTransport\.run\(TcpTransport\.java:215\)\
+SF:n\tat\x20java\.base/java\.lang\.Thread\.run\(Thread\.java:840\)\n\0\n");
+MAC Address: 5A:93:29:F9:09:C3 (Unknown)
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sat Nov 21 22:57:43 2026 -- 1 IP address (1 host up) scanned in 31.89 seconds

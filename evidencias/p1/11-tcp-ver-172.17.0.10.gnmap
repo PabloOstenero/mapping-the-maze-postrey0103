@@ -1,0 +1,4 @@
+# Nmap 7.99 scan initiated Sat Nov 21 22:58:11 2026 as: /usr/lib/nmap/nmap -Pn -sV -p 80 -oA evidencias/p1/11-tcp-ver-172.17.0.10 172.17.0.10
+Host: 172.17.0.10 ()	Status: Up
+Host: 172.17.0.10 ()	Ports: 80/open/tcp//http//SimpleHTTPServer 0.6 (Python 3.11.2)/
+# Nmap done at Sat Nov 21 22:58:18 2026 -- 1 IP address (1 host up) scanned in 6.83 seconds

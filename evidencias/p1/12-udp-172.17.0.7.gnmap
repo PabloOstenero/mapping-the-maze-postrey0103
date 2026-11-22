@@ -1,0 +1,4 @@
+# Nmap 7.99 scan initiated Sat Nov 21 23:20:55 2026 as: /usr/lib/nmap/nmap -Pn -sU --top-ports 100 -sV --version-intensity 0 --max-retries 1 -T3 --max-rate 100 -oA evidencias/p1/12-udp-172.17.0.7 172.17.0.7
+Host: 172.17.0.7 ()	Status: Up
+Host: 172.17.0.7 ()	Ports: 19/closed/udp//chargen///, 53/closed/udp//domain///, 135/closed/udp//msrpc///, 5353/closed/udp//zeroconf///, 49194/closed/udp/////, 49201/closed/udp/////	Ignored State: open|filtered (94)
+# Nmap done at Sat Nov 21 23:21:20 2026 -- 1 IP address (1 host up) scanned in 24.45 seconds

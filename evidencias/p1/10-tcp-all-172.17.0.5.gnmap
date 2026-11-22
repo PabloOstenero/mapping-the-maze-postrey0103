@@ -1,0 +1,4 @@
+# Nmap 7.99 scan initiated Sat Nov 21 20:03:34 2026 as: /usr/lib/nmap/nmap -Pn -sS -p- -T3 --max-rate 200 -oA evidencias/p1/10-tcp-all-172.17.0.5 172.17.0.5
+Host: 172.17.0.5 ()	Status: Up
+Host: 172.17.0.5 ()	Ports: 80/open/tcp//http///, 443/open/tcp//https///, 1883/open/tcp//mqtt///, 5672/open/tcp//amqp///, 8161/open/tcp//patrol-snmp///, 32987/open/tcp/////, 61613/open/tcp/////, 61614/open/tcp/////, 61616/open/tcp/////	Ignored State: closed (65526)
+# Nmap done at Sat Nov 21 20:09:02 2026 -- 1 IP address (1 host up) scanned in 328.35 seconds

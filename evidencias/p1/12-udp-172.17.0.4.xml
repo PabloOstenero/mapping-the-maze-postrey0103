@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.99 scan initiated Sat Nov 21 23:19:39 2026 as: /usr/lib/nmap/nmap -Pn -sU -&#45;top-ports 100 -sV -&#45;version-intensity 0 -&#45;max-retries 1 -T3 -&#45;max-rate 100 -oA evidencias/p1/12-udp-172.17.0.4 172.17.0.4 -->
+<nmaprun scanner="nmap" args="/usr/lib/nmap/nmap -Pn -sU -&#45;top-ports 100 -sV -&#45;version-intensity 0 -&#45;max-retries 1 -T3 -&#45;max-rate 100 -oA evidencias/p1/12-udp-172.17.0.4 172.17.0.4" start="1795303179" startstr="Sat Nov 21 23:19:39 2026" version="7.99" xmloutputversion="1.05">
+<scaninfo type="udp" protocol="udp" numservices="100" services="7,9,17,19,49,53,67-69,80,88,111,120,123,135-139,158,161-162,177,427,443,445,497,500,514-515,518,520,593,623,626,631,996-999,1022-1023,1025-1030,1433-1434,1645-1646,1701,1718-1719,1812-1813,1900,2000,2048-2049,2222-2223,3283,3456,3703,4444,4500,5000,5060,5353,5632,9200,10000,17185,20031,30718,31337,32768-32769,32771,32815,33281,49152-49154,49156,49181-49182,49185-49186,49188,49190-49194,49200-49201,65024"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="172.17.0.4" addrtype="ipv4"/>
+<address addr="1A:03:16:B7:A6:F1" addrtype="mac"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<host starttime="1795303180" endtime="1795303203"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="172.17.0.4" addrtype="ipv4"/>
+<address addr="1A:03:16:B7:A6:F1" addrtype="mac"/>
+<hostnames>
+</hostnames>
+<ports><extraports state="open|filtered" count="91">
+<extrareasons reason="no-response" count="91" proto="udp" ports="7,9,17,19,49,53,67-69,80,88,111,120,123,135-138,158,161-162,177,427,443,445,497,500,514-515,518,520,593,623,626,996-999,1022-1023,1026-1029,1433-1434,1645-1646,1701,1718-1719,1812-1813,1900,2000,2048-2049,2222-2223,3283,3703,4444,4500,5000,5060,5632,9200,10000,17185,20031,30718,31337,32768-32769,32771,32815,49152-49154,49156,49182,49185-49186,49188,49191-49194,49200-49201,65024"/>
+</extraports>
+<port protocol="udp" portid="139"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="netbios-ssn" method="table" conf="3"/></port>
+<port protocol="udp" portid="631"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="ipp" method="table" conf="3"/></port>
+<port protocol="udp" portid="1025"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="blackjack" method="table" conf="3"/></port>
+<port protocol="udp" portid="1030"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="iad1" method="table" conf="3"/></port>
+<port protocol="udp" portid="3456"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="IISrpc-or-vat" method="table" conf="3"/></port>
+<port protocol="udp" portid="5353"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="zeroconf" method="table" conf="3"/></port>
+<port protocol="udp" portid="33281"><state state="closed" reason="port-unreach" reason_ttl="64"/></port>
+<port protocol="udp" portid="49181"><state state="closed" reason="port-unreach" reason_ttl="64"/></port>
+<port protocol="udp" portid="49190"><state state="closed" reason="port-unreach" reason_ttl="64"/></port>
+</ports>
+<times srtt="31" rttvar="392" to="100000"/>
+</host>
+<runstats><finished time="1795303203" timestr="Sat Nov 21 23:20:03 2026" summary="Nmap done at Sat Nov 21 23:20:03 2026; 1 IP address (1 host up) scanned in 24.34 seconds" elapsed="24.34" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

@@ -1,0 +1,4 @@
+# Nmap 7.99 scan initiated Sat Nov 21 22:56:56 2026 as: /usr/lib/nmap/nmap -Pn -sV --version-light -T2 --max-retries 1 -p 21,80 -oA evidencias/p1/11-tcp-ver-172.17.0.3 172.17.0.3
+Host: 172.17.0.3 ()	Status: Up
+Host: 172.17.0.3 ()	Ports: 21/open/tcp//ftp//vsftpd 2.3.4/, 80/open/tcp//http//Apache httpd 2.4.58 ((Ubuntu))/
+# Nmap done at Sat Nov 21 22:57:04 2026 -- 1 IP address (1 host up) scanned in 8.06 seconds
