@@ -1,0 +1,11 @@
+﻿Equipo;IP;Sistema operativo;Servicio;Puerto;Versión;Responsable;Última revisión;Observaciones
+SRV-PORTAL01;172.17.0.10;Windows Server 2008 R2;IIS (portal clientes);80, 443;IIS 7.5;Juanma;12/03/2019;Portal de seguimiento de envíos. Certificado renovado
+SRV-PORTAL01;172.17.0.11;Windows Server 2008;SQL Server;1433;2008 R2 SP1;Juanma;12/03/2019;Base de datos del portal. ¿Es la misma máquina que la de arriba?
+srv-mensajeria;172.17.0.20;Windows Server 2003;MSMQ (mensajería operadores);1801;3.0;Juanma;;Solo tiene ese puerto. Lo demás lo corta el firewall
+FTP-ALMACEN;172.17.0.2;Windows XP SP3;FileZilla Server;21;0.9.41;Paqui (almacén);2018;Albaranes escaneados
+NAS-OFICINA;172.17.0.50;Synology DSM 5.2;Carpetas compartidas;445;;todos;05/2020;No tiene usuarios. Se entra con la clave de la wifi
+PC-PRUEBAS;172.17.1.6;Ubuntu 12.04;cosas mías;3000, 5000, 9090;varias;Juanma;;NO TOCAR. Lo apago cuando no lo uso
+consola sala tecnica;172.17.0.254;HP iLO 2;Web de gestión;443;fw 2.05;Juanma;2017;Solo se llega por cable desde la sala
+IMPRESORA-MUELLE;172.17.0.30;;HP LaserJet P2055;9100;;Muelle 2;;Etiquetas
+srv-backup;172.17.0.100;Debian 7;rsync por SSH;22;OpenSSH 5.5;Juanma;01/2018;Copia nocturna del portal. Creo que ya no funciona
+TPV-RECEPCION;172.17.0.9;Windows 7;Escritorio remoto;3389;;Recepción;;
