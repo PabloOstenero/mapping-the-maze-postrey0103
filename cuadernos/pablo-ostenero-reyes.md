@@ -207,7 +207,7 @@ Nota de trazabilidad: el historial de bash existía antes de activar las marcas 
 - **Objetivo y alcance:** dejar captura de la tabla PORT/STATE/SERVICE/VERSION de cada equipo. Solo ficheros locales.
 - **Qué hice:** `cat evidencias/p1/11-tcp-ver-172.17.0.<n>.nmap` (una vez por equipo) y `grep -H -E "^[0-9]+/tcp +open" evidencias/p1/11-tcp-ver-*.nmap`
 - **Qué salió:** los resultados de la entrada anterior. Evidencia: `evidencias/p1/11-tcp-ver-*.nmap`.
-- **Captura:** ![Versiones de 172.17.0.3](../imagenes/p1-06-versiones-172.17.0.3.png) ![Versiones de 172.17.0.5](../imagenes/p1-06-versiones-172.17.0.5.png) (y una por cada una de las demás IP)
+- **Captura:** ![Versiones de 172.17.0.3](../imagenes/p1-06-versiones-172.17.0.3.png) ![Versiones de 172.17.0.5 (1 de 2)](../imagenes/p1-06-versiones-172.17.0.5-1.png) ![Versiones de 172.17.0.5 (2 de 2)](../imagenes/p1-06-versiones-172.17.0.5-2.png) (y una por cada una de las demás IP)
 - **Siguiente paso:** escanear los puertos UDP más comunes.
 
 ### 2026-11-21 23:19 - Escaneo UDP de los equipos normales
@@ -239,7 +239,7 @@ Nota de trazabilidad: el historial de bash existía antes de activar las marcas 
 - **Objetivo y alcance:** juntar en un solo fichero todos los puertos abiertos (TCP con versión y UDP) para rellenar la tabla del inventario. Solo ficheros locales, sin tráfico de red.
 - **Qué hice:** `for f in evidencias/p1/11-tcp-ver-*.nmap evidencias/p1/12-udp-*.nmap; do echo "== $(basename $f)"; grep -E "^[0-9]+/(tcp|udp) +open " "$f"; done | tee evidencias/p1/resumen-puertos.txt` y `cat evidencias/p1/resumen-puertos.txt`
 - **Qué salió:** 27 puertos TCP abiertos en 8 equipos y 2 UDP abiertos. El UDP abierto confirmado es 623/udp asf-rmcp en la .10 y 137/udp netbios-ns (Samba nmbd, workgroup: DL) en la .8. Los demás equipos no tienen UDP abierto confirmado. Evidencia: `evidencias/p1/resumen-puertos.txt`.
-- **Captura:** ![Resumen de puertos abiertos](../imagenes/p1-08-resumen-puertos.png)
+- **Captura:** ![Resumen de puertos abiertos (1 de 2)](../imagenes/p1-08-resumen-puertos-1.png) ![Resumen de puertos abiertos (2 de 2)](../imagenes/p1-08-resumen-puertos-2.png)
 - **Siguiente paso:** comparar este resumen con la hoja de inventario del cliente (Sobra, Falta, Mal).
 
 ### 2026-11-22 15:50 - Comparación con la hoja de inventario del cliente

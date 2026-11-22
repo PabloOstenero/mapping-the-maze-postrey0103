@@ -69,7 +69,8 @@ Hallazgo grave anotado, sin tocarlo: `vsftpd 2.3.4` en 172.17.0.3:21, detectado 
 
 **172.17.0.5 - Mensajería con operadores (probable)**
 ![Todos los puertos TCP de 172.17.0.5](imagenes/p1-05-tcp-all-172.17.0.5.png)
-![Versiones de 172.17.0.5](imagenes/p1-06-versiones-172.17.0.5.png)
+![Versiones de 172.17.0.5 (1 de 2)](imagenes/p1-06-versiones-172.17.0.5-1.png)
+![Versiones de 172.17.0.5 (2 de 2)](imagenes/p1-06-versiones-172.17.0.5-2.png)
 
 **172.17.0.6**
 ![Todos los puertos TCP de 172.17.0.6](imagenes/p1-05-tcp-all-172.17.0.6.png)
@@ -131,7 +132,8 @@ No se usó detección activa de sistema operativo (`-O`) para no enviar tráfico
 Hoja del cliente comparada con lo observado el 2026-11-22. La hoja no se usó como fuente; solo se contrastó al final. Las entradas que sobran significan que no respondieron desde esta red en el momento de la revisión, no que no existan: se recomienda comprobarlas físicamente.
 
 ![Hoja de inventario entregada por el cliente](imagenes/p1-09-hoja-cliente.png)
-![Resumen de puertos observados](imagenes/p1-08-resumen-puertos.png)
+![Resumen de puertos observados (1 de 2)](imagenes/p1-08-resumen-puertos-1.png)
+![Resumen de puertos observados (2 de 2)](imagenes/p1-08-resumen-puertos-2.png)
 
 | Entrada de la hoja | Lo observado | Corrección | Tipo |
 |---|---|---|---|
