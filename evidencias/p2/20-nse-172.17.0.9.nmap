@@ -1,0 +1,17 @@
+# Nmap 7.99 scan initiated Sun Nov 22 16:48:26 2026 as: /usr/lib/nmap/nmap -Pn -sV -p 22,80 --script "default and safe and not (intrusive or exploit or dos or brute or malware or broadcast or external or auth)" -oA evidencias/p2/20-nse-172.17.0.9 172.17.0.9
+Nmap scan report for 172.17.0.9
+Host is up (0.000078s latency).
+
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 9.2p1 Debian 2+deb12u10 (protocol 2.0)
+| ssh-hostkey: 
+|   256 64:3e:fd:2e:0a:65:fe:93:af:79:39:4f:bb:95:26:fa (ECDSA)
+|_  256 c2:21:1e:90:e8:06:5d:b0:94:07:f0:07:26:36:a7:23 (ED25519)
+80/tcp open  http    Apache httpd 2.4.68 ((Debian))
+|_http-title: test page
+|_http-server-header: Apache/2.4.68 (Debian)
+MAC Address: 9A:14:61:19:6D:5A (Unknown)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sun Nov 22 16:48:34 2026 -- 1 IP address (1 host up) scanned in 7.36 seconds

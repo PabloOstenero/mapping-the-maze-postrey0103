@@ -1,0 +1,12 @@
+# Nmap 7.99 scan initiated Sun Nov 22 16:48:34 2026 as: /usr/lib/nmap/nmap -Pn -sV -p 80 --script "default and safe and not (intrusive or exploit or dos or brute or malware or broadcast or external or auth)" -oA evidencias/p2/20-nse-172.17.0.10 172.17.0.10
+Nmap scan report for 172.17.0.10
+Host is up (0.000062s latency).
+
+PORT   STATE SERVICE VERSION
+80/tcp open  http    SimpleHTTPServer 0.6 (Python 3.11.2)
+|_http-server-header: SimpleHTTP/0.6 Python/3.11.2
+|_http-title: CTG \xC2\xB7 IPMI bajo exposici\xC3\xB3n
+MAC Address: 1A:A5:09:CE:CF:88 (Unknown)
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sun Nov 22 16:48:41 2026 -- 1 IP address (1 host up) scanned in 6.97 seconds

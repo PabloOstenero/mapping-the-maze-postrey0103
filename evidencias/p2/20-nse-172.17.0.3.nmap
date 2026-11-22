@@ -1,0 +1,11 @@
+# Nmap 7.99 scan initiated Sun Nov 22 16:50:03 2026 as: /usr/lib/nmap/nmap -Pn -sV --version-light -T2 --max-retries 1 -p 80 --script "default and safe and not (intrusive or exploit or dos or brute or malware or broadcast or external or auth)" -oA evidencias/p2/20-nse-172.17.0.3 172.17.0.3
+Nmap scan report for 172.17.0.3
+Host is up (0.000060s latency).
+
+PORT   STATE SERVICE VERSION
+80/tcp open  http    Apache httpd 2.4.58 ((Ubuntu))
+|_http-title: Apache2 Ubuntu Default Page: It works
+MAC Address: 76:A5:38:5B:60:CF (Unknown)
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sun Nov 22 16:50:11 2026 -- 1 IP address (1 host up) scanned in 7.75 seconds

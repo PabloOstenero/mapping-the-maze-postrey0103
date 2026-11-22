@@ -1,0 +1,28 @@
+# Nmap 7.99 scan initiated Sun Nov 22 16:48:14 2026 as: /usr/lib/nmap/nmap -Pn -sV -p 22,80,139,445 --script "default and safe and not (intrusive or exploit or dos or brute or malware or broadcast or external or auth)" -oA evidencias/p2/20-nse-172.17.0.8 172.17.0.8
+Nmap scan report for 172.17.0.8
+Host is up (0.000057s latency).
+
+PORT    STATE SERVICE     VERSION
+22/tcp  open  ssh         OpenSSH 9.6p1 Ubuntu 3ubuntu13.5 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   256 43:a1:09:2d:be:05:58:1b:01:20:d7:d0:d8:0d:7b:a6 (ECDSA)
+|_  256 cd:98:0b:8a:0b:f9:f5:43:e4:44:5d:33:2f:08:2e:ce (ED25519)
+80/tcp  open  http        Apache httpd 2.4.58 ((Ubuntu))
+|_http-title: Login
+|_http-server-header: Apache/2.4.58 (Ubuntu)
+139/tcp open  netbios-ssn Samba smbd 4
+445/tcp open  netbios-ssn Samba smbd 4
+MAC Address: AE:02:99:C9:8F:EB (Unknown)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Host script results:
+| smb2-time: 
+|   date: 2026-11-22T16:48:26
+|_  start_date: N/A
+|_nbstat: NetBIOS name: SAMBASERVER, NetBIOS user: <unknown>, NetBIOS MAC: <unknown> (unknown)
+| smb2-security-mode: 
+|   3.1.1: 
+|_    Message signing enabled but not required
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sun Nov 22 16:48:26 2026 -- 1 IP address (1 host up) scanned in 12.35 seconds

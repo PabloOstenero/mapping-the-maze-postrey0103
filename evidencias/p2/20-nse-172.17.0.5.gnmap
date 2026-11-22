@@ -1,0 +1,4 @@
+# Nmap 7.99 scan initiated Sun Nov 22 16:47:51 2026 as: /usr/lib/nmap/nmap -Pn -sV -p 80,443,8161,61614 --script "default and safe and not (intrusive or exploit or dos or brute or malware or broadcast or external or auth)" -oA evidencias/p2/20-nse-172.17.0.5 172.17.0.5
+Host: 172.17.0.5 ()	Status: Up
+Host: 172.17.0.5 ()	Ports: 80/open/tcp//http//Apache httpd 2.4.59 ((Debian))/, 443/open/tcp//ssl|http//Apache httpd 2.4.59 ((Debian))/, 8161/open/tcp//http//Jetty 9.4.39.v20210325/, 61614/open/tcp//http//Jetty 9.4.39.v20210325/
+# Nmap done at Sun Nov 22 16:48:05 2026 -- 1 IP address (1 host up) scanned in 14.34 seconds

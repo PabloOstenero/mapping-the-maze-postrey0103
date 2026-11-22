@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.99 scan initiated Sun Nov 22 16:50:03 2026 as: /usr/lib/nmap/nmap -Pn -sV -&#45;version-light -T2 -&#45;max-retries 1 -p 80 -&#45;script &quot;default and safe and not (intrusive or exploit or dos or brute or malware or broadcast or external or auth)&quot; -oA evidencias/p2/20-nse-172.17.0.3 172.17.0.3 -->
+<nmaprun scanner="nmap" args="/usr/lib/nmap/nmap -Pn -sV -&#45;version-light -T2 -&#45;max-retries 1 -p 80 -&#45;script &quot;default and safe and not (intrusive or exploit or dos or brute or malware or broadcast or external or auth)&quot; -oA evidencias/p2/20-nse-172.17.0.3 172.17.0.3" start="1795366203" startstr="Sun Nov 22 16:50:03 2026" version="7.99" xmloutputversion="1.05">
+<scaninfo type="syn" protocol="tcp" numservices="1" services="80"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="172.17.0.3" addrtype="ipv4"/>
+<address addr="76:A5:38:5B:60:CF" addrtype="mac"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<host starttime="1795366205" endtime="1795366211"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="172.17.0.3" addrtype="ipv4"/>
+<address addr="76:A5:38:5B:60:CF" addrtype="mac"/>
+<hostnames>
+</hostnames>
+<ports><port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="http" product="Apache httpd" version="2.4.58" extrainfo="(Ubuntu)" method="probed" conf="10"><cpe>cpe:/a:apache:http_server:2.4.58</cpe></service><script id="http-title" output="Apache2 Ubuntu Default Page: It works"><elem key="title">Apache2 Ubuntu Default Page: It works</elem>
+</script></port>
+</ports>
+<times srtt="60" rttvar="3760" to="400000"/>
+</host>
+<runstats><finished time="1795366211" timestr="Sun Nov 22 16:50:11 2026" summary="Nmap done at Sun Nov 22 16:50:11 2026; 1 IP address (1 host up) scanned in 7.75 seconds" elapsed="7.75" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

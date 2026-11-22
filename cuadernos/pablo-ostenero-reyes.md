@@ -258,3 +258,63 @@ Nota de trazabilidad: el historial de bash existía antes de activar las marcas 
 - **Captura:** sin captura
 - **Siguiente paso:** redactar `inventario.md` con la tabla de equipos, el UDP y las correcciones a la hoja del cliente.
 
+### 2026-11-22 - Redacción de inventario.md (Parte 1)
+- **Cuándo:** 2026-11-22, después de las 15:57 (hora exacta no registrada en el historial: el fichero se redactó y se subió fuera de la terminal de este historial)
+- **Objetivo y alcance:** dejar escrito el inventario de la Parte 1 (equipos vivos, puertos, servicios, UDP, puertos fuera de lo habitual y correcciones a la hoja del cliente) a partir de mis salidas de nmap y de la hoja del cliente. Solo trabajo con ficheros locales, sin tráfico de red.
+- **Qué hice:** redacté `inventario.md` con ayuda de IA a partir de `evidencias/p1/resumen-puertos.txt`, los `.nmap` de la Parte 1 y `evidencias/p1/inventario-cliente.csv`, y comprobé los datos contra mis salidas y capturas. Las funciones de cada equipo (portal, mensajería, consola, equipo antiguo y servidor de pruebas) quedan marcadas como probables. Después corregí los enlaces de las capturas que se habían hecho en dos partes (`p1-06-versiones-172.17.0.5-1.png` y `-2.png`, y `p1-08-resumen-puertos-1.png` y `-2.png`).
+- **Qué salió:** `inventario.md` con 8 equipos vivos (172.17.0.3 a 172.17.0.10), 24 puertos TCP y 2 UDP abiertos, 7 puertos fuera de lo habitual (todos en 172.17.0.5) y la tabla de correcciones: 7 entradas sobran, 6 equipos faltan, 2 tienen datos erróneos y 1 queda fuera de alcance. Evidencia: `inventario.md`.
+- **Captura:** sin captura
+- **Siguiente paso:** empezar la Parte 2 (enumeración sin autenticar), dejando una marca de inicio en el historial.
+
+---
+
+## Parte 2 - Enumerar sin autenticar
+
+### 2026-11-22 16:44 - Inicio de la Parte 2 y comprobación de variables
+- **Cuándo:** 2026-11-22 16:44 (marca de inicio) y 16:46 (variables)
+- **Objetivo y alcance:** dejar marcado el inicio de la Parte 2 en el historial y comprobar que el filtro `SAFE` y la variable `FRAGIL` están cargados. Solo comprobaciones locales, sin tráfico de red.
+- **Qué hice:** `echo "#### INICIO PARTE 2 $(date '+%F %H:%M')"` y `echo "$SAFE"; echo $FRAGIL`
+- **Qué salió:** la marca de inicio queda a las 16:44 y las dos variables están definidas (el filtro seguro y 172.17.0.3). Evidencia: salida en el historial.
+- **Captura:** sin captura
+- **Siguiente paso:** lanzar los scripts NSE seguros sobre los puertos abiertos de los equipos normales.
+
+### 2026-11-22 16:47 - Scripts NSE seguros en los equipos normales
+- **Cuándo:** 2026-11-22 16:47 (inicio); fin: antes de las 16:50, hora del comando siguiente
+- **Objetivo y alcance:** obtener la información que cada servicio da sin autenticar, con scripts de las categorías default y safe a la vez (filtro `SAFE`). Objetivos: 172.17.0.4 (22, 8080), 172.17.0.5 (80, 443, 8161, 61614), 172.17.0.6 (22, 8080), 172.17.0.7 (22), 172.17.0.8 (22, 80, 139, 445), 172.17.0.9 (22, 80) y 172.17.0.10 (80), dentro de 172.17.0.0/24. Quedan fuera de los scripts el AJP de la .4 (8009) y los puertos de mensajería de la .5 (1883, 5672, 32987, 61613, 61616), por tratarse de servicios donde la guía no permite lanzar scripts.
+- **Qué hice:** `for t in 172.17.0.4:22,8080 172.17.0.5:80,443,8161,61614 172.17.0.6:22,8080 172.17.0.7:22 172.17.0.8:22,80,139,445 172.17.0.9:22,80 172.17.0.10:80; do ip=${t%%:*}; ports=${t#*:}; echo "=== $ip : $ports ==="; sudo nmap -Pn -sV -p $ports --script "$SAFE" -oA evidencias/p2/20-nse-$ip $ip; done`
+- **Qué salió:** 172.17.0.4: Tomcat 9.0.30 y claves de host SSH. 172.17.0.5: página por defecto de Apache (80), certificado `example.com` caducado el 2025-04-17 y web "DockerLabs | Plantilla gratuita Bootstrap 4.3.x" (443), Jetty 9.4.39 con `Error 401 Unauthorized` y aviso de método TRACE en los puertos Jetty. 172.17.0.6: Jetty 10.0.18 con `robots.txt` que prohíbe `/`. 172.17.0.7: claves de host SSH. 172.17.0.8: título "Login", NetBIOS `SAMBASERVER`, SMB 3.1.1 con firma habilitada pero no obligatoria. 172.17.0.9: Apache 2.4.68 con título "test page". 172.17.0.10: SimpleHTTP/0.6 con título "CTG · IPMI bajo exposición". Evidencia: `evidencias/p2/20-nse-172.17.0.<n>.nmap`.
+- **Captura:** sin captura (ver entrada de las capturas por equipo)
+- **Siguiente paso:** repetir el análisis, más suave, en el equipo tratado como delicado (172.17.0.3).
+
+### 2026-11-22 16:50 - Scripts NSE seguros en el equipo delicado (172.17.0.3)
+- **Cuándo:** 2026-11-22 16:50
+- **Objetivo y alcance:** obtener lo que expone el puerto 80 de 172.17.0.3, dentro de 172.17.0.0/24. Se usó `-T2` y `--version-light`, y solo el puerto 80. No se lanzó ningún script contra el FTP (21/tcp, vsftpd 2.3.4), por ser hallazgo grave que no se toca.
+- **Qué hice:** `sudo nmap -Pn -sV --version-light -T2 --max-retries 1 -p 80 --script "$SAFE" -oA evidencias/p2/20-nse-$FRAGIL $FRAGIL`
+- **Qué salió:** título "Apache2 Ubuntu Default Page: It works". Nada más. El ping a 172.17.0.3 respondió sin pérdida de paquetes durante el escaneo. Evidencia: `evidencias/p2/20-nse-172.17.0.3.nmap`.
+- **Captura:** sin captura (ver entrada siguiente)
+- **Siguiente paso:** capturar la salida de los scripts de cada equipo.
+
+### 2026-11-22 16:50 - Capturas de los scripts NSE por equipo
+- **Cuándo:** 2026-11-22 16:50 (.3), 16:51 (.4), 16:52 (.5), 16:53 (.6 y .7), 16:54 (.8), 16:55 (.9 y .10)
+- **Objetivo y alcance:** dejar captura de las líneas `|` de los scripts de cada equipo. Solo ficheros locales.
+- **Qué hice:** `cat evidencias/p2/20-nse-172.17.0.<n>.nmap` (una vez por equipo, con `clear; date "+%F %H:%M"` delante)
+- **Qué salió:** los resultados de las dos entradas anteriores. Evidencia: `evidencias/p2/20-nse-172.17.0.<n>.nmap`.
+- **Captura:** ![NSE de 172.17.0.3](../imagenes/p2-01-nse-172.17.0.3.png) ![NSE de 172.17.0.4](../imagenes/p2-01-nse-172.17.0.4.png) ![NSE de 172.17.0.5](../imagenes/p2-01-nse-172.17.0.5.png) ![NSE de 172.17.0.6](../imagenes/p2-01-nse-172.17.0.6.png) ![NSE de 172.17.0.7](../imagenes/p2-01-nse-172.17.0.7.png) ![NSE de 172.17.0.8](../imagenes/p2-01-nse-172.17.0.8.png) ![NSE de 172.17.0.9](../imagenes/p2-01-nse-172.17.0.9.png) ![NSE de 172.17.0.10](../imagenes/p2-01-nse-172.17.0.10.png)
+- **Siguiente paso:** comprobar las categorías de los scripts sueltos que se van a usar.
+
+### 2026-11-22 16:56 - Categorías de los scripts sueltos
+- **Cuándo:** 2026-11-22 16:56
+- **Objetivo y alcance:** comprobar que ningún script suelto previsto es intrusive, exploit, dos, brute, malware ni auth. Solo consulta de la ayuda local de nmap, sin tráfico de red.
+- **Qué hice:** `for s in ssh2-enum-algos ssh-hostkey smb-os-discovery smb2-security-mode smb-security-mode smb-protocols nbstat ipmi-version; do nmap --script-help $s | grep -iE "^$s|categories"; done`
+- **Qué salió:** los ocho scripts son de categorías safe y discovery (algunos también default); ninguno es intrusive, exploit, dos, brute, malware ni auth. Evidencia: salida en la terminal, sin fichero.
+- **Captura:** ![Categorías de los scripts NSE](../imagenes/p2-02-categorias-scripts.png)
+- **Siguiente paso:** revisar lo que han devuelto los scripts y pasar a la enumeración web.
+
+### 2026-11-22 16:58 - Lectura de las líneas de los scripts
+- **Cuándo:** 2026-11-22 16:58
+- **Objetivo y alcance:** revisar de una vez las líneas `|` de todos los scripts para decidir los siguientes pasos. Solo ficheros locales.
+- **Qué hice:** `grep -h "^|" evidencias/p2/20-nse-*.nmap`
+- **Qué salió:** ninguna cuenta de usuario revelada de momento. Hallazgos de interés para la Parte 3: certificado caducado y genérico en 172.17.0.5:443 y aviso de método TRACE en un puerto Jetty de la 172.17.0.5. Evidencia: `evidencias/p2/20-nse-*.nmap`.
+- **Captura:** sin captura
+- **Siguiente paso:** enumerar los servicios web con cabeceras, `robots.txt`, pistas de la portada y whatweb.
+

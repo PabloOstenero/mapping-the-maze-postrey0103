@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.99 scan initiated Sun Nov 22 16:48:05 2026 as: /usr/lib/nmap/nmap -Pn -sV -p 22,8080 -&#45;script &quot;default and safe and not (intrusive or exploit or dos or brute or malware or broadcast or external or auth)&quot; -oA evidencias/p2/20-nse-172.17.0.6 172.17.0.6 -->
+<nmaprun scanner="nmap" args="/usr/lib/nmap/nmap -Pn -sV -p 22,8080 -&#45;script &quot;default and safe and not (intrusive or exploit or dos or brute or malware or broadcast or external or auth)&quot; -oA evidencias/p2/20-nse-172.17.0.6 172.17.0.6" start="1795366085" startstr="Sun Nov 22 16:48:05 2026" version="7.99" xmloutputversion="1.05">
+<scaninfo type="syn" protocol="tcp" numservices="2" services="22,8080"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="172.17.0.6" addrtype="ipv4"/>
+<address addr="AA:A7:42:4D:0F:AC" addrtype="mac"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<host starttime="1795366086" endtime="1795366093"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="172.17.0.6" addrtype="ipv4"/>
+<address addr="AA:A7:42:4D:0F:AC" addrtype="mac"/>
+<hostnames>
+</hostnames>
+<ports><port protocol="tcp" portid="22"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="ssh" product="OpenSSH" version="9.2p1 Debian 2+deb12u2" extrainfo="protocol 2.0" ostype="Linux" method="probed" conf="10"><cpe>cpe:/a:openbsd:openssh:9.2p1</cpe><cpe>cpe:/o:linux:linux_kernel</cpe></service><script id="ssh-hostkey" output="&#xa;  256 94:fb:28:59:7f:ae:02:c0:56:46:07:33:8c:ac:52:85 (ECDSA)&#xa;  256 43:07:50:30:bb:28:b0:73:9b:7c:0c:4e:3f:c9:bf:02 (ED25519)"><table>
+<elem key="fingerprint">94fb28597fae02c0564607338cac5285</elem>
+<elem key="key">AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBOav0uXZtBKhQOfop2sK5jts/Gq6QrE2lxTdgNQr5zpuodJ6k/8SUNK3ip+QGeLsWudNQ0432LZryulUxUDwV3E=</elem>
+<elem key="bits">256</elem>
+<elem key="type">ecdsa-sha2-nistp256</elem>
+</table>
+<table>
+<elem key="fingerprint">43075030bb28b0739b7c0c4e3fc9bf02</elem>
+<elem key="key">AAAAC3NzaC1lZDI1NTE5AAAAICFq2WXHduUFqHoOeRD0VLSr0FayRYLVvRdF3bnv+Ypi</elem>
+<elem key="bits">256</elem>
+<elem key="type">ssh-ed25519</elem>
+</table>
+</script></port>
+<port protocol="tcp" portid="8080"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="http" product="Jetty" version="10.0.18" method="probed" conf="10"><cpe>cpe:/a:mortbay:jetty:10.0.18</cpe></service><script id="http-title" output="Site doesn&apos;t have a title (text/html;charset=utf-8)."></script><script id="http-server-header" output="Jetty(10.0.18)"><elem>Jetty(10.0.18)</elem>
+</script><script id="http-robots.txt" output="1 disallowed entry &#xa;/"/></port>
+</ports>
+<times srtt="64" rttvar="2836" to="100000"/>
+</host>
+<runstats><finished time="1795366093" timestr="Sun Nov 22 16:48:13 2026" summary="Nmap done at Sun Nov 22 16:48:13 2026; 1 IP address (1 host up) scanned in 7.29 seconds" elapsed="7.29" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

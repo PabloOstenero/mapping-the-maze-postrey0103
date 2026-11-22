@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.99 scan initiated Sun Nov 22 16:48:14 2026 as: /usr/lib/nmap/nmap -Pn -sV -p 22,80,139,445 -&#45;script &quot;default and safe and not (intrusive or exploit or dos or brute or malware or broadcast or external or auth)&quot; -oA evidencias/p2/20-nse-172.17.0.8 172.17.0.8 -->
+<nmaprun scanner="nmap" args="/usr/lib/nmap/nmap -Pn -sV -p 22,80,139,445 -&#45;script &quot;default and safe and not (intrusive or exploit or dos or brute or malware or broadcast or external or auth)&quot; -oA evidencias/p2/20-nse-172.17.0.8 172.17.0.8" start="1795366094" startstr="Sun Nov 22 16:48:14 2026" version="7.99" xmloutputversion="1.05">
+<scaninfo type="syn" protocol="tcp" numservices="4" services="22,80,139,445"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="172.17.0.8" addrtype="ipv4"/>
+<address addr="AE:02:99:C9:8F:EB" addrtype="mac"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<host starttime="1795366095" endtime="1795366106"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="172.17.0.8" addrtype="ipv4"/>
+<address addr="AE:02:99:C9:8F:EB" addrtype="mac"/>
+<hostnames>
+</hostnames>
+<ports><port protocol="tcp" portid="22"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="ssh" product="OpenSSH" version="9.6p1 Ubuntu 3ubuntu13.5" extrainfo="Ubuntu Linux; protocol 2.0" ostype="Linux" method="probed" conf="10"><cpe>cpe:/a:openbsd:openssh:9.6p1</cpe><cpe>cpe:/o:linux:linux_kernel</cpe></service><script id="ssh-hostkey" output="&#xa;  256 43:a1:09:2d:be:05:58:1b:01:20:d7:d0:d8:0d:7b:a6 (ECDSA)&#xa;  256 cd:98:0b:8a:0b:f9:f5:43:e4:44:5d:33:2f:08:2e:ce (ED25519)"><table>
+<elem key="type">ecdsa-sha2-nistp256</elem>
+<elem key="fingerprint">43a1092dbe05581b0120d7d0d80d7ba6</elem>
+<elem key="bits">256</elem>
+<elem key="key">AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBGrGDto+yIluWWc28CO9WLop39MgTQepDrYpDWvwqPgqpC2Ea8ZtGQCObWL21GlJITWAdFSZS0HaWuo1Wl9nZ84=</elem>
+</table>
+<table>
+<elem key="type">ssh-ed25519</elem>
+<elem key="fingerprint">cd980b8a0bf9f543e4445d332f082ece</elem>
+<elem key="bits">256</elem>
+<elem key="key">AAAAC3NzaC1lZDI1NTE5AAAAICk8CRYpvJnqRBsGb/f/ZxXJoTikc4EQdeCBsvENuMwD</elem>
+</table>
+</script></port>
+<port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="http" product="Apache httpd" version="2.4.58" extrainfo="(Ubuntu)" method="probed" conf="10"><cpe>cpe:/a:apache:http_server:2.4.58</cpe></service><script id="http-title" output="Login"><elem key="title">Login</elem>
+</script><script id="http-server-header" output="Apache/2.4.58 (Ubuntu)"><elem>Apache/2.4.58 (Ubuntu)</elem>
+</script></port>
+<port protocol="tcp" portid="139"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="netbios-ssn" product="Samba smbd" version="4" method="probed" conf="10"><cpe>cpe:/a:samba:samba:4</cpe></service></port>
+<port protocol="tcp" portid="445"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="netbios-ssn" product="Samba smbd" version="4" method="probed" conf="10"><cpe>cpe:/a:samba:samba:4</cpe></service></port>
+</ports>
+<hostscript><script id="smb2-time" output="&#xa;  date: 2026-11-22T16:48:26&#xa;  start_date: N/A"><elem key="date">2026-11-22T16:48:26</elem>
+<elem key="start_date">N/A</elem>
+</script><script id="nbstat" output="NetBIOS name: SAMBASERVER, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: &lt;unknown&gt; (unknown)"/><script id="smb2-security-mode" output="&#xa;  3.1.1: &#xa;    Message signing enabled but not required"><table key="3.1.1">
+<elem>Message signing enabled but not required</elem>
+</table>
+</script></hostscript><times srtt="57" rttvar="1623" to="100000"/>
+</host>
+<runstats><finished time="1795366106" timestr="Sun Nov 22 16:48:26 2026" summary="Nmap done at Sun Nov 22 16:48:26 2026; 1 IP address (1 host up) scanned in 12.35 seconds" elapsed="12.35" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

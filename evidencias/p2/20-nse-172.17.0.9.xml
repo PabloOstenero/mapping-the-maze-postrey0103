@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.99 scan initiated Sun Nov 22 16:48:26 2026 as: /usr/lib/nmap/nmap -Pn -sV -p 22,80 -&#45;script &quot;default and safe and not (intrusive or exploit or dos or brute or malware or broadcast or external or auth)&quot; -oA evidencias/p2/20-nse-172.17.0.9 172.17.0.9 -->
+<nmaprun scanner="nmap" args="/usr/lib/nmap/nmap -Pn -sV -p 22,80 -&#45;script &quot;default and safe and not (intrusive or exploit or dos or brute or malware or broadcast or external or auth)&quot; -oA evidencias/p2/20-nse-172.17.0.9 172.17.0.9" start="1795366106" startstr="Sun Nov 22 16:48:26 2026" version="7.99" xmloutputversion="1.05">
+<scaninfo type="syn" protocol="tcp" numservices="2" services="22,80"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="172.17.0.9" addrtype="ipv4"/>
+<address addr="9A:14:61:19:6D:5A" addrtype="mac"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<host starttime="1795366107" endtime="1795366114"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="172.17.0.9" addrtype="ipv4"/>
+<address addr="9A:14:61:19:6D:5A" addrtype="mac"/>
+<hostnames>
+</hostnames>
+<ports><port protocol="tcp" portid="22"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="ssh" product="OpenSSH" version="9.2p1 Debian 2+deb12u10" extrainfo="protocol 2.0" ostype="Linux" method="probed" conf="10"><cpe>cpe:/a:openbsd:openssh:9.2p1</cpe><cpe>cpe:/o:linux:linux_kernel</cpe></service><script id="ssh-hostkey" output="&#xa;  256 64:3e:fd:2e:0a:65:fe:93:af:79:39:4f:bb:95:26:fa (ECDSA)&#xa;  256 c2:21:1e:90:e8:06:5d:b0:94:07:f0:07:26:36:a7:23 (ED25519)"><table>
+<elem key="fingerprint">643efd2e0a65fe93af79394fbb9526fa</elem>
+<elem key="bits">256</elem>
+<elem key="key">AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBK8YaiEcqVlSAaLzSX9FnNcDIh6TXYq4a28UcTzNj0px3SoscCr6IFEeiiWpwX8dm837R15/ABIG7CssEJdumBc=</elem>
+<elem key="type">ecdsa-sha2-nistp256</elem>
+</table>
+<table>
+<elem key="fingerprint">c2211e90e8065db09407f0072636a723</elem>
+<elem key="bits">256</elem>
+<elem key="key">AAAAC3NzaC1lZDI1NTE5AAAAIKyJ+BBonguLJKyTvlsHxID9ryoj5HKfWDlCjhtrYwTK</elem>
+<elem key="type">ssh-ed25519</elem>
+</table>
+</script></port>
+<port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="http" product="Apache httpd" version="2.4.68" extrainfo="(Debian)" method="probed" conf="10"><cpe>cpe:/a:apache:http_server:2.4.68</cpe></service><script id="http-title" output="test page"><elem key="title">test page</elem>
+</script><script id="http-server-header" output="Apache/2.4.68 (Debian)"><elem>Apache/2.4.68 (Debian)</elem>
+</script></port>
+</ports>
+<times srtt="78" rttvar="2843" to="100000"/>
+</host>
+<runstats><finished time="1795366114" timestr="Sun Nov 22 16:48:34 2026" summary="Nmap done at Sun Nov 22 16:48:34 2026; 1 IP address (1 host up) scanned in 7.36 seconds" elapsed="7.36" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

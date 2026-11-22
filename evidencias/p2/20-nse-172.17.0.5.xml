@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.99 scan initiated Sun Nov 22 16:47:51 2026 as: /usr/lib/nmap/nmap -Pn -sV -p 80,443,8161,61614 -&#45;script &quot;default and safe and not (intrusive or exploit or dos or brute or malware or broadcast or external or auth)&quot; -oA evidencias/p2/20-nse-172.17.0.5 172.17.0.5 -->
+<nmaprun scanner="nmap" args="/usr/lib/nmap/nmap -Pn -sV -p 80,443,8161,61614 -&#45;script &quot;default and safe and not (intrusive or exploit or dos or brute or malware or broadcast or external or auth)&quot; -oA evidencias/p2/20-nse-172.17.0.5 172.17.0.5" start="1795366071" startstr="Sun Nov 22 16:47:51 2026" version="7.99" xmloutputversion="1.05">
+<scaninfo type="syn" protocol="tcp" numservices="4" services="80,443,8161,61614"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="172.17.0.5" addrtype="ipv4"/>
+<address addr="5A:93:29:F9:09:C3" addrtype="mac"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<host starttime="1795366072" endtime="1795366085"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="172.17.0.5" addrtype="ipv4"/>
+<address addr="5A:93:29:F9:09:C3" addrtype="mac"/>
+<hostnames>
+</hostnames>
+<ports><port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="http" product="Apache httpd" version="2.4.59" extrainfo="(Debian)" method="probed" conf="10"><cpe>cpe:/a:apache:http_server:2.4.59</cpe></service><script id="http-title" output="Apache2 Debian Default Page: It works"><elem key="title">Apache2 Debian Default Page: It works</elem>
+</script><script id="http-server-header" output="Apache/2.4.59 (Debian)"><elem>Apache/2.4.59 (Debian)</elem>
+</script></port>
+<port protocol="tcp" portid="443"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="http" product="Apache httpd" version="2.4.59" extrainfo="(Debian)" tunnel="ssl" method="probed" conf="10"><cpe>cpe:/a:apache:http_server:2.4.59</cpe></service><script id="ssl-date" output="TLS randomness does not represent time"></script><script id="ssl-cert" output="Subject: commonName=example.com/organizationName=Your Organization/stateOrProvinceName=California/countryName=US&#xa;Not valid before: 2024-04-17T08:32:44&#xa;Not valid after:  2025-04-17T08:32:44"><table key="subject">
+<elem key="commonName">example.com</elem>
+<elem key="countryName">US</elem>
+<elem key="localityName">San Francisco</elem>
+<elem key="organizationName">Your Organization</elem>
+<elem key="organizationalUnitName">Your Unit</elem>
+<elem key="stateOrProvinceName">California</elem>
+</table>
+<table key="issuer">
+<elem key="commonName">example.com</elem>
+<elem key="countryName">US</elem>
+<elem key="localityName">San Francisco</elem>
+<elem key="organizationName">Your Organization</elem>
+<elem key="organizationalUnitName">Your Unit</elem>
+<elem key="stateOrProvinceName">California</elem>
+</table>
+<table key="pubkey">
+<elem key="type">rsa</elem>
+<elem key="bits">2048</elem>
+<elem key="modulus">ABCAA4A32E384C316371C546C193EFD3478AFF75E9942B1A9DB52AA521109532FB88012A26751A0AFCCA620E25D1A583FD12001D00603EC1B64053403558CAE8DFCD8F6D6F3546557746F8BDCE37B60782134289E220B5EC208DCD0582FCC369838F8E2C2695265CAF4794FCA55092D7C61A86EAC841B62F502F1559BCD106C064D9B39CC71200DD39F66D28F5353F405BCF091CFFE8A8A223BE1010FF3B7AF6B78BE543BD876C4247CA6DB3E1C2418EC31E9FF9A1F8B1FCBA679832FA441F183D2A17B8A9F8B73FD51F38FE9642F9AA8B1A506CB11AA3CC878FD3106F1210BE9101ABEEB1696AAB899EFF22028FF539DACB2F3D45856C4B6092EA9C3FAD76AF</elem>
+<elem key="exponent">65537</elem>
+</table>
+<table key="extensions">
+<table>
+<elem key="name">X509v3 Subject Key Identifier</elem>
+<elem key="value">63:DE:2E:8F:32:2E:D0:D4:CC:65:DC:DA:F2:A5:C7:A3:CC:F1:6A:AB</elem>
+</table>
+<table>
+<elem key="name">X509v3 Authority Key Identifier</elem>
+<elem key="value">63:DE:2E:8F:32:2E:D0:D4:CC:65:DC:DA:F2:A5:C7:A3:CC:F1:6A:AB</elem>
+</table>
+<table>
+<elem key="name">X509v3 Basic Constraints</elem>
+<elem key="value">CA:TRUE</elem>
+<elem key="critical">true</elem>
+</table>
+</table>
+<elem key="sig_algo">sha256WithRSAEncryption</elem>
+<table key="validity">
+<elem key="notBefore">2024-04-17T08:32:44</elem>
+<elem key="notAfter">2025-04-17T08:32:44</elem>
+</table>
+<elem key="md5">6db1ccf0343212a46df33a5300fd3c83</elem>
+<elem key="sha1">5873f2c70b4875931961569c2a4be4d5fc46956d</elem>
+<elem key="sha256">ab7c7dfa73212dc9f267b6c49a8c405554878afc2772c93dcfa559e29000e492</elem>
+<elem key="pem">-&#45;&#45;&#45;&#45;BEGIN CERTIFICATE-&#45;&#45;&#45;&#45;&#xa;MIID4zCCAsugAwIBAgIUIe41ZOXBOuxsghemnN4Y64d4J2AwDQYJKoZIhvcNAQEL&#xa;BQAwgYAxCzAJBgNVBAYTAlVTMRMwEQYDVQQIDApDYWxpZm9ybmlhMRYwFAYDVQQH&#xa;DA1TYW4gRnJhbmNpc2NvMRowGAYDVQQKDBFZb3VyIE9yZ2FuaXphdGlvbjESMBAG&#xa;A1UECwwJWW91ciBVbml0MRQwEgYDVQQDDAtleGFtcGxlLmNvbTAeFw0yNDA0MTcw&#xa;ODMyNDRaFw0yNTA0MTcwODMyNDRaMIGAMQswCQYDVQQGEwJVUzETMBEGA1UECAwK&#xa;Q2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzEaMBgGA1UECgwRWW91&#xa;ciBPcmdhbml6YXRpb24xEjAQBgNVBAsMCVlvdXIgVW5pdDEUMBIGA1UEAwwLZXhh&#xa;bXBsZS5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCryqSjLjhM&#xa;MWNxxUbBk+/TR4r/demUKxqdtSqlIRCVMvuIASomdRoK/MpiDiXRpYP9EgAdAGA+&#xa;wbZAU0A1WMro382PbW81RlV3Rvi9zje2B4ITQoniILXsII3NBYL8w2mDj44sJpUm&#xa;XK9HlPylUJLXxhqG6shBti9QLxVZvNEGwGTZs5zHEgDdOfZtKPU1P0Bbzwkc/+io&#xa;oiO+EBD/O3r2t4vlQ72HbEJHym2z4cJBjsMen/mh+LH8umeYMvpEHxg9Khe4qfi3&#xa;P9UfOP6WQvmqixpQbLEao8yHj9MQbxIQvpEBq+6xaWqriZ7/IgKP9Tnayy89RYVs&#xa;S2CS6pw/rXavAgMBAAGjUzBRMB0GA1UdDgQWBBRj3i6PMi7Q1Mxl3NrypcejzPFq&#xa;qzAfBgNVHSMEGDAWgBRj3i6PMi7Q1Mxl3NrypcejzPFqqzAPBgNVHRMBAf8EBTAD&#xa;AQH/MA0GCSqGSIb3DQEBCwUAA4IBAQCpJf6nbJuvSq4R0ElqcOlXs9XUSRL/xRIq&#xa;M+QZlZB+JKVL/UCwW62T7s/pFVQMNiEr6htZ0qW9/rtz5V1L6+Yf1ydVaK6OKgcA&#xa;uHiAqYHFQf3ICc3QcoVty4ESWTR/ReFpb4OyYsoMRE9gDlj0CwLlUHZEAYnR1rHK&#xa;cGtleKZjvVESQjs+cJAzZuwuZZUmAH5kh6f8h127KyV7flTA7eTJTpybzmAWtCkJ&#xa;BJnmCEa1OpbY37kqOOZGCQ9saKiuwWyOMT0WuIwceSx1H05z86aP2hBj4Th0a2Cu&#xa;RMpGR8dvl2AO3tC6LzeNDPzj6OF1cFKjj74glBYZgwL2ImqTFMjq&#xa;-&#45;&#45;&#45;&#45;END CERTIFICATE-&#45;&#45;&#45;&#45;&#xa;</elem>
+</script><script id="http-title" output="DockerLabs | Plantilla gratuita Bootstrap 4.3.x"><elem key="title">DockerLabs | Plantilla gratuita Bootstrap 4.3.x</elem>
+</script><script id="tls-alpn" output="&#xa;  http/1.1"><elem>http/1.1</elem>
+</script><script id="http-server-header" output="Apache/2.4.59 (Debian)"><elem>Apache/2.4.59 (Debian)</elem>
+</script></port>
+<port protocol="tcp" portid="8161"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="http" product="Jetty" version="9.4.39.v20210325" method="probed" conf="10"><cpe>cpe:/a:mortbay:jetty:9.4.39.v20210325</cpe></service><script id="http-title" output="Error 401 Unauthorized"><elem key="title">Error 401 Unauthorized</elem>
+</script><script id="http-server-header" output="Jetty(9.4.39.v20210325)"><elem>Jetty(9.4.39.v20210325)</elem>
+</script></port>
+<port protocol="tcp" portid="61614"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="http" product="Jetty" version="9.4.39.v20210325" method="probed" conf="10"><cpe>cpe:/a:mortbay:jetty:9.4.39.v20210325</cpe></service><script id="http-server-header" output="Jetty(9.4.39.v20210325)"><elem>Jetty(9.4.39.v20210325)</elem>
+</script><script id="http-methods" output="&#xa;  Potentially risky methods: TRACE"><table key="Potentially risky methods">
+<elem>TRACE</elem>
+</table>
+</script><script id="http-title" output="Site doesn&apos;t have a title."></script></port>
+</ports>
+<times srtt="59" rttvar="1626" to="100000"/>
+</host>
+<runstats><finished time="1795366085" timestr="Sun Nov 22 16:48:05 2026" summary="Nmap done at Sun Nov 22 16:48:05 2026; 1 IP address (1 host up) scanned in 14.34 seconds" elapsed="14.34" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

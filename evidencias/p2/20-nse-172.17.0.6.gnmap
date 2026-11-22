@@ -1,0 +1,4 @@
+# Nmap 7.99 scan initiated Sun Nov 22 16:48:05 2026 as: /usr/lib/nmap/nmap -Pn -sV -p 22,8080 --script "default and safe and not (intrusive or exploit or dos or brute or malware or broadcast or external or auth)" -oA evidencias/p2/20-nse-172.17.0.6 172.17.0.6
+Host: 172.17.0.6 ()	Status: Up
+Host: 172.17.0.6 ()	Ports: 22/open/tcp//ssh//OpenSSH 9.2p1 Debian 2+deb12u2 (protocol 2.0)/, 8080/open/tcp//http//Jetty 10.0.18/
+# Nmap done at Sun Nov 22 16:48:13 2026 -- 1 IP address (1 host up) scanned in 7.29 seconds

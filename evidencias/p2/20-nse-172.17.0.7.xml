@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.99 scan initiated Sun Nov 22 16:48:13 2026 as: /usr/lib/nmap/nmap -Pn -sV -p 22 -&#45;script &quot;default and safe and not (intrusive or exploit or dos or brute or malware or broadcast or external or auth)&quot; -oA evidencias/p2/20-nse-172.17.0.7 172.17.0.7 -->
+<nmaprun scanner="nmap" args="/usr/lib/nmap/nmap -Pn -sV -p 22 -&#45;script &quot;default and safe and not (intrusive or exploit or dos or brute or malware or broadcast or external or auth)&quot; -oA evidencias/p2/20-nse-172.17.0.7 172.17.0.7" start="1795366093" startstr="Sun Nov 22 16:48:13 2026" version="7.99" xmloutputversion="1.05">
+<scaninfo type="syn" protocol="tcp" numservices="1" services="22"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="172.17.0.7" addrtype="ipv4"/>
+<address addr="5E:C8:7C:82:D9:49" addrtype="mac"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<host starttime="1795366094" endtime="1795366094"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="172.17.0.7" addrtype="ipv4"/>
+<address addr="5E:C8:7C:82:D9:49" addrtype="mac"/>
+<hostnames>
+</hostnames>
+<ports><port protocol="tcp" portid="22"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="ssh" product="OpenSSH" version="7.7" extrainfo="protocol 2.0" method="probed" conf="10"><cpe>cpe:/a:openbsd:openssh:7.7</cpe></service><script id="ssh-hostkey" output="&#xa;  2048 1a:cb:5e:a3:3d:d1:da:c0:ed:2a:61:7f:73:79:46:ce (RSA)&#xa;  256 54:9e:53:23:57:fc:60:1e:c0:41:cb:f3:85:32:01:fc (ECDSA)&#xa;  256 4b:15:7e:7b:b3:07:54:3d:74:ad:e0:94:78:0c:94:93 (ED25519)"><table>
+<elem key="fingerprint">1acb5ea33dd1dac0ed2a617f737946ce</elem>
+<elem key="type">ssh-rsa</elem>
+<elem key="bits">2048</elem>
+<elem key="key">AAAAB3NzaC1yc2EAAAADAQABAAABAQDfOr49bj2kh3ab2WutTu6Jx7NA7OKSxzp42bJU4nqtQlICZbjiBXhOa1ZKOfUfNvXOGEThiSrTNbf1nRGzXtACiZQp+RwQr5ZEYPAOyasC7C29FaIZVURR7FuFea+tfWZjbzDaP8WnA/U3TQHwtUBsNSR3qFscgJQ1niCyrfH/4rbUk5jiLYN6y8NjctGvsvwPE+cCiFVge76qyfzmZdaf5gJT9DKDt47iBkrngCODYrqqt+Bbl9ZEGh5SUfDqYfsFMIvlsSjmbx0HtMc2NhTW7jLtyV3Xm6ynFUZmQRPRqXdzuN5TIhYzaQD8ogC1Hk9sYJJNUMMF+lGVf15iouMn</elem>
+</table>
+<table>
+<elem key="fingerprint">549e532357fc601ec041cbf3853201fc</elem>
+<elem key="type">ecdsa-sha2-nistp256</elem>
+<elem key="bits">256</elem>
+<elem key="key">AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBLJ77V//dhC1BX2KXpMNurk9hJPA3aukuoMLPajtYfaewmlwrsK5Rdss/I/iQ23YrziNvWb3VMJk511YbvvreZo=</elem>
+</table>
+<table>
+<elem key="fingerprint">4b157e7bb307543d74ade094780c9493</elem>
+<elem key="type">ssh-ed25519</elem>
+<elem key="bits">256</elem>
+<elem key="key">AAAAC3NzaC1lZDI1NTE5AAAAICFLUqv+frul58FgQLXP91bNrTRC9d1X545DZJ0wsw6z</elem>
+</table>
+</script></port>
+</ports>
+<times srtt="83" rttvar="3768" to="100000"/>
+</host>
+<runstats><finished time="1795366094" timestr="Sun Nov 22 16:48:14 2026" summary="Nmap done at Sun Nov 22 16:48:14 2026; 1 IP address (1 host up) scanned in 1.02 seconds" elapsed="1.02" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>
