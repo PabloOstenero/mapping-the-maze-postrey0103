@@ -1,0 +1,7 @@
+CVE-2011-2523 NO esta en KEV
+CVE-2018-15473 NO esta en KEV
+CVE-2020-1938 SI desde 2022-03-03 | ransomware: Unknown
+CVE-2023-46604 SI desde 2023-11-02 | ransomware: Known
+CVE-2024-23897 SI desde 2024-08-19 | ransomware: Known
+CVE-2024-6387 NO esta en KEV
+CVE-2025-24813 SI desde 2025-04-01 | ransomware: Unknown

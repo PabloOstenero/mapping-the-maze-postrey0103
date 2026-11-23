@@ -538,3 +538,62 @@ Nota de trazabilidad: el historial de bash existía antes de activar las marcas 
 - **Captura:** sin captura
 - **Siguiente paso:** comprobar los enlaces a imágenes, hacer commit y empezar la Parte 4 (CVSS, EPSS y KEV).
 
+### 2026-11-23 16:40 - Ficha de NVD del CVE-2024-6387 (captura pendiente de la Parte 3)
+- **Cuándo:** 2026-11-23 16:40
+- **Objetivo y alcance:** dejar captura de la descripción, la CWE y el rango de versiones del CVE de OpenSSH registrado en la ficha V-07, que no la tenía. Solo ficheros locales (la ficha de NVD ya estaba descargada), sin tráfico de red.
+- **Qué hice:** `CVE=CVE-2024-6387` y `{ jq -r '.vulnerabilities[0].cve | "\(.id)\nCWE: ..."' evidencias/p3/33-nvd-$CVE.json; jq -r '.vulnerabilities[0].cve.configurations[]?.nodes[]?.cpeMatch[]? | select(.vulnerable==true) | ...' evidencias/p3/33-nvd-$CVE.json | head -15; } | fold -s -w 110`
+- **Qué salió:** CWE-362 y CWE-364; condición de carrera en `sshd`; rango de OpenSSH de 8.6 a 9.8 incluida (y antes de 4.4). Evidencia: `evidencias/p3/33-nvd-CVE-2024-6387.json`.
+- **Captura:** ![NVD CVE-2024-6387](../imagenes/p3-03-nvd-CVE-2024-6387.png)
+- **Siguiente paso:** empezar la Parte 4 (CVSS, EPSS y KEV).
+
+---
+
+## Parte 4 - Priorizar e informar
+
+### 2026-11-23 16:48 - Inicio de la Parte 4 y lista de CVE de las fichas
+- **Cuándo:** 2026-11-23 16:48
+- **Objetivo y alcance:** dejar marcado el inicio de la Parte 4 y reunir los CVE de las fichas del registro, sin los descartados. Solo ficheros locales, sin tráfico de red. La fecha de consulta de las fuentes queda en `evidencias/p4/fecha-consulta.txt`.
+- **Qué hice:** `echo "#### INICIO PARTE 4 $(date '+%F %H:%M')"`, `grep -E '^\| CVE \|' registro-vulns.md | grep -oE 'CVE-[0-9]{4}-[0-9]+' | sort -u | tee evidencias/p4/39-cves.txt` y `date "+%F" | tee evidencias/p4/fecha-consulta.txt`
+- **Qué salió:** siete CVE: CVE-2011-2523, CVE-2018-15473, CVE-2020-1938, CVE-2023-46604, CVE-2024-23897, CVE-2024-6387 y CVE-2025-24813. Fecha de consulta: 2026-11-23. Se usa un `grep` que lee solo la fila "CVE" de cada ficha, porque el de la guía incluiría también los CVE descartados. Evidencia: `evidencias/p4/39-cves.txt` y `evidencias/p4/fecha-consulta.txt`.
+- **Captura:** sin captura
+- **Siguiente paso:** obtener la puntuación CVSS de cada CVE desde las fichas de NVD.
+
+### 2026-11-23 16:50 - Puntuaciones CVSS de cada CVE
+- **Cuándo:** 2026-11-23 16:50 (comando) y 16:51 (lectura)
+- **Objetivo y alcance:** obtener versión, puntuación, gravedad y vector CVSS de cada CVE de las fichas, distinguiendo la métrica de NVD (`Primary`) de la del fabricante (`Secondary`). Solo ficheros locales (las fichas de NVD ya descargadas), sin tráfico de red.
+- **Qué hice:** `for CVE in $(cat evidencias/p4/39-cves.txt); do jq -r --arg c "$CVE" '.vulnerabilities[0].cve.metrics | to_entries[] | .key as $k | .value[] | "\($c) \($k) \(.type) \(.cvssData.baseScore) \(.cvssData.baseSeverity // .baseSeverity) \(.cvssData.vectorString)"' evidencias/p3/33-nvd-$CVE.json; done | tee evidencias/p4/40-cvss.txt` y `cat evidencias/p4/40-cvss.txt`
+- **Qué salió:** todos los CVE tienen CVSS 3.1 (ninguno trae 4.0). Primary: CVE-2011-2523 9.8, CVE-2020-1938 9.8, CVE-2023-46604 9.8, CVE-2024-23897 9.8, CVE-2025-24813 9.8, CVE-2024-6387 8.1 y CVE-2018-15473 5.3. Secondary que difiere: CVE-2023-46604 10.0, CVE-2025-24813 10.0 y CVE-2018-15473 5.9. Las filas `ssvcV203` no son CVSS y se ignoran. Evidencia: `evidencias/p4/40-cvss.txt`.
+- **Captura:** ![Puntuaciones CVSS obtenidas de NVD](../imagenes/p4-01-cvss.png)
+- **Siguiente paso:** consultar el EPSS de cada CVE.
+
+### 2026-11-23 16:54 - EPSS de cada CVE
+- **Cuándo:** 2026-11-23 16:54
+- **Objetivo y alcance:** consultar la probabilidad de explotación en los próximos 30 días (EPSS) de los siete CVE de las fichas. Consulta a una web pública (FIRST), que no toca la red del cliente.
+- **Qué hice:** `LISTA=$(paste -sd, evidencias/p4/39-cves.txt)`, `curl -s "https://api.first.org/data/v1/epss?cve=$LISTA" -o evidencias/p4/41-epss.json` y `jq -r '.data[] | "\(.cve) EPSS=\(.epss) percentil=\(.percentile) fecha=\(.date)"' evidencias/p4/41-epss.json | tee evidencias/p4/41-epss.txt`
+- **Qué salió:** siete CVE con fecha de los datos 2026-11-23. EPSS y percentil: CVE-2024-23897 0,99999 y 0,99995; CVE-2023-46604 0,9999 y 0,9999; CVE-2025-24813 0,9994 y 0,9997; CVE-2024-6387 0,9951 y 0,9995; CVE-2020-1938 0,9927 y 0,9994; CVE-2018-15473 0,9868 y 0,9993; CVE-2011-2523 0,9618 y 0,9988. Todos superan el umbral de 0,1 y de percentil 0,95, así que el EPSS no distingue entre ellos. Evidencia: `evidencias/p4/41-epss.json` y `41-epss.txt`.
+- **Captura:** ![EPSS de cada CVE, consultado en FIRST](../imagenes/p4-02-epss.png)
+- **Siguiente paso:** consultar el catálogo KEV de CISA.
+
+### 2026-11-23 16:55 - Catálogo KEV de CISA
+- **Cuándo:** 2026-11-23 16:55
+- **Objetivo y alcance:** comprobar qué CVE de las fichas figuran en el catálogo de vulnerabilidades explotadas de CISA (KEV) y si consta su uso en ransomware. Consulta a una web pública, que no toca la red del cliente.
+- **Qué hice:** `curl -s https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json -o evidencias/p4/42-kev-$(date +%F).json`, `jq '.vulnerabilities | length' evidencias/p4/42-kev-$(date +%F).json` y un bucle con `jq` que busca cada CVE y lo guarda con `tee evidencias/p4/42-kev.txt`
+- **Qué salió:** figuran en KEV CVE-2023-46604 (desde 2023-11-02, ransomware: Known), CVE-2024-23897 (desde 2024-08-19, ransomware: Known), CVE-2020-1938 (desde 2022-03-03, Unknown) y CVE-2025-24813 (desde 2025-04-01, Unknown). No figuran CVE-2011-2523, CVE-2018-15473 ni CVE-2024-6387. Evidencia: `evidencias/p4/42-kev-2026-11-23.json` y `42-kev.txt`.
+- **Captura:** ![Comprobación en el catálogo KEV de CISA](../imagenes/p4-03-kev.png)
+- **Siguiente paso:** comprobar el aviso de la noticia contra el inventario.
+
+### 2026-11-23 17:02 - Comprobación del aviso de la noticia (CVE-2026-123158)
+- **Cuándo:** 2026-11-23 17:02
+- **Objetivo y alcance:** contrastar el aviso del cliente (sshole) con mi inventario. Consultas a webs públicas (NVD, FIRST y CISA), que no tocan la red del cliente; el resto son ficheros locales. Fuente del aviso: artículo reenviado por el cliente (ox.security).
+- **Qué hice:** `CVE=CVE-2026-123158`, `curl -s "https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=$CVE" -o evidencias/p4/43-aviso-nvd.json`, tres `jq` sobre ese fichero (publicación, métricas y rangos), `curl -s "https://api.first.org/data/v1/epss?cve=$CVE" | tee evidencias/p4/43-aviso-epss.json`, un `jq` sobre `evidencias/p4/42-kev-*.json`, la lectura de los banners SSH de los equipos .4, .6, .7, .8 y .9, y `grep -rilE "alpine|musl" evidencias/p1 evidencias/p2`
+- **Qué salió:** publicado el 2026-11-05. Solo hay puntuación de la CNA, 8,1 (`CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H`). Afecta a OpenSSH anterior a 10.6. EPSS 0,95538 (percentil 0,99871). Figura en KEV desde 2026-11-09, con uso en ransomware Unknown. Banners: Debian en 172.17.0.4, .6 y .9; Ubuntu en .8; 172.17.0.7 sin distribución. Sin indicios de Alpine ni musl en mis evidencias, lo que no prueba su ausencia porque mis escaneos no muestran la libc. Según el artículo y NVD, el fallo solo afecta a Linux con musl sin PAM: no afecta a Debian ni Ubuntu. Evidencia: `evidencias/p4/43-aviso-nvd.json` y `43-aviso-epss.json`.
+- **Captura:** ![Comprobación del aviso contra nuestro inventario](../imagenes/p4-04-aviso.png)
+- **Siguiente paso:** añadir la ficha V-08 para 172.17.0.7 y completar las fichas con CVSS, EPSS y KEV.
+
+### 2026-11-23 - Revisión del registro tras el aviso
+- **Cuándo:** 2026-11-23, después de las 17:02 (hora no registrada en el historial)
+- **Objetivo y alcance:** reflejar en `registro-vulns.md` el resultado del aviso. Solo ficheros locales, sin tráfico de red.
+- **Qué hice:** moví 172.17.0.7 de la tabla de descartados a una ficha nueva V-08 y reescribí la fila de descarte de CVE-2026-123158, que queda para 172.17.0.4, .6, .8 y .9 por usar Debian o Ubuntu (glibc).
+- **Qué salió:** el registro tiene 8 fichas. La V-08 queda como "pendiente de comprobar" porque no se puede saber la libc de la .7. Evidencia: `registro-vulns.md`.
+- **Captura:** sin captura
+- **Siguiente paso:** completar cada ficha con CVSS, EPSS y KEV y redactar el orden de prioridad.

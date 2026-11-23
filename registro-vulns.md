@@ -150,6 +150,25 @@ Ningún hallazgo se ha confirmado explotándolo. Todos son vulnerabilidades **po
 
 ---
 
+## V-08 - Posible omisión de autenticación por contraseña en OpenSSH 7.7 (sshole)
+
+| Campo | Valor |
+|---|---|
+| Equipo y servicio | 172.17.0.7, 22/tcp, OpenSSH 7.7 |
+| CVE | [CVE-2026-123158](https://nvd.nist.gov/vuln/detail/CVE-2026-123158) |
+| Explicación | Según NVD, `sshd` de OpenSSH anterior a 10.6p2 en Linux con musl libc y sin PAM no distingue bien si una cadena es una contraseña o un hash. Según el artículo del aviso, una contraseña larga permite entrar a cuentas sin contraseña válida sin conocerla. |
+| CWE | CWE-394: Código de estado o valor de retorno inesperado. **Propuesta propia** a partir de la descripción de CISA; se sustituye por la de NVD si la ficha la trae. |
+| Técnica ATT&CK | T1210 Exploitation of Remote Services, con T1078 Valid Accounts como efecto. |
+| Lo observado | Banner `SSH-2.0-OpenSSH_7.7`, sin distribución. Solo SSH abierto en este equipo. |
+| Por qué sospechamos | La versión 7.7 es anterior a 10.6p2 y el equipo ofrece SSH. CISA lo incluye en KEV desde el 2026-11-09. La sospecha es débil: el fallo solo se da con musl libc y sin PAM, y eso no se puede saber desde la red. |
+| Evidencias | `evidencias/p2/22-ssh-banner-172.17.0.7-bash.txt`, `evidencias/p3/31-vulners-172.17.0.7.nmap`, `evidencias/p4/43-aviso-nvd.json` |
+| Capturas | [SSH 1](imagenes/p2-05-ssh-172.17.0.7-1.png), [SSH 2](imagenes/p2-05-ssh-172.17.0.7-2.png), [vulners](imagenes/p3-01-vulners-172.17.0.7.png), [comprobación del aviso](imagenes/p4-04-aviso.png) |
+| Limitaciones | Hallazgo en estado "pendiente de comprobar". No consta la libc, ni PAM, ni si hay cuentas sin contraseña. El banner sin distribución es compatible con Alpine, con RHEL o CentOS y con una copia compilada a mano. No se probó ninguna contraseña. |
+| Pendiente de comprobar | En una fase posterior y con permiso: confirmar el sistema base de este equipo y si usa PAM. Mientras tanto, desactivar las contraseñas en SSH y actualizar a OpenSSH 10.6p2 o a un paquete corregido. |
+| CVSS, EPSS y KEV | Lo completa la Parte 4. |
+
+---
+
 ## Candidatos descartados (falsos positivos)
 
 Propuestos por las herramientas automáticas y descartados tras revisarlos.
@@ -163,7 +182,7 @@ Propuestos por las herramientas automáticas y descartados tras revisarlos.
 | CVE-2025-26465 | 172.17.0.4, .6, .7, .8 y .9, OpenSSH | vulners | Solo ocurre con `VerifyHostKeyDNS` activado, una opción del cliente | `evidencias/p3/33-nvd-CVE-2025-26465.json` |
 | CVE-2023-28531 | 172.17.0.6 y .9, OpenSSH | vulners | Afecta a `ssh-add`, una herramienta de cliente | `evidencias/p3/33-nvd-CVE-2023-28531.json` |
 | CVE-2026-60002 | 172.17.0.4 y .9, OpenSSH | vulners | Según NVD, solo se produce en el cliente `ssh` | `evidencias/p3/33-nvd-CVE-2026-60002.json` |
-| CVE-2026-123158 | 172.17.0.4, .6, .7, .8 y .9, OpenSSH | vulners | Solo afecta a Linux con musl libc y sin PAM. Los banners de Debian y Ubuntu no apuntan a esa configuración. En 172.17.0.7 el banner no indica distribución, así que no se puede asegurar la libc | `evidencias/p3/33-nvd-CVE-2026-123158.json` |
+| CVE-2026-123158 | 172.17.0.4, .6, .8 y .9, OpenSSH | vulners | Solo afecta a Linux con musl libc y sin PAM. La descripción de NVD limita el fallo a esa configuración y el artículo del aviso indica que Debian y Ubuntu (glibc) no están afectados. El banner de los cuatro es de un paquete de Debian o Ubuntu. 172.17.0.7 pasa a la ficha V-08 | `evidencias/p3/33-nvd-CVE-2026-123158.json`, `evidencias/p4/43-aviso-nvd.json` |
 | CVE-2026-119618 | 172.17.0.5, .8 y .9, Apache httpd | vulners | Afecta a `mod_http2`, que no consta activo; en 172.17.0.5:443 el escaneo solo anuncia `http/1.1` | `evidencias/p3/33-nvd-CVE-2026-119618.json`, `evidencias/p2/20-nse-172.17.0.5.nmap` |
 | CVE-2024-38475 | 172.17.0.5 y .8, Apache httpd | vulners | Requiere reglas de `mod_rewrite` concretas que no hay evidencia de que existan | `evidencias/p3/33-nvd-CVE-2024-38475.json` |
 | CVE-2021-28169 | 172.17.0.6, Jetty 10.0.18 | vulners | La versión observada queda fuera del rango afectado (10.0.0 a antes de 10.0.3) | `evidencias/p3/33-nvd-CVE-2021-28169.json` |
