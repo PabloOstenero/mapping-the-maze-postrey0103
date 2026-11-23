@@ -15,6 +15,50 @@
 
 Ningún hallazgo se ha confirmado explotándolo. Todos son vulnerabilidades **potenciales**. No se abrió, descargó ni ejecutó ningún exploit.
 
+## Orden de prioridad
+
+**Autor de la priorización:** Pablo Ostenero Reyes
+**Fecha de consulta de las fuentes:** 2026-11-23
+**Fuentes:** NVD (CVSS y CWE), FIRST EPSS, CISA KEV.
+
+### Método
+
+No se ordena solo por CVSS. Los criterios, de mayor a menor peso, son:
+
+1. Explotación conocida: estar en el catálogo KEV de CISA, y sobre todo con uso en ransomware.
+2. Probabilidad de explotación: EPSS igual o superior a 0,1 o percentil igual o superior a 0,95. Los ocho CVE superan los dos umbrales, así que este criterio no los distingue entre sí.
+3. Gravedad técnica: puntuación CVSS base.
+4. Importancia del equipo para el negocio: consola de gestión, mensajería con operadores (facturación), portal de clientes, equipo antiguo y servidor de pruebas.
+5. Solidez de la evidencia: versión clara y sin parche de la distribución, frente a una condición de configuración que no se ve desde la red.
+
+| Prioridad | ID | Equipo y servicio | CVE | CVSS | EPSS | KEV | Por qué va en este puesto |
+|---|---|---|---|---|---|---|---|
+| 1 | V-03 | 172.17.0.5, ActiveMQ OpenWire 61616 | CVE-2023-46604 | 9.8 | 0.99992 | Sí, ransomware Known | Explotación conocida en ransomware, ejecución remota sin autenticar y equipo de mensajería ligado a la facturación |
+| 2 | V-04 | 172.17.0.6, Jenkins 2.441 | CVE-2024-23897 | 9.8 | 0.99999 | Sí, ransomware Known | Mismo caso que V-03, pero lee ficheros en lugar de ejecutar código |
+| 3 | V-02 | 172.17.0.4, Tomcat 9.0.30 con AJP | CVE-2020-1938 | 9.8 | 0.99270 | Sí | En KEV, versión en rango y AJP abierto; la actualización de Tomcat resuelve también V-06 |
+| 4 | V-08 | 172.17.0.7, OpenSSH 7.7 | CVE-2026-123158 | 8.1 | 0.95538 | Sí | KEV y noticias lo adelantan a V-06 y a V-01, que tienen más CVSS; queda detrás por depender de una configuración desconocida |
+| 5 | V-06 | 172.17.0.4, Tomcat 9.0.30 | CVE-2025-24813 | 9.8 | 0.99942 | Sí | En KEV, pero exige un ajuste desactivado por defecto que no se ve |
+| 6 | V-01 | 172.17.0.3, vsftpd 2.3.4 | CVE-2011-2523 | 9.8 | 0.96184 | No | Grave, pero sin explotación conocida y con evidencia limitada al banner; es el equipo delicado |
+| 7 | V-07 | 172.17.0.6, OpenSSH 9.2p1 Debian | CVE-2024-6387 | 8.1 | 0.99506 | No | No está en KEV y su complejidad es alta |
+| 8 | V-05 | 172.17.0.7, OpenSSH 7.7 | CVE-2018-15473 | 5.3 | 0.98675 | No | Impacto bajo: solo revela si un usuario existe |
+
+Casos en que KEV hace que un hallazgo con menos CVSS vaya antes que otro con más: V-08 (8.1) va antes que V-01 (9.8) porque está en KEV y V-01 no. Y V-08 (8.1) va antes que V-06 (9.8), que también está en KEV, porque V-06 exige un ajuste desactivado por defecto.
+
+Una sola actualización de Tomcat resuelve V-02 y V-06, y actualizar OpenSSH en el equipo 172.17.0.7 cubre V-05 y V-08.
+
+### Datos no disponibles
+
+- CVE-2026-123158: NVD no ha publicado puntuación propia; se usa la de la CNA (8.1).
+- CVE-2023-46604, CVE-2025-24813 y CVE-2018-15473: la CNA publica una puntuación distinta de la de NVD (10.0, 10.0 y 5.9); se usa la de NVD y la otra se indica en cada ficha.
+- No se consultó el seguimiento de seguridad de Debian ni de Ubuntu para CVE-2026-123158.
+
+Evidencias: `evidencias/p4/40-cvss.txt`, `evidencias/p4/41-epss.json`, `evidencias/p4/42-kev-2026-11-23.json` y `evidencias/p4/43-aviso-nvd.json`.
+
+![Puntuaciones CVSS obtenidas de NVD](imagenes/p4-01-cvss.png)
+![EPSS de cada CVE, consultado en FIRST](imagenes/p4-02-epss.png)
+![Comprobación en el catálogo KEV de CISA](imagenes/p4-03-kev.png)
+![Comprobación del aviso contra nuestro inventario](imagenes/p4-04-aviso.png)
+
 ---
 
 ## V-01 - Posible puerta trasera en vsftpd 2.3.4
@@ -32,7 +76,11 @@ Ningún hallazgo se ha confirmado explotándolo. Todos son vulnerabilidades **po
 | Capturas | [versión observada](imagenes/p1-06-versiones-172.17.0.3.png), [banner FTP](imagenes/p2-06-banner-ftp-172.17.0.3.png), [searchsploit](imagenes/p3-02-searchsploit.png), [ficha NVD](imagenes/p3-03-nvd-CVE-2011-2523.png) |
 | Limitaciones | No se ha confirmado porque no se explota. NVD limita el fallo a copias descargadas en unos días concretos de 2011 y el banner no permite distinguir una copia comprometida de una limpia. El banner podría estar modificado. No se lanzó `vulners` contra este equipo por ser el delicado. El puerto 6200 cerrado no descarta el fallo, porque no se ha hecho ninguna prueba que lo abra. |
 | Pendiente de comprobar | En una fase posterior y con permiso del cliente: comprobar el origen y la integridad del paquete instalado (por ejemplo su suma de verificación) y, solo con autorización expresa, la confirmación activa. |
-| CVSS, EPSS y KEV | Lo completa la Parte 4. |
+| CVSS | Versión 3.1, puntuación **9.8 (Crítica)**, vector `CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H`. Fuente: NVD (también CVSS 2.0: 10.0). |
+| Qué implica (C/I/A) | Confidencialidad: alta, podría leer los datos del equipo. Integridad: alta, podría modificarlos. Disponibilidad: alta, podría detenerlo. Se ataca por red, sin credenciales y sin intervención del usuario. |
+| EPSS | 0.96184 (percentil 0.99879). Fuente: FIRST EPSS, consultado el 2026-11-23. |
+| KEV | No figura. Fuente: CISA KEV, consultado el 2026-11-23. |
+| Prioridad | **6**. CVSS crítico, pero sin explotación conocida (no está en KEV) y con la evidencia limitada al banner. Es el equipo delicado: conviene planificar su sustitución. |
 
 ---
 
@@ -51,7 +99,11 @@ Ningún hallazgo se ha confirmado explotándolo. Todos son vulnerabilidades **po
 | Capturas | [versión observada](imagenes/p1-06-versiones-172.17.0.4.png), [vulners](imagenes/p3-01-vulners-172.17.0.4.png), [ficha NVD 1](imagenes/p3-03-nvd-CVE-2020-1938-1.png), [ficha NVD 2](imagenes/p3-03-nvd-CVE-2020-1938-2.png) |
 | Limitaciones | No se ha confirmado porque no se explota. La versión sale de `-sV` y de la portada. No se lanzó ningún script contra el AJP. No se sabe si el conector está configurado con secreto o restringido por red. |
 | Pendiente de comprobar | En una fase posterior y con permiso: revisar la configuración del conector AJP (dirección de escucha y secreto) y limitar el acceso por red. |
-| CVSS, EPSS y KEV | Lo completa la Parte 4. |
+| CVSS | Versión 3.1, puntuación **9.8 (Crítica)**, vector `CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H`. Fuente: NVD (la CNA publica la misma). |
+| Qué implica (C/I/A) | Confidencialidad: alta, podría leer ficheros de las aplicaciones. Integridad: alta. Disponibilidad: alta. Se ataca por red, sin credenciales y sin intervención del usuario. |
+| EPSS | 0.99270 (percentil 0.99938). Fuente: FIRST EPSS, consultado el 2026-11-23. |
+| KEV | Sí, incluido el 2022-03-03; uso en ransomware: Unknown. Fuente: CISA KEV, consultado el 2026-11-23. |
+| Prioridad | **3**. Está en KEV (sin ransomware conocido), la versión está en rango y el AJP está abierto en la red. Actualizar Tomcat resuelve también V-06. |
 
 ---
 
@@ -70,7 +122,11 @@ Ningún hallazgo se ha confirmado explotándolo. Todos son vulnerabilidades **po
 | Capturas | [versión observada 1](imagenes/p1-06-versiones-172.17.0.5-1.png), [versión observada 2](imagenes/p1-06-versiones-172.17.0.5-2.png), [vulners 1](imagenes/p3-01-vulners-172.17.0.5-1.png), [vulners 2](imagenes/p3-01-vulners-172.17.0.5-2.png), [ficha NVD 1](imagenes/p3-03-nvd-CVE-2023-46604-1.png), [ficha NVD 2](imagenes/p3-03-nvd-CVE-2023-46604-2.png) |
 | Limitaciones | No se ha confirmado porque no se explota ni se envía ningún mensaje al broker. La versión sale de `-sV`. No consta si el broker procede de un paquete de la distribución con parches propios (no se consultó el seguimiento de Debian). |
 | Pendiente de comprobar | En una fase posterior y con permiso: confirmar la versión exacta del broker y actualizarlo a 5.15.16 o posterior, y restringir el acceso al puerto 61616. |
-| CVSS, EPSS y KEV | Lo completa la Parte 4. |
+| CVSS | Versión 3.1, puntuación **9.8 (Crítica)**, vector `CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H`. Fuente: NVD. La CNA publica 10.0 (`S:C`, alcance cambiado). |
+| Qué implica (C/I/A) | Confidencialidad: alta, podría leer los mensajes del broker. Integridad: alta, podría ejecutar comandos y alterar mensajes. Disponibilidad: alta, podría detener el servicio. Se ataca por red, sin credenciales y sin intervención del usuario. |
+| EPSS | 0.99992 (percentil 0.99986). Fuente: FIRST EPSS, consultado el 2026-11-23. |
+| KEV | Sí, incluido el 2023-11-02; uso en ransomware: Known. Fuente: CISA KEV, consultado el 2026-11-23. |
+| Prioridad | **1**. Está en KEV con ransomware Known, ejecuta código sin autenticar, la versión está clara y es el equipo de mensajería ligado a la facturación. |
 
 ---
 
@@ -89,7 +145,11 @@ Ningún hallazgo se ha confirmado explotándolo. Todos son vulnerabilidades **po
 | Capturas | [web observada](imagenes/p2-03-http-172.17.0.6-8080.png), [searchsploit](imagenes/p3-02-searchsploit.png), [ficha NVD](imagenes/p3-03-nvd-CVE-2024-23897.png) |
 | Limitaciones | No se ha confirmado porque no se explota ni se usa el CLI de Jenkins. `vulners` no propuso este CVE; sale de `searchsploit` y de NVD. NVD habla de atacantes no autenticados, pero la portada exige login: el alcance real depende de los permisos de acceso anónimo, que desde fuera no se comprueban. |
 | Pendiente de comprobar | En una fase posterior y con permiso: comprobar la versión exacta y los permisos de acceso anónimo, y actualizar Jenkins a una versión corregida. |
-| CVSS, EPSS y KEV | Lo completa la Parte 4. |
+| CVSS | Versión 3.1, puntuación **9.8 (Crítica)**, vector `CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H`. Fuente: NVD (la CNA publica la misma). |
+| Qué implica (C/I/A) | Confidencialidad: alta, podría leer cualquier fichero del servidor, incluidas claves de acceso. Integridad: alta y disponibilidad: alta según el vector, por lo que podría usar esa información para actuar sobre el sistema. Se ataca por red, sin credenciales y sin intervención del usuario. |
+| EPSS | 0.99999 (percentil 0.99995). Fuente: FIRST EPSS, consultado el 2026-11-23. |
+| KEV | Sí, incluido el 2024-08-19; uso en ransomware: Known. Fuente: CISA KEV, consultado el 2026-11-23. |
+| Prioridad | **2**. Está en KEV con ransomware Known y la versión está confirmada por cabecera. Va detrás de V-03 porque por sí solo lee ficheros y no ejecuta código. |
 
 ---
 
@@ -108,7 +168,11 @@ Ningún hallazgo se ha confirmado explotándolo. Todos son vulnerabilidades **po
 | Capturas | [vulners](imagenes/p3-01-vulners-172.17.0.7.png), [searchsploit](imagenes/p3-02-searchsploit.png), [ficha NVD](imagenes/p3-03-nvd-CVE-2018-15473.png) |
 | Limitaciones | No se ha confirmado porque no se prueba ningún usuario. La versión 7.7 está justo en el límite del rango, y el título de una entrada de `searchsploit` dice "antes de 7.7": manda la ficha de NVD. El banner no indica distribución, así que no se puede consultar el seguimiento de parches de Debian o Ubuntu. |
 | Pendiente de comprobar | En una fase posterior y con permiso: confirmar el origen del paquete y actualizar OpenSSH. |
-| CVSS, EPSS y KEV | Lo completa la Parte 4. |
+| CVSS | Versión 3.1, puntuación **5.3 (Media)**, vector `CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N`. Fuente: NVD. La CNA publica 5.9 (`AC:H`, `C:H`). |
+| Qué implica (C/I/A) | Confidencialidad: baja, permite saber si un usuario existe. Integridad: ninguna. Disponibilidad: ninguna. Se ataca por red, sin credenciales y sin intervención del usuario. |
+| EPSS | 0.98675 (percentil 0.99925). Fuente: FIRST EPSS, consultado el 2026-11-23. |
+| KEV | No figura. Fuente: CISA KEV, consultado el 2026-11-23. |
+| Prioridad | **8**. Tiene un EPSS muy alto, pero su impacto es bajo y no está en KEV. Es el último: solo revela usuarios y no cambia ni detiene nada. |
 
 ---
 
@@ -127,7 +191,11 @@ Ningún hallazgo se ha confirmado explotándolo. Todos son vulnerabilidades **po
 | Capturas | [versión observada](imagenes/p1-06-versiones-172.17.0.4.png), [vulners](imagenes/p3-01-vulners-172.17.0.4.png), [ficha NVD 1](imagenes/p3-03-nvd-CVE-2025-24813-1.png), [ficha NVD 2](imagenes/p3-03-nvd-CVE-2025-24813-2.png) |
 | Limitaciones | Hallazgo en estado "pendiente de comprobar". La versión entra en rango, pero la explotación exige escritura activada en el servlet por defecto (desactivada de fábrica), soporte de PUT parcial, y para el RCE persistencia de sesiones en fichero y una librería aprovechable en una deserialización. Ninguna de estas condiciones es visible desde la red. |
 | Pendiente de comprobar | En una fase posterior y con permiso: revisar la configuración de Tomcat (servlet por defecto y persistencia de sesión) y actualizar a 9.0.99 o posterior. |
-| CVSS, EPSS y KEV | Lo completa la Parte 4. |
+| CVSS | Versión 3.1, puntuación **9.8 (Crítica)**, vector `CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H`. Fuente: NVD. La CNA publica 10.0 (`S:C`). |
+| Qué implica (C/I/A) | Confidencialidad: alta. Integridad: alta, podría añadir contenido a ficheros subidos. Disponibilidad: alta. Según NVD exige varias condiciones de configuración a la vez, que no se ven desde la red. |
+| EPSS | 0.99942 (percentil 0.99973). Fuente: FIRST EPSS, consultado el 2026-11-23. |
+| KEV | Sí, incluido el 2025-04-01; uso en ransomware: Unknown. Fuente: CISA KEV, consultado el 2026-11-23. |
+| Prioridad | **5**. Está en KEV, pero exige un ajuste desactivado por defecto (escritura en el servlet por defecto) que no se ve. Se resuelve con la misma actualización que V-02. |
 
 ---
 
@@ -146,7 +214,11 @@ Ningún hallazgo se ha confirmado explotándolo. Todos son vulnerabilidades **po
 | Capturas | [vulners](imagenes/p3-01-vulners-172.17.0.6.png), [tracker de Debian](imagenes/p3-04-backport-CVE-2024-6387.png), [ficha NVD](imagenes/p3-03-nvd-CVE-2024-6387.png) |
 | Limitaciones | No se ha confirmado porque no se explota. La versión sale del banner, que podría estar modificado. La comparación de revisiones se hace con la tabla del tracker, no con el paquete instalado. |
 | Pendiente de comprobar | En una fase posterior y con permiso: confirmar la versión del paquete instalado y actualizar a una revisión corregida. |
-| CVSS, EPSS y KEV | Lo completa la Parte 4. |
+| CVSS | Versión 3.1, puntuación **8.1 (Alta)**, vector `CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H`. Fuente: NVD (la CNA publica la misma). |
+| Qué implica (C/I/A) | Confidencialidad: alta. Integridad: alta. Disponibilidad: alta, según el vector. Se ataca por red, sin credenciales y sin intervención del usuario, pero con complejidad alta: es una carrera de tiempos que exige muchos intentos. |
+| EPSS | 0.99506 (percentil 0.99946). Fuente: FIRST EPSS, consultado el 2026-11-23. |
+| KEV | No figura. Fuente: CISA KEV, consultado el 2026-11-23. |
+| Prioridad | **7**. No está en KEV y su complejidad es alta. La versión no tiene la corrección de Debian según el seguimiento de seguridad. |
 
 ---
 
@@ -165,7 +237,11 @@ Ningún hallazgo se ha confirmado explotándolo. Todos son vulnerabilidades **po
 | Capturas | [SSH 1](imagenes/p2-05-ssh-172.17.0.7-1.png), [SSH 2](imagenes/p2-05-ssh-172.17.0.7-2.png), [vulners](imagenes/p3-01-vulners-172.17.0.7.png), [comprobación del aviso](imagenes/p4-04-aviso.png) |
 | Limitaciones | Hallazgo en estado "pendiente de comprobar". No consta la libc, ni PAM, ni si hay cuentas sin contraseña. El banner sin distribución es compatible con Alpine, con RHEL o CentOS y con una copia compilada a mano. No se probó ninguna contraseña. |
 | Pendiente de comprobar | En una fase posterior y con permiso: confirmar el sistema base de este equipo y si usa PAM. Mientras tanto, desactivar las contraseñas en SSH y actualizar a OpenSSH 10.6p2 o a un paquete corregido. |
-| CVSS, EPSS y KEV | Lo completa la Parte 4. |
+| CVSS | Versión 3.1, puntuación **8.1 (Alta)**, vector `CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H`. Fuente: la CNA, a través de NVD; NVD no ha publicado puntuación propia. |
+| Qué implica (C/I/A) | Confidencialidad: alta. Integridad: alta. Disponibilidad: alta, según el vector. Se ataca por red, sin credenciales y sin intervención del usuario, pero con complejidad alta porque exige una configuración concreta. |
+| EPSS | 0.95538 (percentil 0.99871). Fuente: FIRST EPSS, consultado el 2026-11-23. |
+| KEV | Sí, incluido el 2026-11-09; uso en ransomware: Unknown. Fuente: CISA KEV, consultado el 2026-11-23. |
+| Prioridad | **4**. Está en KEV y en las noticias. Aunque su CVSS es menor que el de V-06 y V-01, la explotación conocida lo adelanta a V-01; V-06 va detrás porque exige un ajuste desactivado por defecto, mientras que aquí se desconoce el sistema base. |
 
 ---
 

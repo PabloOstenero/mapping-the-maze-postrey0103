@@ -597,3 +597,19 @@ Nota de trazabilidad: el historial de bash existía antes de activar las marcas 
 - **Qué salió:** el registro tiene 8 fichas. La V-08 queda como "pendiente de comprobar" porque no se puede saber la libc de la .7. Evidencia: `registro-vulns.md`.
 - **Captura:** sin captura
 - **Siguiente paso:** completar cada ficha con CVSS, EPSS y KEV y redactar el orden de prioridad.
+
+### 2026-11-23 17:18 - CVSS, EPSS, KEV y orden de prioridad en registro-vulns.md
+- **Cuándo:** 2026-11-23 17:14 (comprobación previa de las fichas) y 17:18 (copia de seguridad, script y comprobaciones)
+- **Objetivo y alcance:** completar cada ficha con CVSS, qué implica para confidencialidad, integridad y disponibilidad, EPSS y KEV, y escribir el orden de prioridad justificado. Solo ficheros locales, con los datos ya descargados, sin tráfico de red.
+- **Qué hice:** `cp registro-vulns.md /tmp/registro-antes-p4.md`, un script de Python que sustituye en las ocho fichas la fila "CVSS, EPSS y KEV" y añade el apartado "Orden de prioridad", y después `grep -c "^| Prioridad |" registro-vulns.md`, `grep -n "Lo completa la Parte 4" registro-vulns.md` y `grep -n "^## " registro-vulns.md`
+- **Qué salió:** ocho fichas completas y una tabla de prioridades. Orden: V-03 ActiveMQ, V-04 Jenkins, V-02 Tomcat (AJP), V-08 OpenSSH 7.7 (sshole), V-06 Tomcat (PUT parcial), V-01 vsftpd, V-07 OpenSSH 9.2p1 y V-05 OpenSSH 7.7 (enumeración de usuarios). El EPSS no distingue entre los ocho (todos superan 0,95), así que decide KEV y, dentro de KEV, el uso en ransomware. Evidencia: `registro-vulns.md`.
+- **Captura:** sin captura
+- **Siguiente paso:** redactar el informe para el cliente.
+
+### 2026-11-23 17:22 - Redacción y comprobación de informe-cliente.md (Parte 4)
+- **Cuándo:** entre las 17:18 y las 17:22 del 2026-11-23 (el comando que creó el fichero no consta en este historial; a las 17:22 ya existía y se comprobó)
+- **Objetivo y alcance:** redactar el informe final para la dirección del cliente, en lenguaje claro, con el resumen, el inventario, las vulnerabilidades por orden de prioridad, las advertencias y la respuesta al aviso de la noticia. Solo trabajo con ficheros locales, sin tráfico de red.
+- **Qué hice:** redacté `informe-cliente.md` con ayuda de IA a partir de `inventario.md`, `registro-vulns.md` y los resultados de la comprobación del aviso, respetando el orden de prioridad del registro. Lo comprobé con `grep -c "^| [1-8] |" informe-cliente.md` y `grep -n "PENDIENTE" informe-cliente.md`.
+- **Qué salió:** un informe con 8 equipos activos y 8 vulnerabilidades potenciales (5 en KEV, 2 con uso en ransomware conocido). Recomienda corregir primero ActiveMQ, Jenkins y Tomcat. La tabla de prioridades tiene 8 filas y el fichero no tiene ningún `PENDIENTE`. Sobre el aviso (CVE-2026-123158), responde que no se puede descartar del todo: según lo observado no afecta a 4 de los 5 equipos con SSH (Debian y Ubuntu) y queda pendiente 172.17.0.7. Evidencia: `informe-cliente.md`.
+- **Captura:** sin captura
+- **Siguiente paso:** comprobar los enlaces a imágenes, hacer commit, rellenar el README y compartir los cuadernos con el grupo.
