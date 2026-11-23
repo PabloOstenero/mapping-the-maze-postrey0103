@@ -1,0 +1,11 @@
+# Nmap 7.99 scan initiated Sun Nov 22 20:46:55 2026 as: /usr/lib/nmap/nmap -Pn -sV -p 80 --script vulners --script-args mincvss=5.0 -oA evidencias/p3/31-vulners-172.17.0.10 172.17.0.10
+Nmap scan report for 172.17.0.10
+Host is up (0.000069s latency).
+
+PORT   STATE SERVICE VERSION
+80/tcp open  http    SimpleHTTPServer 0.6 (Python 3.11.2)
+|_http-server-header: SimpleHTTP/0.6 Python/3.11.2
+MAC Address: 1A:A5:09:CE:CF:88 (Unknown)
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sun Nov 22 20:47:07 2026 -- 1 IP address (1 host up) scanned in 12.44 seconds

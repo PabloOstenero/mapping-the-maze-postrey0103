@@ -1,0 +1,27 @@
+------------------------------------------- ---------------------------------
+ Exploit Title                             |  Path
+------------------------------------------- ---------------------------------
+[01;31m[Kvsftpd[m[K [01;31m[K2.3.4[m[K - Backdoor Command Execution  | unix/remote/17491.rb
+[01;31m[Kvsftpd[m[K [01;31m[K2.3.4[m[K - Backdoor Command Execution  | unix/remote/49757.py
+------------------------------------------- ---------------------------------
+Shellcodes: No Results
+Exploits: No Results
+Shellcodes: No Results
+Exploits: No Results
+Shellcodes: No Results
+------------------------------------------- ---------------------------------
+ Exploit Title                             |  Path
+------------------------------------------- ---------------------------------
+[01;31m[KJenkins[m[K [01;31m[K2.441[m[K - Local File Inclusion       | java/webapps/51993.py
+------------------------------------------- ---------------------------------
+Shellcodes: No Results
+------------------------------------------- ---------------------------------
+ Exploit Title                             |  Path
+------------------------------------------- ---------------------------------
+[01;31m[KOpenSSH[m[K 2.3 < [01;31m[K7.7[m[K - Username Enumeration   | linux/remote/45233.py
+[01;31m[KOpenSSH[m[K 2.3 < [01;31m[K7.7[m[K - Username Enumeration ( | linux/remote/45210.py
+[01;31m[KOpenSSH[m[K < [01;31m[K7.7[m[K - User Enumeration (2)       | linux/remote/45939.py
+------------------------------------------- ---------------------------------
+Shellcodes: No Results
+Exploits: No Results
+Shellcodes: No Results

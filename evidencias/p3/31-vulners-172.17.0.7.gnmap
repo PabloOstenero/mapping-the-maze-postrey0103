@@ -1,0 +1,4 @@
+# Nmap 7.99 scan initiated Sun Nov 22 20:46:19 2026 as: /usr/lib/nmap/nmap -Pn -sV -p 22 --script vulners --script-args mincvss=5.0 -oA evidencias/p3/31-vulners-172.17.0.7 172.17.0.7
+Host: 172.17.0.7 ()	Status: Up
+Host: 172.17.0.7 ()	Ports: 22/open/tcp//ssh//OpenSSH 7.7 (protocol 2.0)/
+# Nmap done at Sun Nov 22 20:46:25 2026 -- 1 IP address (1 host up) scanned in 6.05 seconds

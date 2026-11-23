@@ -1,0 +1,4 @@
+# Nmap 7.99 scan initiated Sun Nov 22 20:46:55 2026 as: /usr/lib/nmap/nmap -Pn -sV -p 80 --script vulners --script-args mincvss=5.0 -oA evidencias/p3/31-vulners-172.17.0.10 172.17.0.10
+Host: 172.17.0.10 ()	Status: Up
+Host: 172.17.0.10 ()	Ports: 80/open/tcp//http//SimpleHTTPServer 0.6 (Python 3.11.2)/
+# Nmap done at Sun Nov 22 20:47:07 2026 -- 1 IP address (1 host up) scanned in 12.44 seconds

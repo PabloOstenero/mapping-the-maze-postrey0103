@@ -1,0 +1,4 @@
+# Nmap 7.99 scan initiated Sun Nov 22 20:46:25 2026 as: /usr/lib/nmap/nmap -Pn -sV -p 22,80,139,445 --script vulners --script-args mincvss=5.0 -oA evidencias/p3/31-vulners-172.17.0.8 172.17.0.8
+Host: 172.17.0.8 ()	Status: Up
+Host: 172.17.0.8 ()	Ports: 22/open/tcp//ssh//OpenSSH 9.6p1 Ubuntu 3ubuntu13.5 (Ubuntu Linux; protocol 2.0)/, 80/open/tcp//http//Apache httpd 2.4.58 ((Ubuntu))/, 139/open/tcp//netbios-ssn//Samba smbd 4/, 445/open/tcp//netbios-ssn//Samba smbd 4/
+# Nmap done at Sun Nov 22 20:46:42 2026 -- 1 IP address (1 host up) scanned in 17.24 seconds

@@ -1,0 +1,692 @@
+# Nmap 7.99 scan initiated Sun Nov 22 20:45:29 2026 as: /usr/lib/nmap/nmap -Pn -sV -p 80,443,1883,5672,8161,32987,61613,61614,61616 --script vulners --script-args mincvss=5.0 -oA evidencias/p3/31-vulners-172.17.0.5 172.17.0.5
+Nmap scan report for 172.17.0.5
+Host is up (0.000036s latency).
+
+PORT      STATE SERVICE    VERSION
+80/tcp    open  http       Apache httpd 2.4.59 ((Debian))
+| vulners: 
+|   cpe:/a:apache:http_server:2.4.59: 
+|     	MEND:CVE-2026-59797	9.8	https://vulners.com/mend/MEND:CVE-2026-59797
+|     	MEND:CVE-2026-57941	9.8	https://vulners.com/mend/MEND:CVE-2026-57941
+|     	MEND:CVE-2026-56154	9.8	https://vulners.com/mend/MEND:CVE-2026-56154
+|     	MEND:CVE-2026-44631	9.8	https://vulners.com/mend/MEND:CVE-2026-44631
+|     	MEND:CVE-2026-29167	9.8	https://vulners.com/mend/MEND:CVE-2026-29167
+|     	MEND:CVE-2026-119618	9.8	https://vulners.com/mend/MEND:CVE-2026-119618
+|     	CVE-2026-59797	9.8	https://vulners.com/cve/CVE-2026-59797
+|     	CVE-2026-57941	9.8	https://vulners.com/cve/CVE-2026-57941
+|     	CVE-2026-56154	9.8	https://vulners.com/cve/CVE-2026-56154
+|     	CVE-2026-44631	9.8	https://vulners.com/cve/CVE-2026-44631
+|     	CVE-2026-29167	9.8	https://vulners.com/cve/CVE-2026-29167
+|     	CVE-2026-28780	9.8	https://vulners.com/cve/CVE-2026-28780
+|     	CVE-2024-38476	9.8	https://vulners.com/cve/CVE-2024-38476
+|     	CVE-2024-38474	9.8	https://vulners.com/cve/CVE-2024-38474
+|     	CNVD-2024-36391	9.8	https://vulners.com/cnvd/CNVD-2024-36391
+|     	CNVD-2024-36388	9.8	https://vulners.com/cnvd/CNVD-2024-36388
+|     	MEND:CVE-2025-23048	9.3	https://vulners.com/mend/MEND:CVE-2025-23048
+|     	MEND:CVE-2026-73636	9.2	https://vulners.com/mend/MEND:CVE-2026-73636
+|     	PACKETSTORM:213257	9.1	https://vulners.com/packetstorm/PACKETSTORM:213257	*EXPLOIT*
+|     	MEND:CVE-2026-42535	9.1	https://vulners.com/mend/MEND:CVE-2026-42535
+|     	MEND:CVE-2025-49812	9.1	https://vulners.com/mend/MEND:CVE-2025-49812
+|     	KS:SCANNER-HTTP-CVE_2024_38475_DETECT	9.1	https://vulners.com/kittysploit/KS:SCANNER-HTTP-CVE_2024_38475_DETECT	*EXPLOIT*
+|     	FD2EE3A5-BAEA-5845-BA35-E6889992214F	9.1	https://vulners.com/githubexploit/FD2EE3A5-BAEA-5845-BA35-E6889992214F	*EXPLOIT*
+|     	FBC8A8BE-F00A-5B6D-832E-F99A72E7A3F7	9.1	https://vulners.com/githubexploit/FBC8A8BE-F00A-5B6D-832E-F99A72E7A3F7	*EXPLOIT*
+|     	E606D7F4-5FA2-5907-B30E-367D6FFECD89	9.1	https://vulners.com/githubexploit/E606D7F4-5FA2-5907-B30E-367D6FFECD89	*EXPLOIT*
+|     	D8A19443-2A37-5592-8955-F614504AAF45	9.1	https://vulners.com/githubexploit/D8A19443-2A37-5592-8955-F614504AAF45	*EXPLOIT*
+|     	CVE-2026-89282	9.1	https://vulners.com/cve/CVE-2026-89282
+|     	CVE-2026-42535	9.1	https://vulners.com/cve/CVE-2026-42535
+|     	CVE-2025-23048	9.1	https://vulners.com/cve/CVE-2025-23048
+|     	CVE-2024-40898	9.1	https://vulners.com/cve/CVE-2024-40898
+|     	CVE-2024-38475	9.1	https://vulners.com/cve/CVE-2024-38475
+|     	CNVD-2025-16610	9.1	https://vulners.com/cnvd/CNVD-2025-16610
+|     	CNVD-2024-36387	9.1	https://vulners.com/cnvd/CNVD-2024-36387
+|     	CNVD-2024-33814	9.1	https://vulners.com/cnvd/CNVD-2024-33814
+|     	B5E74010-A082-5ECE-AB37-623A5B33FE7D	9.1	https://vulners.com/githubexploit/B5E74010-A082-5ECE-AB37-623A5B33FE7D	*EXPLOIT*
+|     	704E98B8-3443-5ACE-B86E-C5DB7C712E71	9.1	https://vulners.com/githubexploit/704E98B8-3443-5ACE-B86E-C5DB7C712E71	*EXPLOIT*
+|     	5418A85B-F4B7-5BBD-B106-0800AC961C7A	9.1	https://vulners.com/githubexploit/5418A85B-F4B7-5BBD-B106-0800AC961C7A	*EXPLOIT*
+|     	MEND:CVE-2026-93546	8.8	https://vulners.com/mend/MEND:CVE-2026-93546
+|     	MEND:CVE-2026-24072	8.8	https://vulners.com/mend/MEND:CVE-2026-24072
+|     	CVE-2026-93546	8.8	https://vulners.com/cve/CVE-2026-93546
+|     	CVE-2026-24072	8.8	https://vulners.com/cve/CVE-2026-24072
+|     	40379BCA-07F4-5401-B618-4640793D350D	8.8	https://vulners.com/githubexploit/40379BCA-07F4-5401-B618-4640793D350D	*EXPLOIT*
+|     	MEND:CVE-2026-63718	8.7	https://vulners.com/mend/MEND:CVE-2026-63718
+|     	MEND:CVE-2026-63686	8.7	https://vulners.com/mend/MEND:CVE-2026-63686
+|     	MEND:CVE-2026-63292	8.7	https://vulners.com/mend/MEND:CVE-2026-63292
+|     	MEND:CVE-2026-63045	8.7	https://vulners.com/mend/MEND:CVE-2026-63045
+|     	MEND:CVE-2026-59685	8.7	https://vulners.com/mend/MEND:CVE-2026-59685
+|     	MEND:CVE-2026-56153	8.7	https://vulners.com/mend/MEND:CVE-2026-56153
+|     	MEND:CVE-2026-49975	8.7	https://vulners.com/mend/MEND:CVE-2026-49975
+|     	MEND:CVE-2026-48005	8.7	https://vulners.com/mend/MEND:CVE-2026-48005
+|     	MEND:CVE-2026-47360	8.7	https://vulners.com/mend/MEND:CVE-2026-47360
+|     	MEND:CVE-2026-46729	8.7	https://vulners.com/mend/MEND:CVE-2026-46729
+|     	MEND:CVE-2026-42536	8.7	https://vulners.com/mend/MEND:CVE-2026-42536
+|     	MEND:CVE-2026-34356	8.7	https://vulners.com/mend/MEND:CVE-2026-34356
+|     	MEND:CVE-2026-34355	8.7	https://vulners.com/mend/MEND:CVE-2026-34355
+|     	MEND:CVE-2026-34059	8.7	https://vulners.com/mend/MEND:CVE-2026-34059
+|     	MEND:CVE-2026-29169	8.7	https://vulners.com/mend/MEND:CVE-2026-29169
+|     	MEND:CVE-2026-106023	8.7	https://vulners.com/mend/MEND:CVE-2026-106023
+|     	MEND:CVE-2025-59775	8.7	https://vulners.com/mend/MEND:CVE-2025-59775
+|     	MEND:CVE-2025-58098	8.7	https://vulners.com/mend/MEND:CVE-2025-58098
+|     	MEND:CVE-2025-55753	8.7	https://vulners.com/mend/MEND:CVE-2025-55753
+|     	MEND:CVE-2025-53020	8.7	https://vulners.com/mend/MEND:CVE-2025-53020
+|     	MEND:CVE-2025-49630	8.7	https://vulners.com/mend/MEND:CVE-2025-49630
+|     	MEND:CVE-2024-47252	8.7	https://vulners.com/mend/MEND:CVE-2024-47252
+|     	MEND:CVE-2024-43204	8.7	https://vulners.com/mend/MEND:CVE-2024-43204
+|     	MEND:CVE-2024-42516	8.7	https://vulners.com/mend/MEND:CVE-2024-42516
+|     	CVE-2026-89281	8.4	https://vulners.com/cve/CVE-2026-89281
+|     	CVE-2025-58098	8.3	https://vulners.com/cve/CVE-2025-58098
+|     	CVE-2026-73636	8.1	https://vulners.com/cve/CVE-2026-73636
+|     	CVE-2026-119618	8.1	https://vulners.com/cve/CVE-2026-119618
+|     	CVE-2024-38473	8.1	https://vulners.com/cve/CVE-2024-38473
+|     	5DED1A23-2805-5B2B-B650-BA9D9814F5ED	8.1	https://vulners.com/githubexploit/5DED1A23-2805-5B2B-B650-BA9D9814F5ED	*EXPLOIT*
+|     	23079A70-8B37-56D2-9D37-F638EBF7F8B5	8.1	https://vulners.com/githubexploit/23079A70-8B37-56D2-9D37-F638EBF7F8B5	*EXPLOIT*
+|     	1DAYEXPLOIT:CVE-2026-119618	8.1	https://vulners.com/1dayexploit/1DAYEXPLOIT:CVE-2026-119618	*EXPLOIT*
+|     	EDEE9204-2DB4-5931-983F-6C7DB7FD4FB7	7.5	https://vulners.com/githubexploit/EDEE9204-2DB4-5931-983F-6C7DB7FD4FB7	*EXPLOIT*
+|     	CVE-2026-63718	7.5	https://vulners.com/cve/CVE-2026-63718
+|     	CVE-2026-63686	7.5	https://vulners.com/cve/CVE-2026-63686
+|     	CVE-2026-63292	7.5	https://vulners.com/cve/CVE-2026-63292
+|     	CVE-2026-63045	7.5	https://vulners.com/cve/CVE-2026-63045
+|     	CVE-2026-59685	7.5	https://vulners.com/cve/CVE-2026-59685
+|     	CVE-2026-56449	7.5	https://vulners.com/cve/CVE-2026-56449
+|     	CVE-2026-56153	7.5	https://vulners.com/cve/CVE-2026-56153
+|     	CVE-2026-49975	7.5	https://vulners.com/cve/CVE-2026-49975
+|     	CVE-2026-48005	7.5	https://vulners.com/cve/CVE-2026-48005
+|     	CVE-2026-46729	7.5	https://vulners.com/cve/CVE-2026-46729
+|     	CVE-2026-42536	7.5	https://vulners.com/cve/CVE-2026-42536
+|     	CVE-2026-34356	7.5	https://vulners.com/cve/CVE-2026-34356
+|     	CVE-2026-34355	7.5	https://vulners.com/cve/CVE-2026-34355
+|     	CVE-2026-34059	7.5	https://vulners.com/cve/CVE-2026-34059
+|     	CVE-2026-29169	7.5	https://vulners.com/cve/CVE-2026-29169
+|     	CVE-2025-59775	7.5	https://vulners.com/cve/CVE-2025-59775
+|     	CVE-2025-55753	7.5	https://vulners.com/cve/CVE-2025-55753
+|     	CVE-2025-53020	7.5	https://vulners.com/cve/CVE-2025-53020
+|     	CVE-2025-49630	7.5	https://vulners.com/cve/CVE-2025-49630
+|     	CVE-2024-47252	7.5	https://vulners.com/cve/CVE-2024-47252
+|     	CVE-2024-43394	7.5	https://vulners.com/cve/CVE-2024-43394
+|     	CVE-2024-43204	7.5	https://vulners.com/cve/CVE-2024-43204
+|     	CVE-2024-42516	7.5	https://vulners.com/cve/CVE-2024-42516
+|     	CVE-2024-39573	7.5	https://vulners.com/cve/CVE-2024-39573
+|     	CVE-2024-38477	7.5	https://vulners.com/cve/CVE-2024-38477
+|     	CVE-2024-38472	7.5	https://vulners.com/cve/CVE-2024-38472
+|     	CNVD-2025-30837	7.5	https://vulners.com/cnvd/CNVD-2025-30837
+|     	CNVD-2025-30836	7.5	https://vulners.com/cnvd/CNVD-2025-30836
+|     	CNVD-2025-16614	7.5	https://vulners.com/cnvd/CNVD-2025-16614
+|     	CNVD-2025-16613	7.5	https://vulners.com/cnvd/CNVD-2025-16613
+|     	CNVD-2025-16612	7.5	https://vulners.com/cnvd/CNVD-2025-16612
+|     	CNVD-2025-16609	7.5	https://vulners.com/cnvd/CNVD-2025-16609
+|     	CNVD-2025-16608	7.5	https://vulners.com/cnvd/CNVD-2025-16608
+|     	CNVD-2025-16603	7.5	https://vulners.com/cnvd/CNVD-2025-16603
+|     	CNVD-2024-36393	7.5	https://vulners.com/cnvd/CNVD-2024-36393
+|     	CNVD-2024-36390	7.5	https://vulners.com/cnvd/CNVD-2024-36390
+|     	CNVD-2024-36389	7.5	https://vulners.com/cnvd/CNVD-2024-36389
+|     	CDC791CD-A414-5ABE-A897-7CFA3C2D3D29	7.5	https://vulners.com/githubexploit/CDC791CD-A414-5ABE-A897-7CFA3C2D3D29	*EXPLOIT*
+|     	C2EB4AA1-0C70-5104-AF4C-BC274F5A5B7A	7.5	https://vulners.com/githubexploit/C2EB4AA1-0C70-5104-AF4C-BC274F5A5B7A	*EXPLOIT*
+|     	A5675239-3520-5F86-A975-8C0FBB77C2A9	7.5	https://vulners.com/githubexploit/A5675239-3520-5F86-A975-8C0FBB77C2A9	*EXPLOIT*
+|     	92C0957A-F7CF-5B24-B6B3-B6B5F0C22EC9	7.5	https://vulners.com/githubexploit/92C0957A-F7CF-5B24-B6B3-B6B5F0C22EC9	*EXPLOIT*
+|     	8A1A8D98-62D2-5A2D-8D42-694C66E0D1C4	7.5	https://vulners.com/githubexploit/8A1A8D98-62D2-5A2D-8D42-694C66E0D1C4	*EXPLOIT*
+|     	870911BF-5AC6-5253-9C61-EEB55CC505CC	7.5	https://vulners.com/githubexploit/870911BF-5AC6-5253-9C61-EEB55CC505CC	*EXPLOIT*
+|     	83A428C4-BFA1-573B-A05F-7E0A55E119C5	7.5	https://vulners.com/githubexploit/83A428C4-BFA1-573B-A05F-7E0A55E119C5	*EXPLOIT*
+|     	742112F7-4755-5E94-8DD2-899160B59E5E	7.5	https://vulners.com/githubexploit/742112F7-4755-5E94-8DD2-899160B59E5E	*EXPLOIT*
+|     	5B7082BE-022C-5DCA-BCDA-0F8EDD0E5085	7.5	https://vulners.com/githubexploit/5B7082BE-022C-5DCA-BCDA-0F8EDD0E5085	*EXPLOIT*
+|     	4B051C78-13E6-52F9-A39E-4C7E49ACB51A	7.5	https://vulners.com/githubexploit/4B051C78-13E6-52F9-A39E-4C7E49ACB51A	*EXPLOIT*
+|     	238D27D0-2B6D-59DE-B1AC-12B79D1C507C	7.5	https://vulners.com/githubexploit/238D27D0-2B6D-59DE-B1AC-12B79D1C507C	*EXPLOIT*
+|     	0E08753E-C6D7-5E76-A61F-6CA6F7F87AA8	7.5	https://vulners.com/githubexploit/0E08753E-C6D7-5E76-A61F-6CA6F7F87AA8	*EXPLOIT*
+|     	CVE-2025-49812	7.4	https://vulners.com/cve/CVE-2025-49812
+|     	B4DBC08B-FD86-5033-9708-4924C993CEDA	7.4	https://vulners.com/githubexploit/B4DBC08B-FD86-5033-9708-4924C993CEDA	*EXPLOIT*
+|     	MEND:CVE-2026-73637	7.3	https://vulners.com/mend/MEND:CVE-2026-73637
+|     	MEND:CVE-2026-48913	7.3	https://vulners.com/mend/MEND:CVE-2026-48913
+|     	MEND:CVE-2026-44186	7.3	https://vulners.com/mend/MEND:CVE-2026-44186
+|     	MEND:CVE-2026-44185	7.3	https://vulners.com/mend/MEND:CVE-2026-44185
+|     	MEND:CVE-2026-29168	7.3	https://vulners.com/mend/MEND:CVE-2026-29168
+|     	CVE-2026-73637	7.3	https://vulners.com/cve/CVE-2026-73637
+|     	CVE-2026-48913	7.3	https://vulners.com/cve/CVE-2026-48913
+|     	CVE-2026-44186	7.3	https://vulners.com/cve/CVE-2026-44186
+|     	CVE-2026-44185	7.3	https://vulners.com/cve/CVE-2026-44185
+|     	CVE-2026-29168	7.3	https://vulners.com/cve/CVE-2026-29168
+|     	MEND:CVE-2026-79768	6.9	https://vulners.com/mend/MEND:CVE-2026-79768
+|     	MEND:CVE-2026-58415	6.9	https://vulners.com/mend/MEND:CVE-2026-58415
+|     	MEND:CVE-2026-43951	6.9	https://vulners.com/mend/MEND:CVE-2026-43951
+|     	MEND:CVE-2026-34032	6.9	https://vulners.com/mend/MEND:CVE-2026-34032
+|     	MEND:CVE-2026-33857	6.9	https://vulners.com/mend/MEND:CVE-2026-33857
+|     	MEND:CVE-2026-33523	6.9	https://vulners.com/mend/MEND:CVE-2026-33523
+|     	MEND:CVE-2026-33007	6.9	https://vulners.com/mend/MEND:CVE-2026-33007
+|     	MEND:CVE-2025-65082	6.9	https://vulners.com/mend/MEND:CVE-2025-65082
+|     	MEND:CVE-2026-44119	6.8	https://vulners.com/mend/MEND:CVE-2026-44119
+|     	CVE-2026-43951	6.5	https://vulners.com/cve/CVE-2026-43951
+|     	CVE-2026-33523	6.5	https://vulners.com/cve/CVE-2026-33523
+|     	CVE-2025-65082	6.5	https://vulners.com/cve/CVE-2025-65082
+|     	CNVD-2025-30833	6.5	https://vulners.com/cnvd/CNVD-2025-30833
+|     	MEND:CVE-2026-33006	6.3	https://vulners.com/mend/MEND:CVE-2026-33006
+|     	MEND:CVE-2026-29170	6.1	https://vulners.com/mend/MEND:CVE-2026-29170
+|     	CVE-2026-29170	6.1	https://vulners.com/cve/CVE-2026-29170
+|     	CVE-2026-44119	5.5	https://vulners.com/cve/CVE-2026-44119
+|     	MEND:CVE-2025-66200	5.4	https://vulners.com/mend/MEND:CVE-2025-66200
+|     	CVE-2025-66200	5.4	https://vulners.com/cve/CVE-2025-66200
+|     	CVE-2024-36387	5.4	https://vulners.com/cve/CVE-2024-36387
+|     	CNVD-2025-30835	5.4	https://vulners.com/cnvd/CNVD-2025-30835
+|     	CNVD-2024-36392	5.4	https://vulners.com/cnvd/CNVD-2024-36392
+|     	MEND:CVE-2026-42528	5.3	https://vulners.com/mend/MEND:CVE-2026-42528
+|     	CVE-2026-79768	5.3	https://vulners.com/cve/CVE-2026-79768
+|     	CVE-2026-58415	5.3	https://vulners.com/cve/CVE-2026-58415
+|     	CVE-2026-34032	5.3	https://vulners.com/cve/CVE-2026-34032
+|     	CVE-2026-33857	5.3	https://vulners.com/cve/CVE-2026-33857
+|     	CVE-2026-33007	5.3	https://vulners.com/cve/CVE-2026-33007
+|     	F68B3E37-7029-5959-8AC3-B623213F0060	0.0	https://vulners.com/githubexploit/F68B3E37-7029-5959-8AC3-B623213F0060	*EXPLOIT*
+|     	EF452BBF-C73D-5440-950F-45BF5BF154BD	0.0	https://vulners.com/githubexploit/EF452BBF-C73D-5440-950F-45BF5BF154BD	*EXPLOIT*
+|     	E916291A-9600-55AA-A02C-F5B6868AEE45	0.0	https://vulners.com/githubexploit/E916291A-9600-55AA-A02C-F5B6868AEE45	*EXPLOIT*
+|     	E79A6741-30BC-5E5C-AAA5-B3FB5F378916	0.0	https://vulners.com/githubexploit/E79A6741-30BC-5E5C-AAA5-B3FB5F378916	*EXPLOIT*
+|     	CCD67050-25F8-5CF4-9427-A10B0780D131	0.0	https://vulners.com/githubexploit/CCD67050-25F8-5CF4-9427-A10B0780D131	*EXPLOIT*
+|     	C3ADAAB9-BAD7-5AF9-A17B-B4592F47C2F4	0.0	https://vulners.com/githubexploit/C3ADAAB9-BAD7-5AF9-A17B-B4592F47C2F4	*EXPLOIT*
+|     	9BBE0311-663E-59D6-9070-273BE6CADABE	0.0	https://vulners.com/githubexploit/9BBE0311-663E-59D6-9070-273BE6CADABE	*EXPLOIT*
+|     	7A49EA55-EA79-51CB-BA97-DBF3C05CF885	0.0	https://vulners.com/githubexploit/7A49EA55-EA79-51CB-BA97-DBF3C05CF885	*EXPLOIT*
+|     	75628651-35E8-58D7-B3E0-F41FEBE82433	0.0	https://vulners.com/githubexploit/75628651-35E8-58D7-B3E0-F41FEBE82433	*EXPLOIT*
+|     	74A7BA4E-D496-587B-A72A-FA0BE663F994	0.0	https://vulners.com/githubexploit/74A7BA4E-D496-587B-A72A-FA0BE663F994	*EXPLOIT*
+|     	5E84C426-E374-5A47-AEDC-37EE818778BB	0.0	https://vulners.com/githubexploit/5E84C426-E374-5A47-AEDC-37EE818778BB	*EXPLOIT*
+|     	4E732919-19F8-57FA-900F-B41B2A62CC18	0.0	https://vulners.com/githubexploit/4E732919-19F8-57FA-900F-B41B2A62CC18	*EXPLOIT*
+|     	483C81F1-40D0-50DF-9A46-DD1A51EBC272	0.0	https://vulners.com/githubexploit/483C81F1-40D0-50DF-9A46-DD1A51EBC272	*EXPLOIT*
+|     	1309D7B1-FB86-50BB-9D65-9C4636E7DD11	0.0	https://vulners.com/githubexploit/1309D7B1-FB86-50BB-9D65-9C4636E7DD11	*EXPLOIT*
+|_    	053811C3-D263-581A-988E-2D2E8ACFAD4F	0.0	https://vulners.com/githubexploit/053811C3-D263-581A-988E-2D2E8ACFAD4F	*EXPLOIT*
+|_http-server-header: Apache/2.4.59 (Debian)
+443/tcp   open  ssl/http   Apache httpd 2.4.59 ((Debian))
+|_http-server-header: Apache/2.4.59 (Debian)
+| vulners: 
+|   cpe:/a:apache:http_server:2.4.59: 
+|     	MEND:CVE-2026-59797	9.8	https://vulners.com/mend/MEND:CVE-2026-59797
+|     	MEND:CVE-2026-57941	9.8	https://vulners.com/mend/MEND:CVE-2026-57941
+|     	MEND:CVE-2026-56154	9.8	https://vulners.com/mend/MEND:CVE-2026-56154
+|     	MEND:CVE-2026-44631	9.8	https://vulners.com/mend/MEND:CVE-2026-44631
+|     	MEND:CVE-2026-29167	9.8	https://vulners.com/mend/MEND:CVE-2026-29167
+|     	MEND:CVE-2026-119618	9.8	https://vulners.com/mend/MEND:CVE-2026-119618
+|     	CVE-2026-59797	9.8	https://vulners.com/cve/CVE-2026-59797
+|     	CVE-2026-57941	9.8	https://vulners.com/cve/CVE-2026-57941
+|     	CVE-2026-56154	9.8	https://vulners.com/cve/CVE-2026-56154
+|     	CVE-2026-44631	9.8	https://vulners.com/cve/CVE-2026-44631
+|     	CVE-2026-29167	9.8	https://vulners.com/cve/CVE-2026-29167
+|     	CVE-2026-28780	9.8	https://vulners.com/cve/CVE-2026-28780
+|     	CVE-2024-38476	9.8	https://vulners.com/cve/CVE-2024-38476
+|     	CVE-2024-38474	9.8	https://vulners.com/cve/CVE-2024-38474
+|     	CNVD-2024-36391	9.8	https://vulners.com/cnvd/CNVD-2024-36391
+|     	CNVD-2024-36388	9.8	https://vulners.com/cnvd/CNVD-2024-36388
+|     	MEND:CVE-2025-23048	9.3	https://vulners.com/mend/MEND:CVE-2025-23048
+|     	MEND:CVE-2026-73636	9.2	https://vulners.com/mend/MEND:CVE-2026-73636
+|     	PACKETSTORM:213257	9.1	https://vulners.com/packetstorm/PACKETSTORM:213257	*EXPLOIT*
+|     	MEND:CVE-2026-42535	9.1	https://vulners.com/mend/MEND:CVE-2026-42535
+|     	MEND:CVE-2025-49812	9.1	https://vulners.com/mend/MEND:CVE-2025-49812
+|     	KS:SCANNER-HTTP-CVE_2024_38475_DETECT	9.1	https://vulners.com/kittysploit/KS:SCANNER-HTTP-CVE_2024_38475_DETECT	*EXPLOIT*
+|     	FD2EE3A5-BAEA-5845-BA35-E6889992214F	9.1	https://vulners.com/githubexploit/FD2EE3A5-BAEA-5845-BA35-E6889992214F	*EXPLOIT*
+|     	FBC8A8BE-F00A-5B6D-832E-F99A72E7A3F7	9.1	https://vulners.com/githubexploit/FBC8A8BE-F00A-5B6D-832E-F99A72E7A3F7	*EXPLOIT*
+|     	E606D7F4-5FA2-5907-B30E-367D6FFECD89	9.1	https://vulners.com/githubexploit/E606D7F4-5FA2-5907-B30E-367D6FFECD89	*EXPLOIT*
+|     	D8A19443-2A37-5592-8955-F614504AAF45	9.1	https://vulners.com/githubexploit/D8A19443-2A37-5592-8955-F614504AAF45	*EXPLOIT*
+|     	CVE-2026-89282	9.1	https://vulners.com/cve/CVE-2026-89282
+|     	CVE-2026-42535	9.1	https://vulners.com/cve/CVE-2026-42535
+|     	CVE-2025-23048	9.1	https://vulners.com/cve/CVE-2025-23048
+|     	CVE-2024-40898	9.1	https://vulners.com/cve/CVE-2024-40898
+|     	CVE-2024-38475	9.1	https://vulners.com/cve/CVE-2024-38475
+|     	CNVD-2025-16610	9.1	https://vulners.com/cnvd/CNVD-2025-16610
+|     	CNVD-2024-36387	9.1	https://vulners.com/cnvd/CNVD-2024-36387
+|     	CNVD-2024-33814	9.1	https://vulners.com/cnvd/CNVD-2024-33814
+|     	B5E74010-A082-5ECE-AB37-623A5B33FE7D	9.1	https://vulners.com/githubexploit/B5E74010-A082-5ECE-AB37-623A5B33FE7D	*EXPLOIT*
+|     	704E98B8-3443-5ACE-B86E-C5DB7C712E71	9.1	https://vulners.com/githubexploit/704E98B8-3443-5ACE-B86E-C5DB7C712E71	*EXPLOIT*
+|     	5418A85B-F4B7-5BBD-B106-0800AC961C7A	9.1	https://vulners.com/githubexploit/5418A85B-F4B7-5BBD-B106-0800AC961C7A	*EXPLOIT*
+|     	MEND:CVE-2026-93546	8.8	https://vulners.com/mend/MEND:CVE-2026-93546
+|     	MEND:CVE-2026-24072	8.8	https://vulners.com/mend/MEND:CVE-2026-24072
+|     	CVE-2026-93546	8.8	https://vulners.com/cve/CVE-2026-93546
+|     	CVE-2026-24072	8.8	https://vulners.com/cve/CVE-2026-24072
+|     	40379BCA-07F4-5401-B618-4640793D350D	8.8	https://vulners.com/githubexploit/40379BCA-07F4-5401-B618-4640793D350D	*EXPLOIT*
+|     	MEND:CVE-2026-63718	8.7	https://vulners.com/mend/MEND:CVE-2026-63718
+|     	MEND:CVE-2026-63686	8.7	https://vulners.com/mend/MEND:CVE-2026-63686
+|     	MEND:CVE-2026-63292	8.7	https://vulners.com/mend/MEND:CVE-2026-63292
+|     	MEND:CVE-2026-63045	8.7	https://vulners.com/mend/MEND:CVE-2026-63045
+|     	MEND:CVE-2026-59685	8.7	https://vulners.com/mend/MEND:CVE-2026-59685
+|     	MEND:CVE-2026-56153	8.7	https://vulners.com/mend/MEND:CVE-2026-56153
+|     	MEND:CVE-2026-49975	8.7	https://vulners.com/mend/MEND:CVE-2026-49975
+|     	MEND:CVE-2026-48005	8.7	https://vulners.com/mend/MEND:CVE-2026-48005
+|     	MEND:CVE-2026-47360	8.7	https://vulners.com/mend/MEND:CVE-2026-47360
+|     	MEND:CVE-2026-46729	8.7	https://vulners.com/mend/MEND:CVE-2026-46729
+|     	MEND:CVE-2026-42536	8.7	https://vulners.com/mend/MEND:CVE-2026-42536
+|     	MEND:CVE-2026-34356	8.7	https://vulners.com/mend/MEND:CVE-2026-34356
+|     	MEND:CVE-2026-34355	8.7	https://vulners.com/mend/MEND:CVE-2026-34355
+|     	MEND:CVE-2026-34059	8.7	https://vulners.com/mend/MEND:CVE-2026-34059
+|     	MEND:CVE-2026-29169	8.7	https://vulners.com/mend/MEND:CVE-2026-29169
+|     	MEND:CVE-2026-106023	8.7	https://vulners.com/mend/MEND:CVE-2026-106023
+|     	MEND:CVE-2025-59775	8.7	https://vulners.com/mend/MEND:CVE-2025-59775
+|     	MEND:CVE-2025-58098	8.7	https://vulners.com/mend/MEND:CVE-2025-58098
+|     	MEND:CVE-2025-55753	8.7	https://vulners.com/mend/MEND:CVE-2025-55753
+|     	MEND:CVE-2025-53020	8.7	https://vulners.com/mend/MEND:CVE-2025-53020
+|     	MEND:CVE-2025-49630	8.7	https://vulners.com/mend/MEND:CVE-2025-49630
+|     	MEND:CVE-2024-47252	8.7	https://vulners.com/mend/MEND:CVE-2024-47252
+|     	MEND:CVE-2024-43204	8.7	https://vulners.com/mend/MEND:CVE-2024-43204
+|     	MEND:CVE-2024-42516	8.7	https://vulners.com/mend/MEND:CVE-2024-42516
+|     	CVE-2026-89281	8.4	https://vulners.com/cve/CVE-2026-89281
+|     	CVE-2025-58098	8.3	https://vulners.com/cve/CVE-2025-58098
+|     	CVE-2026-73636	8.1	https://vulners.com/cve/CVE-2026-73636
+|     	CVE-2026-119618	8.1	https://vulners.com/cve/CVE-2026-119618
+|     	CVE-2024-38473	8.1	https://vulners.com/cve/CVE-2024-38473
+|     	5DED1A23-2805-5B2B-B650-BA9D9814F5ED	8.1	https://vulners.com/githubexploit/5DED1A23-2805-5B2B-B650-BA9D9814F5ED	*EXPLOIT*
+|     	23079A70-8B37-56D2-9D37-F638EBF7F8B5	8.1	https://vulners.com/githubexploit/23079A70-8B37-56D2-9D37-F638EBF7F8B5	*EXPLOIT*
+|     	1DAYEXPLOIT:CVE-2026-119618	8.1	https://vulners.com/1dayexploit/1DAYEXPLOIT:CVE-2026-119618	*EXPLOIT*
+|     	EDEE9204-2DB4-5931-983F-6C7DB7FD4FB7	7.5	https://vulners.com/githubexploit/EDEE9204-2DB4-5931-983F-6C7DB7FD4FB7	*EXPLOIT*
+|     	CVE-2026-63718	7.5	https://vulners.com/cve/CVE-2026-63718
+|     	CVE-2026-63686	7.5	https://vulners.com/cve/CVE-2026-63686
+|     	CVE-2026-63292	7.5	https://vulners.com/cve/CVE-2026-63292
+|     	CVE-2026-63045	7.5	https://vulners.com/cve/CVE-2026-63045
+|     	CVE-2026-59685	7.5	https://vulners.com/cve/CVE-2026-59685
+|     	CVE-2026-56449	7.5	https://vulners.com/cve/CVE-2026-56449
+|     	CVE-2026-56153	7.5	https://vulners.com/cve/CVE-2026-56153
+|     	CVE-2026-49975	7.5	https://vulners.com/cve/CVE-2026-49975
+|     	CVE-2026-48005	7.5	https://vulners.com/cve/CVE-2026-48005
+|     	CVE-2026-46729	7.5	https://vulners.com/cve/CVE-2026-46729
+|     	CVE-2026-42536	7.5	https://vulners.com/cve/CVE-2026-42536
+|     	CVE-2026-34356	7.5	https://vulners.com/cve/CVE-2026-34356
+|     	CVE-2026-34355	7.5	https://vulners.com/cve/CVE-2026-34355
+|     	CVE-2026-34059	7.5	https://vulners.com/cve/CVE-2026-34059
+|     	CVE-2026-29169	7.5	https://vulners.com/cve/CVE-2026-29169
+|     	CVE-2025-59775	7.5	https://vulners.com/cve/CVE-2025-59775
+|     	CVE-2025-55753	7.5	https://vulners.com/cve/CVE-2025-55753
+|     	CVE-2025-53020	7.5	https://vulners.com/cve/CVE-2025-53020
+|     	CVE-2025-49630	7.5	https://vulners.com/cve/CVE-2025-49630
+|     	CVE-2024-47252	7.5	https://vulners.com/cve/CVE-2024-47252
+|     	CVE-2024-43394	7.5	https://vulners.com/cve/CVE-2024-43394
+|     	CVE-2024-43204	7.5	https://vulners.com/cve/CVE-2024-43204
+|     	CVE-2024-42516	7.5	https://vulners.com/cve/CVE-2024-42516
+|     	CVE-2024-39573	7.5	https://vulners.com/cve/CVE-2024-39573
+|     	CVE-2024-38477	7.5	https://vulners.com/cve/CVE-2024-38477
+|     	CVE-2024-38472	7.5	https://vulners.com/cve/CVE-2024-38472
+|     	CNVD-2025-30837	7.5	https://vulners.com/cnvd/CNVD-2025-30837
+|     	CNVD-2025-30836	7.5	https://vulners.com/cnvd/CNVD-2025-30836
+|     	CNVD-2025-16614	7.5	https://vulners.com/cnvd/CNVD-2025-16614
+|     	CNVD-2025-16613	7.5	https://vulners.com/cnvd/CNVD-2025-16613
+|     	CNVD-2025-16612	7.5	https://vulners.com/cnvd/CNVD-2025-16612
+|     	CNVD-2025-16609	7.5	https://vulners.com/cnvd/CNVD-2025-16609
+|     	CNVD-2025-16608	7.5	https://vulners.com/cnvd/CNVD-2025-16608
+|     	CNVD-2025-16603	7.5	https://vulners.com/cnvd/CNVD-2025-16603
+|     	CNVD-2024-36393	7.5	https://vulners.com/cnvd/CNVD-2024-36393
+|     	CNVD-2024-36390	7.5	https://vulners.com/cnvd/CNVD-2024-36390
+|     	CNVD-2024-36389	7.5	https://vulners.com/cnvd/CNVD-2024-36389
+|     	CDC791CD-A414-5ABE-A897-7CFA3C2D3D29	7.5	https://vulners.com/githubexploit/CDC791CD-A414-5ABE-A897-7CFA3C2D3D29	*EXPLOIT*
+|     	C2EB4AA1-0C70-5104-AF4C-BC274F5A5B7A	7.5	https://vulners.com/githubexploit/C2EB4AA1-0C70-5104-AF4C-BC274F5A5B7A	*EXPLOIT*
+|     	A5675239-3520-5F86-A975-8C0FBB77C2A9	7.5	https://vulners.com/githubexploit/A5675239-3520-5F86-A975-8C0FBB77C2A9	*EXPLOIT*
+|     	92C0957A-F7CF-5B24-B6B3-B6B5F0C22EC9	7.5	https://vulners.com/githubexploit/92C0957A-F7CF-5B24-B6B3-B6B5F0C22EC9	*EXPLOIT*
+|     	8A1A8D98-62D2-5A2D-8D42-694C66E0D1C4	7.5	https://vulners.com/githubexploit/8A1A8D98-62D2-5A2D-8D42-694C66E0D1C4	*EXPLOIT*
+|     	870911BF-5AC6-5253-9C61-EEB55CC505CC	7.5	https://vulners.com/githubexploit/870911BF-5AC6-5253-9C61-EEB55CC505CC	*EXPLOIT*
+|     	83A428C4-BFA1-573B-A05F-7E0A55E119C5	7.5	https://vulners.com/githubexploit/83A428C4-BFA1-573B-A05F-7E0A55E119C5	*EXPLOIT*
+|     	742112F7-4755-5E94-8DD2-899160B59E5E	7.5	https://vulners.com/githubexploit/742112F7-4755-5E94-8DD2-899160B59E5E	*EXPLOIT*
+|     	5B7082BE-022C-5DCA-BCDA-0F8EDD0E5085	7.5	https://vulners.com/githubexploit/5B7082BE-022C-5DCA-BCDA-0F8EDD0E5085	*EXPLOIT*
+|     	4B051C78-13E6-52F9-A39E-4C7E49ACB51A	7.5	https://vulners.com/githubexploit/4B051C78-13E6-52F9-A39E-4C7E49ACB51A	*EXPLOIT*
+|     	238D27D0-2B6D-59DE-B1AC-12B79D1C507C	7.5	https://vulners.com/githubexploit/238D27D0-2B6D-59DE-B1AC-12B79D1C507C	*EXPLOIT*
+|     	0E08753E-C6D7-5E76-A61F-6CA6F7F87AA8	7.5	https://vulners.com/githubexploit/0E08753E-C6D7-5E76-A61F-6CA6F7F87AA8	*EXPLOIT*
+|     	CVE-2025-49812	7.4	https://vulners.com/cve/CVE-2025-49812
+|     	B4DBC08B-FD86-5033-9708-4924C993CEDA	7.4	https://vulners.com/githubexploit/B4DBC08B-FD86-5033-9708-4924C993CEDA	*EXPLOIT*
+|     	MEND:CVE-2026-73637	7.3	https://vulners.com/mend/MEND:CVE-2026-73637
+|     	MEND:CVE-2026-48913	7.3	https://vulners.com/mend/MEND:CVE-2026-48913
+|     	MEND:CVE-2026-44186	7.3	https://vulners.com/mend/MEND:CVE-2026-44186
+|     	MEND:CVE-2026-44185	7.3	https://vulners.com/mend/MEND:CVE-2026-44185
+|     	MEND:CVE-2026-29168	7.3	https://vulners.com/mend/MEND:CVE-2026-29168
+|     	CVE-2026-73637	7.3	https://vulners.com/cve/CVE-2026-73637
+|     	CVE-2026-48913	7.3	https://vulners.com/cve/CVE-2026-48913
+|     	CVE-2026-44186	7.3	https://vulners.com/cve/CVE-2026-44186
+|     	CVE-2026-44185	7.3	https://vulners.com/cve/CVE-2026-44185
+|     	CVE-2026-29168	7.3	https://vulners.com/cve/CVE-2026-29168
+|     	MEND:CVE-2026-79768	6.9	https://vulners.com/mend/MEND:CVE-2026-79768
+|     	MEND:CVE-2026-58415	6.9	https://vulners.com/mend/MEND:CVE-2026-58415
+|     	MEND:CVE-2026-43951	6.9	https://vulners.com/mend/MEND:CVE-2026-43951
+|     	MEND:CVE-2026-34032	6.9	https://vulners.com/mend/MEND:CVE-2026-34032
+|     	MEND:CVE-2026-33857	6.9	https://vulners.com/mend/MEND:CVE-2026-33857
+|     	MEND:CVE-2026-33523	6.9	https://vulners.com/mend/MEND:CVE-2026-33523
+|     	MEND:CVE-2026-33007	6.9	https://vulners.com/mend/MEND:CVE-2026-33007
+|     	MEND:CVE-2025-65082	6.9	https://vulners.com/mend/MEND:CVE-2025-65082
+|     	MEND:CVE-2026-44119	6.8	https://vulners.com/mend/MEND:CVE-2026-44119
+|     	CVE-2026-43951	6.5	https://vulners.com/cve/CVE-2026-43951
+|     	CVE-2026-33523	6.5	https://vulners.com/cve/CVE-2026-33523
+|     	CVE-2025-65082	6.5	https://vulners.com/cve/CVE-2025-65082
+|     	CNVD-2025-30833	6.5	https://vulners.com/cnvd/CNVD-2025-30833
+|     	MEND:CVE-2026-33006	6.3	https://vulners.com/mend/MEND:CVE-2026-33006
+|     	MEND:CVE-2026-29170	6.1	https://vulners.com/mend/MEND:CVE-2026-29170
+|     	CVE-2026-29170	6.1	https://vulners.com/cve/CVE-2026-29170
+|     	CVE-2026-44119	5.5	https://vulners.com/cve/CVE-2026-44119
+|     	MEND:CVE-2025-66200	5.4	https://vulners.com/mend/MEND:CVE-2025-66200
+|     	CVE-2025-66200	5.4	https://vulners.com/cve/CVE-2025-66200
+|     	CVE-2024-36387	5.4	https://vulners.com/cve/CVE-2024-36387
+|     	CNVD-2025-30835	5.4	https://vulners.com/cnvd/CNVD-2025-30835
+|     	CNVD-2024-36392	5.4	https://vulners.com/cnvd/CNVD-2024-36392
+|     	MEND:CVE-2026-42528	5.3	https://vulners.com/mend/MEND:CVE-2026-42528
+|     	CVE-2026-79768	5.3	https://vulners.com/cve/CVE-2026-79768
+|     	CVE-2026-58415	5.3	https://vulners.com/cve/CVE-2026-58415
+|     	CVE-2026-34032	5.3	https://vulners.com/cve/CVE-2026-34032
+|     	CVE-2026-33857	5.3	https://vulners.com/cve/CVE-2026-33857
+|     	CVE-2026-33007	5.3	https://vulners.com/cve/CVE-2026-33007
+|     	F68B3E37-7029-5959-8AC3-B623213F0060	0.0	https://vulners.com/githubexploit/F68B3E37-7029-5959-8AC3-B623213F0060	*EXPLOIT*
+|     	EF452BBF-C73D-5440-950F-45BF5BF154BD	0.0	https://vulners.com/githubexploit/EF452BBF-C73D-5440-950F-45BF5BF154BD	*EXPLOIT*
+|     	E916291A-9600-55AA-A02C-F5B6868AEE45	0.0	https://vulners.com/githubexploit/E916291A-9600-55AA-A02C-F5B6868AEE45	*EXPLOIT*
+|     	E79A6741-30BC-5E5C-AAA5-B3FB5F378916	0.0	https://vulners.com/githubexploit/E79A6741-30BC-5E5C-AAA5-B3FB5F378916	*EXPLOIT*
+|     	CCD67050-25F8-5CF4-9427-A10B0780D131	0.0	https://vulners.com/githubexploit/CCD67050-25F8-5CF4-9427-A10B0780D131	*EXPLOIT*
+|     	C3ADAAB9-BAD7-5AF9-A17B-B4592F47C2F4	0.0	https://vulners.com/githubexploit/C3ADAAB9-BAD7-5AF9-A17B-B4592F47C2F4	*EXPLOIT*
+|     	9BBE0311-663E-59D6-9070-273BE6CADABE	0.0	https://vulners.com/githubexploit/9BBE0311-663E-59D6-9070-273BE6CADABE	*EXPLOIT*
+|     	7A49EA55-EA79-51CB-BA97-DBF3C05CF885	0.0	https://vulners.com/githubexploit/7A49EA55-EA79-51CB-BA97-DBF3C05CF885	*EXPLOIT*
+|     	75628651-35E8-58D7-B3E0-F41FEBE82433	0.0	https://vulners.com/githubexploit/75628651-35E8-58D7-B3E0-F41FEBE82433	*EXPLOIT*
+|     	74A7BA4E-D496-587B-A72A-FA0BE663F994	0.0	https://vulners.com/githubexploit/74A7BA4E-D496-587B-A72A-FA0BE663F994	*EXPLOIT*
+|     	5E84C426-E374-5A47-AEDC-37EE818778BB	0.0	https://vulners.com/githubexploit/5E84C426-E374-5A47-AEDC-37EE818778BB	*EXPLOIT*
+|     	4E732919-19F8-57FA-900F-B41B2A62CC18	0.0	https://vulners.com/githubexploit/4E732919-19F8-57FA-900F-B41B2A62CC18	*EXPLOIT*
+|     	483C81F1-40D0-50DF-9A46-DD1A51EBC272	0.0	https://vulners.com/githubexploit/483C81F1-40D0-50DF-9A46-DD1A51EBC272	*EXPLOIT*
+|     	1309D7B1-FB86-50BB-9D65-9C4636E7DD11	0.0	https://vulners.com/githubexploit/1309D7B1-FB86-50BB-9D65-9C4636E7DD11	*EXPLOIT*
+|_    	053811C3-D263-581A-988E-2D2E8ACFAD4F	0.0	https://vulners.com/githubexploit/053811C3-D263-581A-988E-2D2E8ACFAD4F	*EXPLOIT*
+1883/tcp  open  mqtt
+| mqtt-subscribe: 
+|   Topics and their most recent payloads: 
+|     ActiveMQ/Advisory/MasterBroker: 
+|_    ActiveMQ/Advisory/Consumer/Topic/#: 
+5672/tcp  open  amqp?
+| fingerprint-strings: 
+|   DNSStatusRequestTCP, DNSVersionBindReqTCP, GetRequest, HTTPOptions, RPCCheck, RTSPRequest, SSLSessionReq, TerminalServerCookie: 
+|     AMQP
+|     AMQP
+|     amqp:decode-error
+|_    7Connection from client using unsupported AMQP attempted
+|_amqp-info: ERROR: AQMP:handshake expected header (1) frame, but was 65
+8161/tcp  open  http       Jetty 9.4.39.v20210325
+|_http-server-header: Jetty(9.4.39.v20210325)
+| vulners: 
+|   Jetty 9.4.39.v20210325: 
+|     	AB55E109-1A71-52E8-B6CC-06377E6C6713	10.0	https://vulners.com/githubexploit/AB55E109-1A71-52E8-B6CC-06377E6C6713	*EXPLOIT*
+|     	CVE-2026-2332	9.1	https://vulners.com/cve/CVE-2026-2332
+|     	CVE-2026-10050	9.1	https://vulners.com/cve/CVE-2026-10050
+|     	3F71F065-66D4-541F-A813-9F1A2F2B1D91	8.8	https://vulners.com/githubexploit/3F71F065-66D4-541F-A813-9F1A2F2B1D91	*EXPLOIT*
+|     	CVE-2026-12611	8.7	https://vulners.com/cve/CVE-2026-12611
+|     	CVE-2026-19203	8.3	https://vulners.com/cve/CVE-2026-19203
+|     	CVE-2026-77711	8.2	https://vulners.com/cve/CVE-2026-77711
+|     	CVE-2026-76184	8.2	https://vulners.com/cve/CVE-2026-76184
+|     	DF041B2B-2DA7-5262-AABE-9EBD2D535041	7.8	https://vulners.com/githubexploit/DF041B2B-2DA7-5262-AABE-9EBD2D535041	*EXPLOIT*
+|     	CVE-2021-28165	7.8	https://vulners.com/cve/CVE-2021-28165
+|     	CVE-2025-5115	7.7	https://vulners.com/cve/CVE-2025-5115
+|     	PACKETSTORM:212872	7.5	https://vulners.com/packetstorm/PACKETSTORM:212872	*EXPLOIT*
+|     	PACKETSTORM:211124	7.5	https://vulners.com/packetstorm/PACKETSTORM:211124	*EXPLOIT*
+|     	F94D5BB8-9B74-5F23-B7A1-600FDAA168CD	7.5	https://vulners.com/githubexploit/F94D5BB8-9B74-5F23-B7A1-600FDAA168CD	*EXPLOIT*
+|     	EDB-ID:52426	7.5	https://vulners.com/exploitdb/EDB-ID:52426	*EXPLOIT*
+|     	E5C174E5-D6E8-56E0-8403-D287DE52EB3F	7.5	https://vulners.com/githubexploit/E5C174E5-D6E8-56E0-8403-D287DE52EB3F	*EXPLOIT*
+|     	E0817F76-5B95-518C-8553-8A32BCC99359	7.5	https://vulners.com/githubexploit/E0817F76-5B95-518C-8553-8A32BCC99359	*EXPLOIT*
+|     	D228B59B-465A-509D-A681-012DB9348698	7.5	https://vulners.com/githubexploit/D228B59B-465A-509D-A681-012DB9348698	*EXPLOIT*
+|     	CVE-2024-9823	7.5	https://vulners.com/cve/CVE-2024-9823
+|     	CVE-2024-22201	7.5	https://vulners.com/cve/CVE-2024-22201
+|     	CVE-2023-44487	7.5	https://vulners.com/cve/CVE-2023-44487
+|     	CVE-2023-36478	7.5	https://vulners.com/cve/CVE-2023-36478
+|     	CVE-2022-2191	7.5	https://vulners.com/cve/CVE-2022-2191
+|     	CVE-2022-2048	7.5	https://vulners.com/cve/CVE-2022-2048
+|     	BD3652A9-D066-57BA-9943-4E34970463B9	7.5	https://vulners.com/githubexploit/BD3652A9-D066-57BA-9943-4E34970463B9	*EXPLOIT*
+|     	B0208442-6E17-5772-B12D-B5BE30FA5540	7.5	https://vulners.com/githubexploit/B0208442-6E17-5772-B12D-B5BE30FA5540	*EXPLOIT*
+|     	A66531EB-3C47-5C56-B8A6-E04B54E9D656	7.5	https://vulners.com/githubexploit/A66531EB-3C47-5C56-B8A6-E04B54E9D656	*EXPLOIT*
+|     	9814661A-35A4-5DB7-BB25-A1040F365C81	7.5	https://vulners.com/githubexploit/9814661A-35A4-5DB7-BB25-A1040F365C81	*EXPLOIT*
+|     	8132DEBA-6222-5A32-84DE-B97EF48D0F99	7.5	https://vulners.com/githubexploit/8132DEBA-6222-5A32-84DE-B97EF48D0F99	*EXPLOIT*
+|     	7C6FD510-4E4C-564E-ADDC-8BC362BE504C	7.5	https://vulners.com/githubexploit/7C6FD510-4E4C-564E-ADDC-8BC362BE504C	*EXPLOIT*
+|     	4F6A4973-5B5F-5C74-A397-E0D50D5C463B	7.5	https://vulners.com/githubexploit/4F6A4973-5B5F-5C74-A397-E0D50D5C463B	*EXPLOIT*
+|     	40879618-C556-547C-8769-9E63E83D0B55	7.5	https://vulners.com/githubexploit/40879618-C556-547C-8769-9E63E83D0B55	*EXPLOIT*
+|     	3C5CB3A8-939D-5A76-A4A2-D99026CB82D9	7.5	https://vulners.com/githubexploit/3C5CB3A8-939D-5A76-A4A2-D99026CB82D9	*EXPLOIT*
+|     	1F6E0709-DA03-564E-925F-3177657C053E	7.5	https://vulners.com/githubexploit/1F6E0709-DA03-564E-925F-3177657C053E	*EXPLOIT*
+|     	1C08D31D-AA5F-5319-B3F7-D0A3694E91F6	7.5	https://vulners.com/githubexploit/1C08D31D-AA5F-5319-B3F7-D0A3694E91F6	*EXPLOIT*
+|     	CVE-2026-5795	7.4	https://vulners.com/cve/CVE-2026-5795
+|     	CVE-2024-13009	7.2	https://vulners.com/cve/CVE-2024-13009
+|     	CVE-2026-76182	6.9	https://vulners.com/cve/CVE-2026-76182
+|     	CVE-2025-11143	6.5	https://vulners.com/cve/CVE-2025-11143
+|     	CVE-2024-8184	6.5	https://vulners.com/cve/CVE-2024-8184
+|     	SRC-2021-0017	5.3	https://vulners.com/srcincite/SRC-2021-0017	*EXPLOIT*
+|     	PACKETSTORM:180705	5.3	https://vulners.com/packetstorm/PACKETSTORM:180705	*EXPLOIT*
+|     	MSF:AUXILIARY-GATHER-JETTY_WEB_INF_DISCLOSURE-	5.3	https://vulners.com/metasploit/MSF:AUXILIARY-GATHER-JETTY_WEB_INF_DISCLOSURE-	*EXPLOIT*
+|     	KS:SCANNER-HTTP-CVE_2021_28169_DETECT	5.3	https://vulners.com/kittysploit/KS:SCANNER-HTTP-CVE_2021_28169_DETECT	*EXPLOIT*
+|     	EDB-ID:50478	5.3	https://vulners.com/exploitdb/EDB-ID:50478	*EXPLOIT*
+|     	CVE-2026-6790	5.3	https://vulners.com/cve/CVE-2026-6790
+|     	CVE-2024-6763	5.3	https://vulners.com/cve/CVE-2024-6763
+|     	CVE-2023-40167	5.3	https://vulners.com/cve/CVE-2023-40167
+|     	CVE-2023-26049	5.3	https://vulners.com/cve/CVE-2023-26049
+|     	CVE-2023-26048	5.3	https://vulners.com/cve/CVE-2023-26048
+|     	CVE-2021-34429	5.3	https://vulners.com/cve/CVE-2021-34429
+|     	CVE-2021-28169	5.3	https://vulners.com/cve/CVE-2021-28169
+|     	9A68A65E-1A3C-5F85-BC5B-D3B9AF89FD8F	5.3	https://vulners.com/githubexploit/9A68A65E-1A3C-5F85-BC5B-D3B9AF89FD8F	*EXPLOIT*
+|     	1337DAY-ID-36980	5.3	https://vulners.com/zdt/1337DAY-ID-36980	*EXPLOIT*
+|_    	SSV:99271	5.0	https://vulners.com/seebug/SSV:99271	*EXPLOIT*
+32987/tcp open  tcpwrapped
+61613/tcp open  stomp      Apache ActiveMQ
+| fingerprint-strings: 
+|   HELP4STOMP: 
+|     ERROR
+|     content-type:text/plain
+|     message:Unknown STOMP action: HELP
+|     org.apache.activemq.transport.stomp.ProtocolException: Unknown STOMP action: HELP
+|     org.apache.activemq.transport.stomp.ProtocolConverter.onStompCommand(ProtocolConverter.java:258)
+|     org.apache.activemq.transport.stomp.StompTransportFilter.onCommand(StompTransportFilter.java:85)
+|     org.apache.activemq.transport.TransportSupport.doConsume(TransportSupport.java:83)
+|     org.apache.activemq.transport.tcp.TcpTransport.doRun(TcpTransport.java:233)
+|     org.apache.activemq.transport.tcp.TcpTransport.run(TcpTransport.java:215)
+|_    java.base/java.lang.Thread.run(Thread.java:840)
+61614/tcp open  http       Jetty 9.4.39.v20210325
+|_http-server-header: Jetty(9.4.39.v20210325)
+| vulners: 
+|   Jetty 9.4.39.v20210325: 
+|     	AB55E109-1A71-52E8-B6CC-06377E6C6713	10.0	https://vulners.com/githubexploit/AB55E109-1A71-52E8-B6CC-06377E6C6713	*EXPLOIT*
+|     	CVE-2026-2332	9.1	https://vulners.com/cve/CVE-2026-2332
+|     	CVE-2026-10050	9.1	https://vulners.com/cve/CVE-2026-10050
+|     	3F71F065-66D4-541F-A813-9F1A2F2B1D91	8.8	https://vulners.com/githubexploit/3F71F065-66D4-541F-A813-9F1A2F2B1D91	*EXPLOIT*
+|     	CVE-2026-12611	8.7	https://vulners.com/cve/CVE-2026-12611
+|     	CVE-2026-19203	8.3	https://vulners.com/cve/CVE-2026-19203
+|     	CVE-2026-77711	8.2	https://vulners.com/cve/CVE-2026-77711
+|     	CVE-2026-76184	8.2	https://vulners.com/cve/CVE-2026-76184
+|     	DF041B2B-2DA7-5262-AABE-9EBD2D535041	7.8	https://vulners.com/githubexploit/DF041B2B-2DA7-5262-AABE-9EBD2D535041	*EXPLOIT*
+|     	CVE-2021-28165	7.8	https://vulners.com/cve/CVE-2021-28165
+|     	CVE-2025-5115	7.7	https://vulners.com/cve/CVE-2025-5115
+|     	PACKETSTORM:212872	7.5	https://vulners.com/packetstorm/PACKETSTORM:212872	*EXPLOIT*
+|     	PACKETSTORM:211124	7.5	https://vulners.com/packetstorm/PACKETSTORM:211124	*EXPLOIT*
+|     	F94D5BB8-9B74-5F23-B7A1-600FDAA168CD	7.5	https://vulners.com/githubexploit/F94D5BB8-9B74-5F23-B7A1-600FDAA168CD	*EXPLOIT*
+|     	EDB-ID:52426	7.5	https://vulners.com/exploitdb/EDB-ID:52426	*EXPLOIT*
+|     	E5C174E5-D6E8-56E0-8403-D287DE52EB3F	7.5	https://vulners.com/githubexploit/E5C174E5-D6E8-56E0-8403-D287DE52EB3F	*EXPLOIT*
+|     	E0817F76-5B95-518C-8553-8A32BCC99359	7.5	https://vulners.com/githubexploit/E0817F76-5B95-518C-8553-8A32BCC99359	*EXPLOIT*
+|     	D228B59B-465A-509D-A681-012DB9348698	7.5	https://vulners.com/githubexploit/D228B59B-465A-509D-A681-012DB9348698	*EXPLOIT*
+|     	CVE-2024-9823	7.5	https://vulners.com/cve/CVE-2024-9823
+|     	CVE-2024-22201	7.5	https://vulners.com/cve/CVE-2024-22201
+|     	CVE-2023-44487	7.5	https://vulners.com/cve/CVE-2023-44487
+|     	CVE-2023-36478	7.5	https://vulners.com/cve/CVE-2023-36478
+|     	CVE-2022-2191	7.5	https://vulners.com/cve/CVE-2022-2191
+|     	CVE-2022-2048	7.5	https://vulners.com/cve/CVE-2022-2048
+|     	BD3652A9-D066-57BA-9943-4E34970463B9	7.5	https://vulners.com/githubexploit/BD3652A9-D066-57BA-9943-4E34970463B9	*EXPLOIT*
+|     	B0208442-6E17-5772-B12D-B5BE30FA5540	7.5	https://vulners.com/githubexploit/B0208442-6E17-5772-B12D-B5BE30FA5540	*EXPLOIT*
+|     	A66531EB-3C47-5C56-B8A6-E04B54E9D656	7.5	https://vulners.com/githubexploit/A66531EB-3C47-5C56-B8A6-E04B54E9D656	*EXPLOIT*
+|     	9814661A-35A4-5DB7-BB25-A1040F365C81	7.5	https://vulners.com/githubexploit/9814661A-35A4-5DB7-BB25-A1040F365C81	*EXPLOIT*
+|     	8132DEBA-6222-5A32-84DE-B97EF48D0F99	7.5	https://vulners.com/githubexploit/8132DEBA-6222-5A32-84DE-B97EF48D0F99	*EXPLOIT*
+|     	7C6FD510-4E4C-564E-ADDC-8BC362BE504C	7.5	https://vulners.com/githubexploit/7C6FD510-4E4C-564E-ADDC-8BC362BE504C	*EXPLOIT*
+|     	4F6A4973-5B5F-5C74-A397-E0D50D5C463B	7.5	https://vulners.com/githubexploit/4F6A4973-5B5F-5C74-A397-E0D50D5C463B	*EXPLOIT*
+|     	40879618-C556-547C-8769-9E63E83D0B55	7.5	https://vulners.com/githubexploit/40879618-C556-547C-8769-9E63E83D0B55	*EXPLOIT*
+|     	3C5CB3A8-939D-5A76-A4A2-D99026CB82D9	7.5	https://vulners.com/githubexploit/3C5CB3A8-939D-5A76-A4A2-D99026CB82D9	*EXPLOIT*
+|     	1F6E0709-DA03-564E-925F-3177657C053E	7.5	https://vulners.com/githubexploit/1F6E0709-DA03-564E-925F-3177657C053E	*EXPLOIT*
+|     	1C08D31D-AA5F-5319-B3F7-D0A3694E91F6	7.5	https://vulners.com/githubexploit/1C08D31D-AA5F-5319-B3F7-D0A3694E91F6	*EXPLOIT*
+|     	CVE-2026-5795	7.4	https://vulners.com/cve/CVE-2026-5795
+|     	CVE-2024-13009	7.2	https://vulners.com/cve/CVE-2024-13009
+|     	CVE-2026-76182	6.9	https://vulners.com/cve/CVE-2026-76182
+|     	CVE-2025-11143	6.5	https://vulners.com/cve/CVE-2025-11143
+|     	CVE-2024-8184	6.5	https://vulners.com/cve/CVE-2024-8184
+|     	SRC-2021-0017	5.3	https://vulners.com/srcincite/SRC-2021-0017	*EXPLOIT*
+|     	PACKETSTORM:180705	5.3	https://vulners.com/packetstorm/PACKETSTORM:180705	*EXPLOIT*
+|     	MSF:AUXILIARY-GATHER-JETTY_WEB_INF_DISCLOSURE-	5.3	https://vulners.com/metasploit/MSF:AUXILIARY-GATHER-JETTY_WEB_INF_DISCLOSURE-	*EXPLOIT*
+|     	KS:SCANNER-HTTP-CVE_2021_28169_DETECT	5.3	https://vulners.com/kittysploit/KS:SCANNER-HTTP-CVE_2021_28169_DETECT	*EXPLOIT*
+|     	EDB-ID:50478	5.3	https://vulners.com/exploitdb/EDB-ID:50478	*EXPLOIT*
+|     	CVE-2026-6790	5.3	https://vulners.com/cve/CVE-2026-6790
+|     	CVE-2024-6763	5.3	https://vulners.com/cve/CVE-2024-6763
+|     	CVE-2023-40167	5.3	https://vulners.com/cve/CVE-2023-40167
+|     	CVE-2023-26049	5.3	https://vulners.com/cve/CVE-2023-26049
+|     	CVE-2023-26048	5.3	https://vulners.com/cve/CVE-2023-26048
+|     	CVE-2021-34429	5.3	https://vulners.com/cve/CVE-2021-34429
+|     	CVE-2021-28169	5.3	https://vulners.com/cve/CVE-2021-28169
+|     	9A68A65E-1A3C-5F85-BC5B-D3B9AF89FD8F	5.3	https://vulners.com/githubexploit/9A68A65E-1A3C-5F85-BC5B-D3B9AF89FD8F	*EXPLOIT*
+|     	1337DAY-ID-36980	5.3	https://vulners.com/zdt/1337DAY-ID-36980	*EXPLOIT*
+|_    	SSV:99271	5.0	https://vulners.com/seebug/SSV:99271	*EXPLOIT*
+61616/tcp open  apachemq   ActiveMQ OpenWire transport 5.15.15
+| vulners: 
+|   cpe:/a:apache:activemq:5.15.15: 
+|     	PACKETSTORM:238677	10.0	https://vulners.com/packetstorm/PACKETSTORM:238677	*EXPLOIT*
+|     	PACKETSTORM:175676	10.0	https://vulners.com/packetstorm/PACKETSTORM:175676	*EXPLOIT*
+|     	MSF:EXPLOIT-MULTI-MISC-APACHE_ACTIVEMQ_RCE_CVE_2023_46604-	10.0	https://vulners.com/metasploit/MSF:EXPLOIT-MULTI-MISC-APACHE_ACTIVEMQ_RCE_CVE_2023_46604-	*EXPLOIT*
+|     	MEND:CVE-2023-46604	10.0	https://vulners.com/mend/MEND:CVE-2023-46604
+|     	KS:SCANNER-TCP-ACTIVEMQ_CVE_2023_46604_DETECT	10.0	https://vulners.com/kittysploit/KS:SCANNER-TCP-ACTIVEMQ_CVE_2023_46604_DETECT	*EXPLOIT*
+|     	KS:EXPLOITS-MULTI-TCP-ACTIVEMQ_CVE_2023_46604_RCE	10.0	https://vulners.com/kittysploit/KS:EXPLOITS-MULTI-TCP-ACTIVEMQ_CVE_2023_46604_RCE	*EXPLOIT*
+|     	F3C032C6-B6CC-55FF-9794-56FD24402C87	10.0	https://vulners.com/githubexploit/F3C032C6-B6CC-55FF-9794-56FD24402C87	*EXPLOIT*
+|     	EFDDD7CE-4EE1-56A5-9DCF-106469871AF4	10.0	https://vulners.com/githubexploit/EFDDD7CE-4EE1-56A5-9DCF-106469871AF4	*EXPLOIT*
+|     	EE2DBB41-07AF-5B57-903D-69784A0507B6	10.0	https://vulners.com/githubexploit/EE2DBB41-07AF-5B57-903D-69784A0507B6	*EXPLOIT*
+|     	E834820B-9821-5C48-ADF1-0663BF7FA8E7	10.0	https://vulners.com/githubexploit/E834820B-9821-5C48-ADF1-0663BF7FA8E7	*EXPLOIT*
+|     	E5B5BEE1-1450-5A9D-AB5A-A28171F60645	10.0	https://vulners.com/githubexploit/E5B5BEE1-1450-5A9D-AB5A-A28171F60645	*EXPLOIT*
+|     	D1A6E22C-FE78-53F8-AC35-8B11AD6D5EAD	10.0	https://vulners.com/githubexploit/D1A6E22C-FE78-53F8-AC35-8B11AD6D5EAD	*EXPLOIT*
+|     	D08F9AF7-A83F-58A7-BEA5-B05C3D4D3045	10.0	https://vulners.com/githubexploit/D08F9AF7-A83F-58A7-BEA5-B05C3D4D3045	*EXPLOIT*
+|     	CVE-2023-46604	10.0	https://vulners.com/cve/CVE-2023-46604
+|     	CNVD-2023-94073	10.0	https://vulners.com/cnvd/CNVD-2023-94073
+|     	BD5C816C-E485-50D6-8E9B-26FB4DC85762	10.0	https://vulners.com/githubexploit/BD5C816C-E485-50D6-8E9B-26FB4DC85762	*EXPLOIT*
+|     	B9D40A57-73D7-5396-9883-FA8BBD26C92F	10.0	https://vulners.com/githubexploit/B9D40A57-73D7-5396-9883-FA8BBD26C92F	*EXPLOIT*
+|     	B45A3BAB-DD80-5C8D-9097-ABB6D7BC9D86	10.0	https://vulners.com/githubexploit/B45A3BAB-DD80-5C8D-9097-ABB6D7BC9D86	*EXPLOIT*
+|     	A8B06FE9-9E97-50A9-BB40-E56DE5F22D9B	10.0	https://vulners.com/githubexploit/A8B06FE9-9E97-50A9-BB40-E56DE5F22D9B	*EXPLOIT*
+|     	9A615C78-2FF4-5FC2-BC17-B3957D9871CC	10.0	https://vulners.com/githubexploit/9A615C78-2FF4-5FC2-BC17-B3957D9871CC	*EXPLOIT*
+|     	906BEC95-A3C3-5BDA-92B3-8C9DEFFC3363	10.0	https://vulners.com/githubexploit/906BEC95-A3C3-5BDA-92B3-8C9DEFFC3363	*EXPLOIT*
+|     	8DF4117A-0CBF-5767-BEB0-31D3E0375D32	10.0	https://vulners.com/githubexploit/8DF4117A-0CBF-5767-BEB0-31D3E0375D32	*EXPLOIT*
+|     	8BA79BA4-8ADF-5058-80A4-F431DAB43AAB	10.0	https://vulners.com/githubexploit/8BA79BA4-8ADF-5058-80A4-F431DAB43AAB	*EXPLOIT*
+|     	8B01C354-3075-57B4-AA26-6803F8F77A8A	10.0	https://vulners.com/githubexploit/8B01C354-3075-57B4-AA26-6803F8F77A8A	*EXPLOIT*
+|     	77E6233D-7556-5243-8E36-6A14BB7251B5	10.0	https://vulners.com/githubexploit/77E6233D-7556-5243-8E36-6A14BB7251B5	*EXPLOIT*
+|     	73A7F774-F367-5C10-B447-35B16ED329AA	10.0	https://vulners.com/githubexploit/73A7F774-F367-5C10-B447-35B16ED329AA	*EXPLOIT*
+|     	5FC6D05E-F86A-53AE-AD49-BE8FC538AF8E	10.0	https://vulners.com/githubexploit/5FC6D05E-F86A-53AE-AD49-BE8FC538AF8E	*EXPLOIT*
+|     	5DAE41A2-CB8E-5900-8F12-03645AA6E5AB	10.0	https://vulners.com/githubexploit/5DAE41A2-CB8E-5900-8F12-03645AA6E5AB	*EXPLOIT*
+|     	5554AFF9-5DC2-5870-8CEC-258C4908FBEF	10.0	https://vulners.com/githubexploit/5554AFF9-5DC2-5870-8CEC-258C4908FBEF	*EXPLOIT*
+|     	535C403A-C112-538E-836E-3DD2329C29E8	10.0	https://vulners.com/githubexploit/535C403A-C112-538E-836E-3DD2329C29E8	*EXPLOIT*
+|     	4A3A24A8-60BB-5987-9260-1D3FE5D80BA8	10.0	https://vulners.com/githubexploit/4A3A24A8-60BB-5987-9260-1D3FE5D80BA8	*EXPLOIT*
+|     	40B87F16-53BE-508A-A2F2-0299B19108E4	10.0	https://vulners.com/githubexploit/40B87F16-53BE-508A-A2F2-0299B19108E4	*EXPLOIT*
+|     	3D224FBD-135B-51B6-BDF7-5668CE8DECF7	10.0	https://vulners.com/githubexploit/3D224FBD-135B-51B6-BDF7-5668CE8DECF7	*EXPLOIT*
+|     	37C49D97-E8F5-5260-A003-EE331E336213	10.0	https://vulners.com/githubexploit/37C49D97-E8F5-5260-A003-EE331E336213	*EXPLOIT*
+|     	32BABF3C-0537-598C-AE0C-8C92C9B30990	10.0	https://vulners.com/githubexploit/32BABF3C-0537-598C-AE0C-8C92C9B30990	*EXPLOIT*
+|     	30BB96C4-5A37-55F2-8924-005F6CD066FF	10.0	https://vulners.com/githubexploit/30BB96C4-5A37-55F2-8924-005F6CD066FF	*EXPLOIT*
+|     	2E0523BA-5A5F-59A6-A067-CDA22B5089E8	10.0	https://vulners.com/githubexploit/2E0523BA-5A5F-59A6-A067-CDA22B5089E8	*EXPLOIT*
+|     	29A02B80-16A7-5D6B-B903-8BB533BA9212	10.0	https://vulners.com/githubexploit/29A02B80-16A7-5D6B-B903-8BB533BA9212	*EXPLOIT*
+|     	26651B20-6643-5C80-B61A-665C29D38846	10.0	https://vulners.com/githubexploit/26651B20-6643-5C80-B61A-665C29D38846	*EXPLOIT*
+|     	262C6173-6C7E-593E-A599-8E2415B89755	10.0	https://vulners.com/githubexploit/262C6173-6C7E-593E-A599-8E2415B89755	*EXPLOIT*
+|     	1337DAY-ID-39139	10.0	https://vulners.com/zdt/1337DAY-ID-39139	*EXPLOIT*
+|     	11E6311E-DB93-508A-A741-E3EDE47ACC3B	10.0	https://vulners.com/githubexploit/11E6311E-DB93-508A-A741-E3EDE47ACC3B	*EXPLOIT*
+|     	3955D959-C0D4-50B2-A901-EF6BED19A121	9.8	https://vulners.com/githubexploit/3955D959-C0D4-50B2-A901-EF6BED19A121	*EXPLOIT*
+|     	PACKETSTORM:222315	8.8	https://vulners.com/packetstorm/PACKETSTORM:222315	*EXPLOIT*
+|     	PACKETSTORM:222271	8.8	https://vulners.com/packetstorm/PACKETSTORM:222271	*EXPLOIT*
+|     	MSF:EXPLOIT-MULTI-HTTP-APACHE_ACTIVEMQ_JOLOKIA_RCE-	8.8	https://vulners.com/metasploit/MSF:EXPLOIT-MULTI-HTTP-APACHE_ACTIVEMQ_JOLOKIA_RCE-	*EXPLOIT*
+|     	MEND:CVE-2026-49157	8.8	https://vulners.com/mend/MEND:CVE-2026-49157
+|     	MEND:CVE-2026-41044	8.8	https://vulners.com/mend/MEND:CVE-2026-41044
+|     	MEND:CVE-2026-40466	8.8	https://vulners.com/mend/MEND:CVE-2026-40466
+|     	MEND:CVE-2025-66168	8.8	https://vulners.com/mend/MEND:CVE-2025-66168
+|     	KS:SCANNER-HTTP-CVE_2024_32114_DETECT	8.8	https://vulners.com/kittysploit/KS:SCANNER-HTTP-CVE_2024_32114_DETECT	*EXPLOIT*
+|     	KS:SCANNER-HTTP-CVE_2022_41678_DETECT	8.8	https://vulners.com/kittysploit/KS:SCANNER-HTTP-CVE_2022_41678_DETECT	*EXPLOIT*
+|     	KS:SCANNER-HTTP-ACTIVEMQ_CVE_2026_34197	8.8	https://vulners.com/kittysploit/KS:SCANNER-HTTP-ACTIVEMQ_CVE_2026_34197	*EXPLOIT*
+|     	KS:EXPLOITS-LINUX-HTTP-ACTIVEMQ_CVE_2026_34197_RCE	8.8	https://vulners.com/kittysploit/KS:EXPLOITS-LINUX-HTTP-ACTIVEMQ_CVE_2026_34197_RCE	*EXPLOIT*
+|     	FC0BC85C-3D86-5FC0-AA56-8226EA09C9D6	8.8	https://vulners.com/githubexploit/FC0BC85C-3D86-5FC0-AA56-8226EA09C9D6	*EXPLOIT*
+|     	DA223D95-A93E-5045-ACD2-95097217D3B5	8.8	https://vulners.com/githubexploit/DA223D95-A93E-5045-ACD2-95097217D3B5	*EXPLOIT*
+|     	CVE-2026-49157	8.8	https://vulners.com/cve/CVE-2026-49157
+|     	CVE-2026-45505	8.8	https://vulners.com/cve/CVE-2026-45505
+|     	CVE-2026-41044	8.8	https://vulners.com/cve/CVE-2026-41044
+|     	CVE-2026-40466	8.8	https://vulners.com/cve/CVE-2026-40466
+|     	CVE-2026-34197	8.8	https://vulners.com/cve/CVE-2026-34197
+|     	CVE-2025-66168	8.8	https://vulners.com/cve/CVE-2025-66168
+|     	CVE-2022-41678	8.8	https://vulners.com/cve/CVE-2022-41678
+|     	CNVD-2026-17369	8.8	https://vulners.com/cnvd/CNVD-2026-17369
+|     	CNVD-2024-27491	8.8	https://vulners.com/cnvd/CNVD-2024-27491
+|     	830144AF-D83A-57E9-9EF4-75E12C45DA3D	8.8	https://vulners.com/githubexploit/830144AF-D83A-57E9-9EF4-75E12C45DA3D	*EXPLOIT*
+|     	7696467A-97CF-577C-B1C8-46DDC20F58CF	8.8	https://vulners.com/githubexploit/7696467A-97CF-577C-B1C8-46DDC20F58CF	*EXPLOIT*
+|     	5F8B2A50-2BF0-59BF-8562-6C054CE79B98	8.8	https://vulners.com/githubexploit/5F8B2A50-2BF0-59BF-8562-6C054CE79B98	*EXPLOIT*
+|     	59103EF8-34AE-5D99-AC69-1E43D784DA44	8.8	https://vulners.com/githubexploit/59103EF8-34AE-5D99-AC69-1E43D784DA44	*EXPLOIT*
+|     	569F9270-8B79-5272-BCC9-E672F9F88014	8.8	https://vulners.com/githubexploit/569F9270-8B79-5272-BCC9-E672F9F88014	*EXPLOIT*
+|     	56846A38-EC30-580B-86FD-E20F8957A43F	8.8	https://vulners.com/githubexploit/56846A38-EC30-580B-86FD-E20F8957A43F	*EXPLOIT*
+|     	277C9FAC-D6C5-54B4-B126-A668459A56BB	8.8	https://vulners.com/githubexploit/277C9FAC-D6C5-54B4-B126-A668459A56BB	*EXPLOIT*
+|     	1B077F36-EB2B-50DC-B1EC-07C966A57F70	8.8	https://vulners.com/githubexploit/1B077F36-EB2B-50DC-B1EC-07C966A57F70	*EXPLOIT*
+|     	0EB06AF4-CFA4-5311-9994-15760AF8992B	8.8	https://vulners.com/githubexploit/0EB06AF4-CFA4-5311-9994-15760AF8992B	*EXPLOIT*
+|     	0C689166-CD87-52DE-B05C-72DB598155C2	8.8	https://vulners.com/githubexploit/0C689166-CD87-52DE-B05C-72DB598155C2	*EXPLOIT*
+|     	045EFDB1-ADE8-5FDE-B1AB-BAA073B03C28	8.8	https://vulners.com/githubexploit/045EFDB1-ADE8-5FDE-B1AB-BAA073B03C28	*EXPLOIT*
+|     	MEND:CVE-2026-74761	8.7	https://vulners.com/mend/MEND:CVE-2026-74761
+|     	MEND:CVE-2026-59878	8.7	https://vulners.com/mend/MEND:CVE-2026-59878
+|     	MEND:CVE-2026-54475	8.7	https://vulners.com/mend/MEND:CVE-2026-54475
+|     	MEND:CVE-2026-53917	8.7	https://vulners.com/mend/MEND:CVE-2026-53917
+|     	MEND:CVE-2026-53916	8.7	https://vulners.com/mend/MEND:CVE-2026-53916
+|     	MEND:CVE-2026-50734	8.7	https://vulners.com/mend/MEND:CVE-2026-50734
+|     	MEND:CVE-2026-49434	8.7	https://vulners.com/mend/MEND:CVE-2026-49434
+|     	MEND:CVE-2026-49432	8.7	https://vulners.com/mend/MEND:CVE-2026-49432
+|     	MEND:CVE-2026-39304	8.7	https://vulners.com/mend/MEND:CVE-2026-39304
+|     	MEND:CVE-2026-49877	8.6	https://vulners.com/mend/MEND:CVE-2026-49877
+|     	E2D2E062-090F-5A3A-84ED-306A6EC90608	8.1	https://vulners.com/githubexploit/E2D2E062-090F-5A3A-84ED-306A6EC90608	*EXPLOIT*
+|     	CVE-2026-49877	8.1	https://vulners.com/cve/CVE-2026-49877
+|     	CVE-2026-42588	8.1	https://vulners.com/cve/CVE-2026-42588
+|     	CVE-2026-111822	8.1	https://vulners.com/cve/CVE-2026-111822
+|     	CNVD-2026-28240	8.1	https://vulners.com/cnvd/CNVD-2026-28240
+|     	MEND:CVE-2025-27533	7.5	https://vulners.com/mend/MEND:CVE-2025-27533
+|     	EDB-ID:52288	7.5	https://vulners.com/exploitdb/EDB-ID:52288	*EXPLOIT*
+|     	CVE-2026-74761	7.5	https://vulners.com/cve/CVE-2026-74761
+|     	CVE-2026-59878	7.5	https://vulners.com/cve/CVE-2026-59878
+|     	CVE-2026-54475	7.5	https://vulners.com/cve/CVE-2026-54475
+|     	CVE-2026-53917	7.5	https://vulners.com/cve/CVE-2026-53917
+|     	CVE-2026-53916	7.5	https://vulners.com/cve/CVE-2026-53916
+|     	CVE-2026-50734	7.5	https://vulners.com/cve/CVE-2026-50734
+|     	CVE-2026-49434	7.5	https://vulners.com/cve/CVE-2026-49434
+|     	CVE-2026-49432	7.5	https://vulners.com/cve/CVE-2026-49432
+|     	CVE-2026-39304	7.5	https://vulners.com/cve/CVE-2026-39304
+|     	CVE-2026-111821	7.5	https://vulners.com/cve/CVE-2026-111821
+|     	CVE-2021-26117	7.5	https://vulners.com/cve/CVE-2021-26117
+|     	CNVD-2026-28243	7.5	https://vulners.com/cnvd/CNVD-2026-28243
+|     	CNVD-2026-28242	7.5	https://vulners.com/cnvd/CNVD-2026-28242
+|     	CNVD-2026-28241	7.5	https://vulners.com/cnvd/CNVD-2026-28241
+|     	CNVD-2026-28238	7.5	https://vulners.com/cnvd/CNVD-2026-28238
+|     	CNVD-2026-28237	7.5	https://vulners.com/cnvd/CNVD-2026-28237
+|     	A27C1C09-AF66-5B22-82B7-74B3E956A785	7.5	https://vulners.com/githubexploit/A27C1C09-AF66-5B22-82B7-74B3E956A785	*EXPLOIT*
+|     	MEND:CVE-2026-41043	6.9	https://vulners.com/mend/MEND:CVE-2026-41043
+|     	CVE-2026-61487	6.5	https://vulners.com/cve/CVE-2026-61487
+|     	CVE-2026-41043	6.5	https://vulners.com/cve/CVE-2026-41043
+|     	CVE-2026-108949	6.5	https://vulners.com/cve/CVE-2026-108949
+|     	CVE-2026-108946	6.5	https://vulners.com/cve/CVE-2026-108946
+|     	MEND:CVE-2026-52760	6.1	https://vulners.com/mend/MEND:CVE-2026-52760
+|     	MEND:CVE-2026-42253	6.1	https://vulners.com/mend/MEND:CVE-2026-42253
+|     	CVE-2026-52760	6.1	https://vulners.com/cve/CVE-2026-52760
+|     	CVE-2026-42253	6.1	https://vulners.com/cve/CVE-2026-42253
+|     	CNVD-2021-11837	6.1	https://vulners.com/cnvd/CNVD-2021-11837
+|     	CVE-2026-49270	5.9	https://vulners.com/cve/CVE-2026-49270
+|_    	MEND:CVE-2026-33227	5.3	https://vulners.com/mend/MEND:CVE-2026-33227
+2 services unrecognized despite returning data. If you know the service/version, please submit the following fingerprints at https://nmap.org/cgi-bin/submit.cgi?new-service :
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port5672-TCP:V=7.99%I=7%D=11/22%Time=6B035475%P=x86_64-pc-linux-gnu%r(G
+SF:etRequest,89,"AMQP\x03\x01\0\0AMQP\0\x01\0\0\0\0\0\x19\x02\0\0\0\0S\x10
+SF:\xc0\x0c\x04\xa1\0@p\0\x02\0\0`\x7f\xff\0\0\0`\x02\0\0\0\0S\x18\xc0S\x0
+SF:1\0S\x1d\xc0M\x02\xa3\x11amqp:decode-error\xa17Connection\x20from\x20cl
+SF:ient\x20using\x20unsupported\x20AMQP\x20attempted")%r(HTTPOptions,89,"A
+SF:MQP\x03\x01\0\0AMQP\0\x01\0\0\0\0\0\x19\x02\0\0\0\0S\x10\xc0\x0c\x04\xa
+SF:1\0@p\0\x02\0\0`\x7f\xff\0\0\0`\x02\0\0\0\0S\x18\xc0S\x01\0S\x1d\xc0M\x
+SF:02\xa3\x11amqp:decode-error\xa17Connection\x20from\x20client\x20using\x
+SF:20unsupported\x20AMQP\x20attempted")%r(RTSPRequest,89,"AMQP\x03\x01\0\0
+SF:AMQP\0\x01\0\0\0\0\0\x19\x02\0\0\0\0S\x10\xc0\x0c\x04\xa1\0@p\0\x02\0\0
+SF:`\x7f\xff\0\0\0`\x02\0\0\0\0S\x18\xc0S\x01\0S\x1d\xc0M\x02\xa3\x11amqp:
+SF:decode-error\xa17Connection\x20from\x20client\x20using\x20unsupported\x
+SF:20AMQP\x20attempted")%r(RPCCheck,89,"AMQP\x03\x01\0\0AMQP\0\x01\0\0\0\0
+SF:\0\x19\x02\0\0\0\0S\x10\xc0\x0c\x04\xa1\0@p\0\x02\0\0`\x7f\xff\0\0\0`\x
+SF:02\0\0\0\0S\x18\xc0S\x01\0S\x1d\xc0M\x02\xa3\x11amqp:decode-error\xa17C
+SF:onnection\x20from\x20client\x20using\x20unsupported\x20AMQP\x20attempte
+SF:d")%r(DNSVersionBindReqTCP,89,"AMQP\x03\x01\0\0AMQP\0\x01\0\0\0\0\0\x19
+SF:\x02\0\0\0\0S\x10\xc0\x0c\x04\xa1\0@p\0\x02\0\0`\x7f\xff\0\0\0`\x02\0\0
+SF:\0\0S\x18\xc0S\x01\0S\x1d\xc0M\x02\xa3\x11amqp:decode-error\xa17Connect
+SF:ion\x20from\x20client\x20using\x20unsupported\x20AMQP\x20attempted")%r(
+SF:DNSStatusRequestTCP,89,"AMQP\x03\x01\0\0AMQP\0\x01\0\0\0\0\0\x19\x02\0\
+SF:0\0\0S\x10\xc0\x0c\x04\xa1\0@p\0\x02\0\0`\x7f\xff\0\0\0`\x02\0\0\0\0S\x
+SF:18\xc0S\x01\0S\x1d\xc0M\x02\xa3\x11amqp:decode-error\xa17Connection\x20
+SF:from\x20client\x20using\x20unsupported\x20AMQP\x20attempted")%r(SSLSess
+SF:ionReq,89,"AMQP\x03\x01\0\0AMQP\0\x01\0\0\0\0\0\x19\x02\0\0\0\0S\x10\xc
+SF:0\x0c\x04\xa1\0@p\0\x02\0\0`\x7f\xff\0\0\0`\x02\0\0\0\0S\x18\xc0S\x01\0
+SF:S\x1d\xc0M\x02\xa3\x11amqp:decode-error\xa17Connection\x20from\x20clien
+SF:t\x20using\x20unsupported\x20AMQP\x20attempted")%r(TerminalServerCookie
+SF:,89,"AMQP\x03\x01\0\0AMQP\0\x01\0\0\0\0\0\x19\x02\0\0\0\0S\x10\xc0\x0c\
+SF:x04\xa1\0@p\0\x02\0\0`\x7f\xff\0\0\0`\x02\0\0\0\0S\x18\xc0S\x01\0S\x1d\
+SF:xc0M\x02\xa3\x11amqp:decode-error\xa17Connection\x20from\x20client\x20u
+SF:sing\x20unsupported\x20AMQP\x20attempted");
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port61613-TCP:V=7.99%I=7%D=11/22%Time=6B035470%P=x86_64-pc-linux-gnu%r(
+SF:HELP4STOMP,289,"ERROR\ncontent-type:text/plain\nmessage:Unknown\x20STOM
+SF:P\x20action:\x20HELP\n\norg\.apache\.activemq\.transport\.stomp\.Protoc
+SF:olException:\x20Unknown\x20STOMP\x20action:\x20HELP\n\tat\x20org\.apach
+SF:e\.activemq\.transport\.stomp\.ProtocolConverter\.onStompCommand\(Proto
+SF:colConverter\.java:258\)\n\tat\x20org\.apache\.activemq\.transport\.sto
+SF:mp\.StompTransportFilter\.onCommand\(StompTransportFilter\.java:85\)\n\
+SF:tat\x20org\.apache\.activemq\.transport\.TransportSupport\.doConsume\(T
+SF:ransportSupport\.java:83\)\n\tat\x20org\.apache\.activemq\.transport\.t
+SF:cp\.TcpTransport\.doRun\(TcpTransport\.java:233\)\n\tat\x20org\.apache\
+SF:.activemq\.transport\.tcp\.TcpTransport\.run\(TcpTransport\.java:215\)\
+SF:n\tat\x20java\.base/java\.lang\.Thread\.run\(Thread\.java:840\)\n\0\n");
+MAC Address: 5A:93:29:F9:09:C3 (Unknown)
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sun Nov 22 20:46:06 2026 -- 1 IP address (1 host up) scanned in 37.08 seconds

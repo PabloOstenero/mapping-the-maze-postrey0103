@@ -398,10 +398,143 @@ Nota de trazabilidad: el historial de bash existía antes de activar las marcas 
 - **Captura:** ![Búsqueda de cuentas en las evidencias](../imagenes/p2-10-cuentas.png)
 - **Siguiente paso:** redactar la Parte 2 de `inventario.md`.
 
-### 2026-11-22 - Redacción de la Parte 2 de inventario.md
-- **Cuándo:** 2026-11-22, después de las 20:26 (hora exacta no registrada en el historial: el fichero se redactó y se subió fuera de la terminal de este historial)
-- **Objetivo y alcance:** dejar escrito lo que expone cada servicio sin autenticar, las cuentas descubiertas y las limitaciones. Solo trabajo con ficheros locales, sin tráfico de red.
-- **Qué hice:** añadí el apartado de la Parte 2 a `inventario.md` con ayuda de IA, a partir de mis ficheros de `evidencias/p2/`, y lo comprobé contra mis salidas y capturas. Con lo observado revisé las funciones probables: 172.17.0.6 pasa a servidor donde se montaban cosas (Jenkins), 172.17.0.8 a portal de clientes (indicio débil) y 172.17.0.9 a sin función asignada.
-- **Qué salió:** `inventario.md` con la enumeración de los 8 equipos, 2 servicios UDP, 1 cuenta de usuario y las limitaciones. Evidencia: `inventario.md`.
+### 2026-11-22 20:28 - Puerto con aviso de método TRACE (cierre de la Parte 2)
+- **Cuándo:** 2026-11-22 20:28
+- **Objetivo y alcance:** saber en qué puerto de 172.17.0.5 avisó nmap de `TRACE`. Solo ficheros locales, sin tráfico de red.
+- **Qué hice:** `grep -B4 -A2 "TRACE" evidencias/p2/20-nse-172.17.0.5.nmap`
+- **Qué salió:** el aviso `Potentially risky methods: TRACE` corresponde a 172.17.0.5:61614 (Jetty 9.4.39.v20210325). Evidencia: `evidencias/p2/20-nse-172.17.0.5.nmap`.
 - **Captura:** sin captura
-- **Siguiente paso:** comprobar los enlaces a imágenes, hacer commit y empezar la Parte 3.
+- **Siguiente paso:** empezar la Parte 3.
+
+---
+
+## Parte 3 - De la versión al CVE
+
+### 2026-11-22 20:35 - Inicio de la Parte 3 y comprobación de acceso a NVD
+- **Cuándo:** 2026-11-22 20:35 (marca de inicio) y 20:41 (comprobación)
+- **Objetivo y alcance:** dejar marcado el inicio de la Parte 3 y comprobar que hay acceso a internet para consultar NVD. La consulta es a una web pública y no toca la red del cliente.
+- **Qué hice:** `echo "#### INICIO PARTE 3 $(date '+%F %H:%M')"` y `curl -sI https://services.nvd.nist.gov | head -1`
+- **Qué salió:** `HTTP/2 200`: hay acceso a NVD. Evidencia: salida en el historial.
+- **Captura:** sin captura
+- **Siguiente paso:** preparar la lista de productos y versiones.
+
+### 2026-11-22 20:44 - Lista de productos y versiones
+- **Cuándo:** 2026-11-22 20:44
+- **Objetivo y alcance:** reunir en un fichero los puertos abiertos con su producto y versión, como punto de partida de la búsqueda de CVE. Solo ficheros locales de la Parte 1, sin tráfico de red.
+- **Qué hice:** `grep -hE "^[0-9]+/(tcp|udp) +open " evidencias/p1/11-tcp-ver-*.nmap evidencias/p1/12-udp-*.nmap | awk '{ $2=""; print }' | sort -u | tee evidencias/p3/30-versiones.txt`
+- **Qué salió:** lista sin repeticiones de puertos, servicios y versiones de los 8 equipos. Evidencia: `evidencias/p3/30-versiones.txt`.
+- **Captura:** sin captura
+- **Siguiente paso:** pedir a `vulners` los CVE candidatos de los equipos normales.
+
+### 2026-11-22 20:45 - Candidatos automáticos con vulners
+- **Cuándo:** 2026-11-22 20:45 (inicio); fin: 20:47 (el último equipo, 172.17.0.10, terminó a las 20:47:07; cada equipo tardó entre 6 y 37 s)
+- **Objetivo y alcance:** obtener CVE candidatos comparando cada versión con la base de datos de `vulners`, sin tocar la vulnerabilidad. Objetivos: 172.17.0.4 a 172.17.0.10, dentro de 172.17.0.0/24. No se lanzó a 172.17.0.3 (equipo delicado): sus versiones se revisan a mano en NVD.
+- **Qué hice:** `for ip in $(grep -vx "$FRAGIL" evidencias/p1/vivos.txt); do ports=$(grep -oE '[0-9]+/open/tcp' evidencias/p1/10-tcp-all-$ip.gnmap | cut -d/ -f1 | paste -sd, -); [ -z "$ports" ] && continue; echo "=== $ip : $ports ==="; sudo nmap -Pn -sV -p $ports --script vulners --script-args mincvss=5.0 -oA evidencias/p3/31-vulners-$ip $ip; done`
+- **Qué salió:** líneas con `CVE-` por equipo: .4 162, .5 339, .6 47, .7 34, .8 329, .9 68 y .10 0. Estas cifras incluyen duplicados de otras fuentes (`MEND:` y `1DAYEXPLOIT:`), así que no son CVE distintos ni hallazgos. Evidencia: `evidencias/p3/31-vulners-172.17.0.<n>.nmap`.
+- **Captura:** sin captura (ver entrada siguiente)
+- **Siguiente paso:** capturar los CVE propuestos en cada equipo.
+
+### 2026-11-22 21:48 - Capturas de los CVE propuestos por vulners
+- **Cuándo:** 2026-11-22 21:48 (.4), 21:51 (.5), 21:52 (.6), 21:54 (.7), 21:55 (.8 y .9) y 21:56 (.10)
+- **Objetivo y alcance:** dejar captura de los CVE que propone `vulners` en cada equipo. Solo ficheros locales.
+- **Qué hice:** `grep -E "CVE-" evidencias/p3/31-vulners-172.17.0.<n>.nmap | head -30` (uno por equipo, con `clear; date "+%F %H:%M"` delante)
+- **Qué salió:** los resultados de la entrada anterior (los 30 primeros CVE de cada equipo; 172.17.0.10 no devuelve ninguno). La captura de 172.17.0.5 se hizo en dos partes. Evidencia: `evidencias/p3/31-vulners-172.17.0.<n>.nmap`.
+- **Captura:** ![vulners 172.17.0.4](../imagenes/p3-01-vulners-172.17.0.4.png) ![vulners 172.17.0.5 (1 de 2)](../imagenes/p3-01-vulners-172.17.0.5-1.png) ![vulners 172.17.0.5 (2 de 2)](../imagenes/p3-01-vulners-172.17.0.5-2.png) ![vulners 172.17.0.6](../imagenes/p3-01-vulners-172.17.0.6.png) ![vulners 172.17.0.7](../imagenes/p3-01-vulners-172.17.0.7.png) ![vulners 172.17.0.8](../imagenes/p3-01-vulners-172.17.0.8.png) ![vulners 172.17.0.9](../imagenes/p3-01-vulners-172.17.0.9.png) ![vulners 172.17.0.10](../imagenes/p3-01-vulners-172.17.0.10.png)
+- **Siguiente paso:** buscar con `searchsploit` si hay algo público para las versiones más delicadas.
+
+### 2026-11-22 21:57 - Búsqueda de exploits públicos con searchsploit (solo listado)
+- **Cuándo:** 2026-11-22 21:57
+- **Objetivo y alcance:** saber si existe algo público para las versiones clave, como dato para la priorización. Búsqueda en una base local, sin tráfico de red. No se abrió, copió ni ejecutó ningún exploit.
+- **Qué hice:** `for q in "vsftpd 2.3.4" "Apache Tomcat 9.0.30" "ActiveMQ 5.15" "Jenkins 2.441" "OpenSSH 7.7" "OpenSSH 7.9"; do echo "=== $q ==="; searchsploit "$q" | tee -a evidencias/p3/32-searchsploit.txt; done`
+- **Qué salió:** hay entradas para vsftpd 2.3.4 ("Backdoor Command Execution", 2 entradas), Jenkins 2.441 ("Local File Inclusion") y OpenSSH hasta 7.7 ("Username Enumeration", 3 entradas). La búsqueda de OpenSSH 7.9 no devuelve exploits. Evidencia: `evidencias/p3/32-searchsploit.txt`.
+- **Captura:** ![searchsploit de las versiones clave](../imagenes/p3-02-searchsploit.png)
+- **Siguiente paso:** revisar los resultados y consultar NVD para los candidatos.
+
+### 2026-11-22 22:00 - Revisión de los resultados automáticos
+- **Cuándo:** 2026-11-22 22:00
+- **Objetivo y alcance:** revisar de una vez lo que han devuelto `vulners` y `searchsploit`. Solo ficheros locales.
+- **Qué hice:** `grep -c "CVE-" evidencias/p3/31-vulners-*.nmap`, `grep -H "CVE-" evidencias/p3/31-vulners-*.nmap | head -60` y `cat evidencias/p3/32-searchsploit.txt`
+- **Qué salió:** los recuentos están inflados por los duplicados de otras fuentes, y 172.17.0.10 devuelve 0 porque no tiene una versión de producto comparable. Algunos identificadores propuestos para 172.17.0.4 no se pueden dar por buenos sin verificar en NVD. Se eligen como candidatos CVE-2011-2523 (vsftpd 2.3.4, de `searchsploit`), CVE-2020-1938 y CVE-2025-24813 (Tomcat, de `vulners`), CVE-2024-23897 (Jenkins), CVE-2023-46604 (ActiveMQ) y CVE-2018-15473 (OpenSSH 7.7). Evidencia: `evidencias/p3/31-vulners-*.nmap` y `32-searchsploit.txt`.
+- **Captura:** sin captura
+- **Siguiente paso:** descargar la ficha de NVD de cada candidato.
+
+### 2026-11-22 22:03 - CVE con exploit público marcado por vulners
+- **Cuándo:** 2026-11-22 22:03 (primera ejecución) y 2026-11-23 16:08 (repetición para revisar la salida)
+- **Objetivo y alcance:** ver qué entradas de `vulners` llevan la marca `*EXPLOIT*`, como dato para la priorización. Solo ficheros locales, sin tráfico de red. No se abrió, descargó ni ejecutó ningún exploit.
+- **Qué hice:** `grep -H "\*EXPLOIT\*" evidencias/p3/31-vulners-*.nmap | sed 's#evidencias/p3/31-vulners-##' | cut -c1-110`
+- **Qué salió:** hay entradas marcadas en 172.17.0.4 a 172.17.0.9 y ninguna en 172.17.0.10. Casi todas son repositorios y listados genéricos (GitHub, Gitee, PacketStorm), que no se consideran hallazgos. Se anotan las que tienen nombre propio: módulos de Metasploit de Ghostcat (CVE-2020-1938) y de la deserialización de Tomcat (CVE-2025-24813) en 172.17.0.4; el módulo de ActiveMQ CVE-2023-46604 y el de Jetty (WEB-INF) en 172.17.0.5; el módulo de enumeración de usuarios SSH en 172.17.0.7; detectores de Samba y de Zerologon en 172.17.0.8; y la entrada de Jetty también en 172.17.0.6. La marca solo indica que existe algo público, no que el servicio sea explotable. Evidencia: `evidencias/p3/31-vulners-172.17.0.<n>.nmap`.
+- **Captura:** sin captura
+- **Siguiente paso:** descargar las fichas de NVD de los candidatos a descarte y comprobar los trackers de Debian y Ubuntu.
+
+### 2026-11-22 22:04 - Fichas de NVD de los candidatos
+- **Cuándo:** 2026-11-22 22:04
+- **Objetivo y alcance:** descargar la ficha oficial de cada CVE candidato y ver su CWE. Consulta a una web pública (NVD), que no toca la red del cliente.
+- **Qué hice:** `for CVE in CVE-2011-2523 CVE-2020-1938 CVE-2025-24813 CVE-2024-23897 CVE-2023-46604 CVE-2018-15473; do curl -s "https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=$CVE" -o evidencias/p3/33-nvd-$CVE.json; jq -r '.vulnerabilities[0].cve | "\(.id) CWE: \([.weaknesses[]?.description[]?.value]|unique|join(", "))"' evidencias/p3/33-nvd-$CVE.json; sleep 6; done`
+- **Qué salió:** CWE según NVD: CVE-2011-2523 CWE-78; CVE-2020-1938 NVD-CWE-Other; CVE-2025-24813 CWE-44, CWE-502 y CWE-706; CVE-2024-23897 CWE-22 y CWE-27; CVE-2023-46604 CWE-502; CVE-2018-15473 CWE-362. Evidencia: `evidencias/p3/33-nvd-<CVE>.json`.
+- **Captura:** sin captura (ver entrada siguiente)
+- **Siguiente paso:** comprobar los rangos de versiones afectadas frente a las versiones observadas.
+
+### 2026-11-23 08:28 - Ficha de NVD y rangos de versiones de cada candidato
+- **Cuándo:** 2026-11-23 08:28 (CVE-2011-2523), 08:29 (CVE-2020-1938), 08:32 (CVE-2025-24813), 08:35 (CVE-2024-23897), 08:36 (CVE-2023-46604) y 08:39 (CVE-2018-15473)
+- **Objetivo y alcance:** ver CWE, descripción y rango de versiones afectadas de cada candidato, a partir de las fichas de NVD ya descargadas. Solo ficheros locales, sin tráfico de red.
+- **Qué hice:** `{ jq -r '.vulnerabilities[0].cve | "\(.id)\nCWE: ..."' evidencias/p3/33-nvd-$CVE.json; jq -r '.vulnerabilities[0].cve.configurations[]?.nodes[]?.cpeMatch[]? | select(.vulnerable==true) | ...' evidencias/p3/33-nvd-$CVE.json | head -15; } | fold -s -w 110`, con `CVE=` cada uno de los seis (comando completo en el historial)
+- **Qué salió:** la CWE, la descripción y los rangos de cada CVE, que se comparan con las versiones observadas en la entrada siguiente. Evidencia: `evidencias/p3/33-nvd-<CVE>.json`.
+- **Captura:** ![NVD CVE-2011-2523](../imagenes/p3-03-nvd-CVE-2011-2523.png) ![NVD CVE-2020-1938 (1 de 2)](../imagenes/p3-03-nvd-CVE-2020-1938-1.png) ![NVD CVE-2020-1938 (2 de 2)](../imagenes/p3-03-nvd-CVE-2020-1938-2.png) ![NVD CVE-2025-24813 (1 de 2)](../imagenes/p3-03-nvd-CVE-2025-24813-1.png) ![NVD CVE-2025-24813 (2 de 2)](../imagenes/p3-03-nvd-CVE-2025-24813-2.png) ![NVD CVE-2024-23897](../imagenes/p3-03-nvd-CVE-2024-23897.png) ![NVD CVE-2023-46604 (1 de 2)](../imagenes/p3-03-nvd-CVE-2023-46604-1.png) ![NVD CVE-2023-46604 (2 de 2)](../imagenes/p3-03-nvd-CVE-2023-46604-2.png) ![NVD CVE-2018-15473](../imagenes/p3-03-nvd-CVE-2018-15473.png)
+- **Siguiente paso:** comparar los rangos con las versiones observadas.
+
+### 2026-11-23 08:40 - Comparación de rangos con las versiones observadas
+- **Cuándo:** 2026-11-23 08:40 (rangos) y 08:41 (horas de fin de `vulners`)
+- **Objetivo y alcance:** comprobar si cada versión observada entra en el rango afectado. Solo ficheros locales.
+- **Qué hice:** `for CVE in CVE-2011-2523 CVE-2020-1938 CVE-2025-24813 CVE-2024-23897 CVE-2023-46604 CVE-2018-15473; do echo "== $CVE"; jq -r '.vulnerabilities[0].cve.configurations[]?.nodes[]?.cpeMatch[]? | select(.vulnerable==true) | ...' evidencias/p3/33-nvd-$CVE.json | head -15; done` y `grep -H "Nmap done" evidencias/p3/31-vulners-*.nmap`
+- **Qué salió:** CVE-2011-2523, vsftpd 2.3.4 exacto (observado 2.3.4 en 172.17.0.3). CVE-2020-1938, Tomcat 9.0.0 a 9.0.31 sin incluir (observado 9.0.30 en 172.17.0.4). CVE-2025-24813, Tomcat hasta 9.0.99 sin incluir (observado 9.0.30). CVE-2024-23897, Jenkins hasta 2.442 sin incluir en versiones no LTS (observado 2.441 en 172.17.0.6). CVE-2023-46604, ActiveMQ hasta 5.15.16 sin incluir (observado 5.15.15 en 172.17.0.5). CVE-2018-15473, OpenSSH hasta 7.7 incluida (observado 7.7 en 172.17.0.7). Las seis versiones entran en el rango. Evidencia: `evidencias/p3/33-nvd-<CVE>.json`.
+- **Captura:** sin captura
+- **Siguiente paso:** ver en qué equipos propuso `vulners` cada candidato y elegir los descartes.
+
+### 2026-11-23 08:50 - Qué propuso vulners de cada candidato
+- **Cuándo:** 2026-11-23 08:50
+- **Objetivo y alcance:** saber en qué equipos propuso `vulners` cada candidato y localizar falsos positivos en los equipos con OpenSSH. Solo ficheros locales.
+- **Qué hice:** `grep -H -E "CVE-2018-15473|CVE-2023-38408|CVE-2020-1938|CVE-2025-24813|CVE-2024-23897|CVE-2023-46604|CVE-2011-2523" evidencias/p3/31-vulners-*.nmap | sed 's#evidencias/p3/31-vulners-##' | cut -c1-90` y `grep -H "CVE-" evidencias/p3/31-vulners-172.17.0.9.nmap | grep -v -E "MEND:|1DAYEXPLOIT:" | head -15`
+- **Qué salió:** CVE-2020-1938 y CVE-2025-24813 en 172.17.0.4; CVE-2023-46604 en 172.17.0.5; CVE-2018-15473 en 172.17.0.7; CVE-2023-38408 en 172.17.0.4, .6, .7 y .9; en 172.17.0.9 además CVE-2023-28531, CVE-2024-6387 y CVE-2025-26465, entre otros. `vulners` no propuso CVE-2024-23897 (Jenkins) ni CVE-2011-2523 (vsftpd; no se escaneó la .3), que vienen de `searchsploit` y de NVD. Evidencia: `evidencias/p3/31-vulners-*.nmap`.
+- **Captura:** sin captura
+- **Siguiente paso:** descargar las fichas de NVD de los candidatos a descarte y comprobar los trackers de Debian.
+
+### 2026-11-23 09:01 - Fichas de NVD de los candidatos a descarte de OpenSSH
+- **Cuándo:** 2026-11-23 09:01 (`grep` de `vulners`) y 09:02 (consulta a NVD)
+- **Objetivo y alcance:** ver en qué equipos propuso `vulners` los CVE de OpenSSH y comprobar en NVD la descripción, la CWE y el rango de cada uno, para decidir los descartes. El `grep` lee ficheros locales; las consultas a NVD son a una web pública y no tocan la red del cliente.
+- **Qué hice:** `grep -H -E "CVE-2024-6387|CVE-2025-26465|CVE-2023-28531" evidencias/p3/31-vulners-172.17.0.*.nmap | sed 's#evidencias/p3/31-vulners-##' | cut -c1-90` y `for CVE in CVE-2024-6387 CVE-2023-38408 CVE-2025-26465 CVE-2023-28531 CVE-2026-60002; do curl -s "https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=$CVE" -o evidencias/p3/33-nvd-$CVE.json; ...; sleep 6; done`
+- **Qué salió:** `vulners` propuso CVE-2025-26465 en 172.17.0.4, .6, .7, .8 y .9; CVE-2024-6387 en .6, .8 y .9; y CVE-2023-28531 en .6 y .9. NVD: CVE-2024-6387 es una condición de carrera en `sshd` (CWE-362 y CWE-364) que afecta a OpenSSH 8.6 hasta 9.8 incluida. CVE-2023-38408 afecta a `ssh-agent` con reenvío de agente (CWE-428), antes de 9.3. CVE-2025-26465 solo ocurre con `VerifyHostKeyDNS` activado (CWE-390). CVE-2023-28531 afecta a `ssh-add` desde 8.9 hasta 9.3 sin incluir (CWE-284). CVE-2026-60002 es un uso tras liberación (CWE-416) en el cliente `ssh` antes de 10.4, solo del lado cliente. Evidencia: `evidencias/p3/33-nvd-<CVE>.json`.
+- **Captura:** sin captura
+- **Siguiente paso:** comprobar en el tracker de Debian si la versión de OpenSSH de la .6 y la .9 está parcheada.
+
+### 2026-11-23 - Comprobación de backport en el tracker de Debian
+- **Cuándo:** 2026-11-23 (hora no registrada: se hizo en el navegador de mi ordenador, no en la terminal)
+- **Objetivo y alcance:** saber si Debian ha parcheado sin cambiar el número de versión CVE-2024-6387 y CVE-2023-38408 en las versiones de OpenSSH de 172.17.0.6 y 172.17.0.9. Consulta a una web pública, sin tráfico hacia el cliente.
+- **Qué hice:** abrí `https://security-tracker.debian.org/tracker/CVE-2024-6387` y `https://security-tracker.debian.org/tracker/CVE-2023-38408` y comparé la versión `fixed` de bookworm con las observadas.
+- **Qué salió:** en los dos CVE el tracker da como `fixed` `1:9.2p1-2+deb12u10` en bookworm y `1:9.2p1-2+deb12u9` en bookworm (security). La 172.17.0.9 (`deb12u10`) tiene una versión igual o superior: parcheada, se descarta por backport. La 172.17.0.6 (`deb12u2`) tiene una versión inferior: sin parche según el tracker, de modo que CVE-2024-6387 se registra para ese equipo. Evidencia: sin fichero, solo captura.
+- **Captura:** ![Tracker de Debian, CVE-2024-6387](../imagenes/p3-04-backport-CVE-2024-6387.png) ![Tracker de Debian, CVE-2023-38408](../imagenes/p3-04-backport-CVE-2023-38408.png)
+- **Siguiente paso:** comprobar el tracker de Ubuntu para CVE-2024-6387 en 172.17.0.8.
+
+### 2026-11-23 16:16 - Fichas de NVD de los candidatos a descarte de Apache, Jetty, Samba y OpenSSH
+- **Cuándo:** 2026-11-23 16:16 (hora tomada del `date` de la salida)
+- **Objetivo y alcance:** comprobar en NVD la descripción y el rango de versiones de los CVE que `vulners` propuso en Apache, Jetty, Samba y OpenSSH, para decidir los descartes. Consulta a una web pública (NVD), que no toca la red del cliente.
+- **Qué hice:** `for CVE in CVE-2026-123158 CVE-2026-119618 CVE-2021-28169 CVE-2017-7494 CVE-2020-1472 CVE-2024-38475; do curl -s "https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=$CVE" -o evidencias/p3/33-nvd-$CVE.json; ...; sleep 6; done`
+- **Qué salió:** CVE-2026-123158: `sshd` de OpenSSH antes de 10.6 en Linux con musl libc sin PAM. CVE-2026-119618: `mod_http2` de Apache, de 2.4.55 hasta antes de 2.4.71. CVE-2021-28169: `ConcatServlet` de Jetty, hasta antes de 9.4.41 y de 10.0.0 a antes de 10.0.3. CVE-2017-7494: Samba de 3.5.0 a antes de 4.6.4 (y 4.5.10 y 4.4.14). CVE-2020-1472: Netlogon en un controlador de dominio; Samba antes de 4.10.18, 4.11.13 y 4.12.7. CVE-2024-38475: `mod_rewrite` de Apache de 2.4.0 a antes de 2.4.60. Evidencia: `evidencias/p3/33-nvd-<CVE>.json`.
+- **Captura:** sin captura
+- **Siguiente paso:** comprobar el backport de OpenSSH en el tracker de Ubuntu para la 172.17.0.8.
+
+### 2026-11-23 - Comprobación de backport en el tracker de Ubuntu
+- **Cuándo:** 2026-11-23 (hora no registrada: se hizo en el navegador de mi ordenador, no en la terminal)
+- **Objetivo y alcance:** saber si Ubuntu ha parcheado sin cambiar el número de versión CVE-2024-6387 en el OpenSSH de 172.17.0.8. Consulta a una web pública, sin tráfico hacia el cliente.
+- **Qué hice:** abrí `https://ubuntu.com/security/CVE-2024-6387` y comparé la versión `fixed` de 24.04 noble con la observada.
+- **Qué salió:** el tracker da como corregida en noble la versión `1:9.6p1-3ubuntu13.3`. La 172.17.0.8 tiene `3ubuntu13.5`, igual o superior: parcheada, se descarta por backport. Evidencia: sin fichero, solo captura.
+- **Captura:** ![Tracker de Ubuntu, CVE-2024-6387](../imagenes/p3-04-backport-CVE-2024-6387-ubuntu.png)
+- **Siguiente paso:** redactar `registro-vulns.md` con las fichas y la tabla de descartados.
+
+### 2026-11-23 16:33 - Redacción de registro-vulns.md (Parte 3)
+- **Cuándo:** 2026-11-23 16:33 (lectura de las descripciones de NVD) y 16:39 (comprobación del historial). El fichero se redactó después de las 16:33, fuera de la terminal de este historial: hora exacta no registrada.
+- **Objetivo y alcance:** dejar escrito el registro de vulnerabilidades potenciales con una ficha por hallazgo y la tabla de descartados. Solo trabajo con ficheros locales y con las fichas de NVD ya descargadas, sin tráfico hacia el cliente.
+- **Qué hice:** `for CVE in CVE-2011-2523 CVE-2020-1938 CVE-2025-24813 CVE-2024-23897 CVE-2023-46604 CVE-2018-15473; do echo "== $CVE"; jq -r '.vulnerabilities[0].cve.descriptions[]|select(.lang=="en").value' evidencias/p3/33-nvd-$CVE.json | cut -c1-450; done` y después redacté `registro-vulns.md` con ayuda de IA a partir de mis ficheros de `evidencias/p3/` y mis capturas, y lo comprobé contra ellos.
+- **Qué salió:** `registro-vulns.md` con 7 fichas (V-01 vsftpd, V-02 y V-06 Tomcat, V-03 ActiveMQ, V-04 Jenkins, V-05 OpenSSH 7.7 y V-07 OpenSSH 9.2p1 de 172.17.0.6) y 14 filas de descartados. Las dos CWE elegidas por mí (CVE-2020-1938 y la principal del CVE-2025-24813) quedan marcadas como propuesta. Evidencia: `registro-vulns.md`.
+- **Captura:** sin captura
+- **Siguiente paso:** comprobar los enlaces a imágenes, hacer commit y empezar la Parte 4 (CVSS, EPSS y KEV).
+

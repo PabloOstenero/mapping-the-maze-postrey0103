@@ -1,0 +1,25 @@
+137/udp  netbios-ns Samba nmbd netbios-ns (workgroup: DL)
+139/tcp  netbios-ssn Samba smbd 4
+1883/tcp  mqtt
+21/tcp  ftp vsftpd 2.3.4
+22/tcp  ssh OpenSSH 7.7 (protocol 2.0)
+22/tcp  ssh OpenSSH 7.9p1 Debian 10+deb10u4 (protocol 2.0)
+22/tcp  ssh OpenSSH 9.2p1 Debian 2+deb12u10 (protocol 2.0)
+22/tcp  ssh OpenSSH 9.2p1 Debian 2+deb12u2 (protocol 2.0)
+22/tcp  ssh OpenSSH 9.6p1 Ubuntu 3ubuntu13.5 (Ubuntu Linux; protocol 2.0)
+32987/tcp  tcpwrapped
+443/tcp  ssl/http Apache httpd 2.4.59 ((Debian))
+445/tcp  netbios-ssn Samba smbd 4
+5672/tcp  amqp?
+61613/tcp  stomp Apache ActiveMQ
+61614/tcp  http Jetty 9.4.39.v20210325
+61616/tcp  apachemq ActiveMQ OpenWire transport 5.15.15
+623/udp  asf-rmcp
+8009/tcp  ajp13 Apache Jserv (Protocol v1.3)
+8080/tcp  http Apache Tomcat 9.0.30
+8080/tcp  http Jetty 10.0.18
+80/tcp  http Apache httpd 2.4.58 ((Ubuntu))
+80/tcp  http Apache httpd 2.4.59 ((Debian))
+80/tcp  http Apache httpd 2.4.68 ((Debian))
+80/tcp  http SimpleHTTPServer 0.6 (Python 3.11.2)
+8161/tcp  http Jetty 9.4.39.v20210325
